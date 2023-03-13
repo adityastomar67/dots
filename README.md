@@ -1,7 +1,5 @@
 # BSPWM | Polybar themes collection with Theme Selector
 
-## Puedes leer esta pagina en español [AQUI](INICIO.md)
-
 ## 🌿 Information
 12 different themes for BSPWM and Polybar. With a theme selector to change on the fly. 
 
@@ -253,7 +251,7 @@ The installer only works for **ARCH** Linux, and based distros.
 <b>Open a terminal in HOME</b>
 - **First download the installer**
 ```sh
-curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/RiceInstaller -o $HOME/RiceInstaller
+curl https://raw.githubusercontent.com/adityastomar67/dots/master/RiceInstaller -o $HOME/RiceInstaller
 ```
 - **Now give it execute permissions**
 ```sh
