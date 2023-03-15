@@ -5,6 +5,7 @@
 #	Script to install my dotfiles
 #   Author: z0mbi3
 #	url: https://github.com/gh0stzk
+#   Redone by: https://github.com/adityastomar67
 
 CRE=$(tput setaf 1)
 CYE=$(tput setaf 3)
@@ -68,7 +69,7 @@ clear
 
 logo "Installing needed packages.."
 
-dependencias=(base-devel pacman-contrib bspwm polybar sxhkd alacritty brightnessctl dunst rofi lsd jq polkit-gnome git playerctl mpd ncmpcpp geany ranger mpc picom feh ueberzug maim pamixer libwebp webp-pixbuf-loader xorg-xprop xorg-xkill physlock papirus-icon-theme ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels zsh)
+dependencies=(base-devel pacman-contrib bspwm polybar sxhkd alacritty brightnessctl dunst rofi lsd jq polkit-gnome git playerctl mpd ncmpcpp geany ranger mpc picom feh ueberzug maim pamixer libwebp webp-pixbuf-loader xorg-xprop xorg-xkill physlock papirus-icon-theme ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels zsh)
 
 is_installed() {
   pacman -Qi $1 &> /dev/null
@@ -76,13 +77,13 @@ is_installed() {
 }
 
 printf "%s%sChecking for required packages...%s\n" "${BLD}" "${CBL}" "${CNC}"
-for paquete in "${dependencias[@]}"
+for package in "${dependencies[@]}"
 do
-  if ! is_installed $paquete; then
-    sudo pacman -S $paquete --noconfirm
+  if ! is_installed $package; then
+    sudo pacman -S $package --noconfirm
     printf "\n"
   else
-    printf '%s%s is already installed on your system!%s\n' "${CGR}" "$paquete" "${CNC}"
+    printf '%s%s is already installed on your system!%s\n' "${CGR}" "$package" "${CNC}"
     sleep 1
   fi
 done
@@ -113,9 +114,9 @@ clear
 
 logo "Cloning Rice!"
 [ -d ~/dotfiles ] && rm -rf ~/dotfiles
-printf "Cloning rice from https://github.com/gh0stzk/dotfiles\n\n"
+printf "Cloning gh0stzk's rice.\n\n"
 cd $HOME
-git clone --depth=1 https://github.com/gh0stzk/dotfiles.git
+git clone --depth=1 https://github.com/adityastomar67/dots.git
 sleep 2
 clear
 
@@ -129,7 +130,7 @@ if [ ! -d "$backup_folder" ]; then
   mkdir -p "$backup_folder"
 fi
 
-for folder in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp nvim ranger zsh mpd; do
+for folder in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp nvim ranger .zsh mpd; do
   if [ -d "$HOME/.config/$folder" ]; then
     mv "$HOME/.config/$folder" "$backup_folder/${folder}_$date"
     echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"
@@ -155,57 +156,57 @@ printf "Copying files to respective directories..\n"
 [ ! -d ~/.local/share/fonts ] && mkdir -p ~/.local/share/fonts
 [ ! -d ~/.local/share/asciiart ] && mkdir -p ~/.local/share/asciiart
 
-for archivos in ~/dotfiles/config/*; do
-  cp -R ${archivos} ~/.config/
+for archive in ~/dotfiles/config/*; do
+  cp -R ${archive} ~/.config/
   if [ $? -eq 0 ]; then
-	printf "%s%s%s folder copied succesfully!%s\n" "${BLD}" "${CGR}" "${archivos}" "${CNC}"
+	printf "%s%s%s folder copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 	sleep 1
   else
-	printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archivos}" "${CNC}"
+	printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 	sleep 1
   fi
 done
 
-for archivos in ~/dotfiles/misc/bin/*; do
-  cp -R ${archivos} ~/.local/bin/
+for archive in ~/dotfiles/misc/bin/*; do
+  cp -R ${archive} ~/.local/bin/
   if [ $? -eq 0 ]; then
-	printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archivos}" "${CNC}"
+	printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 	sleep 1
   else
-	printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archivos}" "${CNC}"
+	printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 	sleep 1
   fi
 done
 
-for archivos in ~/dotfiles/misc/applications/*; do
-  cp -R ${archivos} ~/.local/share/applications/
+for archive in ~/dotfiles/misc/applications/*; do
+  cp -R ${archive} ~/.local/share/applications/
   if [ $? -eq 0 ]; then
-	printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archivos}" "${CNC}"
+	printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 	sleep 1
   else
-	printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archivos}" "${CNC}"
+	printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 	sleep 1
   fi
 done
 
-for archivos in ~/dotfiles/misc/fonts/*; do
-  cp -R ${archivos} ~/.local/share/fonts/
+for archive in ~/dotfiles/misc/fonts/*; do
+  cp -R ${archive} ~/.local/share/fonts/
   if [ $? -eq 0 ]; then
-	printf "%s%s%s copied succesfully!%s\n" "${BLD}" "${CGR}" "${archivos}" "${CNC}"
+	printf "%s%s%s copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 	sleep 1
   else
-	printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archivos}" "${CNC}"
+	printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 	sleep 1
   fi
 done
 
-for archivos in ~/dotfiles/misc/asciiart/*; do
-  cp -R ${archivos} ~/.local/share/asciiart/
+for archive in ~/dotfiles/misc/asciiart/*; do
+  cp -R ${archive} ~/.local/share/asciiart/
   if [ $? -eq 0 ]; then
-	printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archivos}" "${CNC}"
+	printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 	sleep 1
   else
-	printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archivos}" "${CNC}"
+	printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 	sleep 1
   fi
 done
