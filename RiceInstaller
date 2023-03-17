@@ -116,7 +116,7 @@ logo "Cloning Rice!"
 [ -d ~/dotfiles ] && rm -rf ~/dotfiles
 printf "Cloning gh0stzk's rice.\n\n"
 cd $HOME
-git clone --depth=1 https://github.com/adityastomar67/dots.git
+git clone --depth=1 https://github.com/adityastomar67/dots.git $HOME/dotfiles
 sleep 2
 clear
 
