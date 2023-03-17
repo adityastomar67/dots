@@ -1,3 +1,6 @@
+# █ █▀▀ █▀█ █▄ █ █▀
+# █ █▄▄ █▄█ █ ▀█ ▄█
+
 typeset -gAH icons
 local LC_ALL="" LC_CTYPE="en_US.UTF-8"
 icons=(
@@ -76,3 +79,5 @@ get_icon_names() {
     echo "$key: ${icons[$key]}"
   done
 }
+
+# vim:filetype=zsh

@@ -1,9 +1,9 @@
-#!/bin/sh
 # ▀█ ▄▄ █▀█ █▀█ █▀█ █▀▄▀█ █▀█ ▀█▀
-# █▄    █▀▀ █▀▄ █▄█ █░▀░█ █▀▀  █
+# █▄    █▀▀ █▀▄ █▄█ █ ▀ █ █▀▀  █
 
+##--> Prompt Definitions <--##
 z_prompt() {
-  ## Styles for Prompt
+  # Styles for Prompt
   declare -a PROMPTS
   PROMPTS=(
       " "
@@ -14,19 +14,21 @@ z_prompt() {
       "󰮯 "
     )
 
-  ## autoload vcs and colors
+  # Autoload vcs and colors
   autoload -Uz vcs_info
   autoload -U colors && colors
 
-  ## Enable only git
+  # Enable only git
   zstyle ':vcs_info:*' enable git
 
-  ## Setup a hook that runs before every prompt.
-  precmd_vcs_info() { vcs_info }
+  # Setup a hook that runs before every prompt.
+  precmd_vcs_info() { 
+    vcs_info 
+  }
   precmd_functions+=( precmd_vcs_info )
   setopt prompt_subst
 
-  ## Add a function to check for untracked files in the directory. from https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
+  # Add a function to check for untracked files in the directory. from https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
   zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 
   +vi-git-untracked(){
@@ -42,13 +44,29 @@ z_prompt() {
   zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%}) "
   # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
 
-  ## Actual Prompt Definition
+  ##--> Actual Prompt Definition <--##
   ignition=${PROMPTS[1 + $RANDOM%6]}
   PROMPT='%T %F{yellow}$ignition%f %F{blue}%1~%f '
   RPROMPT=\$vcs_info_msg_0_
 }
 
 10k_style() {
+    ##--> Toggle prompt <--##
+    function _toggle-prompt() {
+        case "$1" in
+            right) p10k display '*/right'=hide,show ;;
+            left) p10k display '*/left'=hide,show ;;
+        esac
+    }
+
+    function _toggle-right-prompt() {
+        _toggle-prompt right
+    }
+
+    function _toggle-left-prompt() {
+        _toggle-prompt left
+    }
+
     autoload -U add-zsh-hook
     autoload -U colors
     colors
@@ -57,11 +75,11 @@ z_prompt() {
     autoload -Uz vcs_info
     zstyle ':vcs_info:*' enable git hg
     zstyle ':vcs_info:*' check-for-changes true
-    zstyle ':vcs_info:*' stagedstr "%F{green}●%f" # default 'S'
-    zstyle ':vcs_info:*' unstagedstr "%F{red}●%f" # default 'U'
     zstyle ':vcs_info:*' use-simple true
     zstyle ':vcs_info:git+set-message:*' hooks git-untracked
-    zstyle ':vcs_info:git*:*' formats '[%b%m%c%u] ' # default ' (%s)-[%b]%c%u-'
+    zstyle ':vcs_info:*' stagedstr "%F{green}●%f"            # default 'S'
+    zstyle ':vcs_info:*' unstagedstr "%F{red}●%f"            # default 'U'
+    zstyle ':vcs_info:git*:*' formats '[%b%m%c%u] '          # default ' (%s)-[%b]%c%u-'
     zstyle ':vcs_info:git*:*' actionformats '[%b|%a%m%c%u] ' # default ' (%s)-[%b|%a]%c%u-'
     zstyle ':vcs_info:hg*:*' formats '[%m%b] '
     zstyle ':vcs_info:hg*:*' actionformats '[%b|%a%m] '
@@ -292,5 +310,7 @@ gh0st_prompt() {
 
 }
 
-## Calling the Prompt
+##--> Calling the Prompt <--##
 gh0st_prompt
+
+# vim:filetype=zsh

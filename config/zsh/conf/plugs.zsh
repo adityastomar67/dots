@@ -1,7 +1,10 @@
+# █▀█ █   █ █ █▀▀ █ █▄ █ █▀
+# █▀▀ █▄▄ █▄█ █▄█ █ █ ▀█ ▄█
+
 OMZ_HOME="$HOME/.oh-my-zsh"
 ZINIT_HOME="$HOME/.zinit"
 
-## zinit setup
+##--> Zinit setup <--##
 if [ ! -d "$ZINIT_HOME" ]
 then
     echo "ZINIT not found. Cloning..."
@@ -10,7 +13,6 @@ fi
 
 source "$ZINIT_HOME/zinit.zsh"
 alias use='zinit light'
-alias snip='zinit snippet'
 alias ice='zinit ice'
 alias load='zinit load'
 
@@ -23,9 +25,7 @@ compinit
 use hlissner/zsh-autopair
 use zdharma-continuum/fast-syntax-highlighting
 use MichaelAquilina/zsh-you-should-use
-# use zsh-users/zsh-autosuggestions
 use Aloxaf/fzf-tab
-# use marlonrichert/zsh-autocomplete
 
 ice wait'3' lucid
 load zsh-users/zsh-history-substring-search
@@ -33,11 +33,10 @@ load zsh-users/zsh-history-substring-search
 ice wait'2' lucid
 load zdharma-continuum/history-search-multi-word
 
-# ice wait'5' lucid
-# snip https://gist.githubusercontent.com/hightemp/5071909/raw/
-unalias use snip ice load
+ice wait'5' lucid
+unalias use ice load
 
-## oh-my-zsh setup
+##--> OMZ setup <--##
 if [ ! -d "$OMZ_HOME" ]
 then
     echo "OH-MY-ZSH not found. Cloning..."
@@ -54,7 +53,13 @@ plugins=(
 )
 source "$OMZ_HOME/oh-my-zsh.sh"
 
-# Offline Plugins
-source ~/.config/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.config/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.config/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+##--> Offline Plugins <--##
+source ~/.config/zsh/plug/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.config/zsh/plug/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.config/zsh/plug/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+##--> Other Plugins <--##
+command -v aws &>/dev/null && complete -C aws_completer aws
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+
+# vim:filetype=zsh
