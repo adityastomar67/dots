@@ -9,11 +9,11 @@ while read F
 do
   [ -f "$HOME/.config/zsh/conf/$F.zsh" ] && source "$HOME/.config/zsh/conf/$F.zsh"
 done <<-EOF
+    opts
     plugs
     theme
     keys
     env
-    opts
     prompt
     fzf
 EOF

@@ -2,15 +2,15 @@
 # Do not edit that file directly. Instead, add any settings overrides in this file.
 
 ##--> Some options for user experience <--##
-export OPT_THEME="No" # Change it to "Yes", if you wants to use theme.sh script.
-export USE_TMUX="No"  # Change it to "Yes", to automatically load tmux on every new instance of the terminal
-export USE_ALIAS="NO" # Pretty self explainotory
+export OPT_THEME="No"        # Change it to "Yes", if you wants to use theme.sh script.
+export USE_TMUX="No"         # Change it to "Yes", to automatically load tmux on every new instance of the terminal
+export USE_ALIAS="No"        # Pretty self explainotory
+export PROMPT_THEME="gh0st"  # And many more like gh0st, z, 10k.
 
 ##--> Sourcing main config files <--##
-if [ -r "$HOME/.config/zsh/.zshrc" ]; then
-    source "$HOME/.config/zsh/.zshrc"
-fi
+[ -r "$HOME/.config/zsh/.zshrc" ] && source "$HOME/.config/zsh/.zshrc"
 
+##--> Terminal Decorations <--##
 # [ -x motivate ]                     && motivate ;echo                    # Random Motivational Quotes
 # [ -x header ]                       && header ;echo                      # Header for adityastomar67
 [ -x $HOME/.local/bin/colorscript ] && $HOME/.local/bin/colorscript -r

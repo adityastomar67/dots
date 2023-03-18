@@ -50,7 +50,7 @@ z_prompt() {
   RPROMPT=\$vcs_info_msg_0_
 }
 
-10k_style() {
+10k_prompt() {
     ##--> Toggle prompt <--##
     function _toggle-prompt() {
         case "$1" in
@@ -311,6 +311,14 @@ gh0st_prompt() {
 }
 
 ##--> Calling the Prompt <--##
-gh0st_prompt
+if [ $PROMPT_THEME = "gh0st" ]; then
+  gh0st_prompt
+elif [ $PROMPT_THEME = "z" ]; then
+  z_prompt
+elif [ $PROMPT_THEME = "10k" ]; then
+  10k_prompt
+else
+  return
+fi
 
 # vim:filetype=zsh

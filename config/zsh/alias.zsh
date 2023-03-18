@@ -4,7 +4,7 @@
 ##--> Example aliases <--##
 # alias "alias_name"=<alias_command>
 
-if [ $USE_ALIAS == "Yes" ]; then
+if [ $USE_ALIAS = "Yes" ]; then
 
     # Use neovim for vim if present.
     [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"

@@ -102,7 +102,7 @@ zle -N _toggle-right-prompt
 zle -N _toggle-left-prompt
 
 autoload -Uz compinit
-compinit -d ~/.config/.zsh/zcompdump-$ZSH_VERSION
+compinit -d ~/.config/zsh/zcompdump-$ZSH_VERSION
 _comp_options+=(globdots)
 
 ## On-demand rehash
