@@ -1,0 +1,51 @@
+Xft.antialias:	  1
+Xft.hinting:	  1
+Xft.autohint:	  0
+Xft.hintstyle:	  hintslight
+Xft.rgba:	      rgb
+Xft.lcdfilter:	  lcddefault
+
+! font
+st.font:          Operator Mono Lig:style:medium:pixelsize=18
+
+! window-padding
+st.borderpx:      20
+
+! transparency
+st.alpha:         0.9
+
+! special
+*.foreground:     #c5c8c9
+*.background:     #0B0F10
+
+! black
+*.color0:         #2C3333
+*.color8:         #131718
+
+! red
+*.color1:         #df5b61
+*.color9:         #ee6a70
+
+! green
+*.color2:         #87c7a1
+*.color10:        #96d6b0
+
+! yellow
+*.color3:         #de8f78
+*.color11:        #ffb29b
+
+! blue
+*.color4:         #6791c9
+*.color12:        #7ba5dd
+
+! magenta
+*.color5:         #bc83e3
+*.color13:        #cb92f2
+
+! cyan
+*.color6:         #70b9cc
+*.color14:        #7fc8db
+
+! white
+*.color7:         #c4c4c4
+*.color15:        #cccccc
