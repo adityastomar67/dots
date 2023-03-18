@@ -16,12 +16,12 @@ done <<-EOF
     env
     prompt
     fzf
+    alias
+    function
 EOF
 
 ##--> Sourcing other files <--##
-[ -f "$HOME/.config/zsh/alias.zsh" ]     && source "$HOME/.config/zsh/alias.zsh"      # Aliases - For a full list of active aliases, run `alias`.
-[ -f "$HOME/.config/zsh/function.zsh" ]  && source "$HOME/.config/zsh/function.zsh"   # functions to improve productivity
-[ -f "$HOME/.temp_src" ]                 && source "$HOME/.temp_src"                  # For temporary offline aliases
+[ -f "$HOME/.temp_src" ] && source "$HOME/.temp_src"  # For temporary offline aliases
 
 ##--> Final Options <--##
 echo -en "\x1b[2J\x1b[1;1H" ;echo   # For faster clearing the Terminal
