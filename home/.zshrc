@@ -7,10 +7,10 @@ export USE_TMUX="No"  # Change it to "Yes", to automatically load tmux on every 
 export USE_ALIAS="NO" # Pretty self explainotory
 
 ##--> Sourcing main config files <--##
-if [ -r "$HOME/.config/.zsh/.zshrc" ]; then
+if [ -r "$HOME/.config/zsh/.zshrc" ]; then
     source "$HOME/.config/zsh/.zshrc"
 fi
 
-# motivate ;echo                    # Random Motivational Quotes
-# header ;echo                      # Header for adityastomar67
-$HOME/.local/bin/colorscript -r
+# [ -x motivate ]                     && motivate ;echo                    # Random Motivational Quotes
+# [ -x header ]                       && header ;echo                      # Header for adityastomar67
+[ -x $HOME/.local/bin/colorscript ] && $HOME/.local/bin/colorscript -r

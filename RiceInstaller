@@ -37,7 +37,7 @@ logo () {
 	       &&&////   &&
 	          &&//@@@**
 	            ..***                
-			  z0mbi3 Script\n\n"
+			  z0mbi3 Script (adityastomar67 fork)\n\n"
     printf ' %s [%s%s %s%s %s]%s\n\n' "${CRE}" "${CNC}" "${CYE}" "${text}" "${CNC}" "${CRE}" "${CNC}"
     sleep 2
 }
@@ -114,7 +114,7 @@ clear
 
 logo "Cloning Rice!"
 [ -d ~/dotfiles ] && rm -rf ~/dotfiles
-printf "Cloning gh0stzk's rice.\n\n"
+printf "Cloning gh0stzk's rice. (adityastomar67 fork)\n\n"
 cd $HOME
 git clone --depth=1 https://github.com/adityastomar67/dots.git $HOME/dotfiles
 sleep 2
@@ -130,7 +130,7 @@ if [ ! -d "$backup_folder" ]; then
   mkdir -p "$backup_folder"
 fi
 
-for folder in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp nvim ranger .zsh mpd; do
+for folder in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp nvim ranger zsh mpd; do
   if [ -d "$HOME/.config/$folder" ]; then
     mv "$HOME/.config/$folder" "$backup_folder/${folder}_$date"
     echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"

@@ -1,19 +1,21 @@
 # ▀█▀ █ █ █▀▀ █▀▄▀█ █▀▀   █▀ █ █
 #  █  █▀█ ██▄ █ ▀ █ ██▄ ▄ ▄█ █▀█
 
-if [ $OPT_THEME == "Yes" ]; then
+if [ $OPT_THEME = "Yes" ]; then
 
     ##--> Theme.sh Config <--##
     if command -v theme.sh >/dev/null; then
         [ -e ~/.theme_history ] && theme.sh "$(theme.sh -l | tail -n1)"
 
         # Optional
-        Bind C-o to the last theme.
         last_theme() {
             theme.sh "$(theme.sh -l | tail -n2 | head -n1)"
         }
         zle -N last_theme
+
+        # Bind C-o to the last theme.
         bindkey '^O' last_theme
+        
         alias th='theme.sh -i'
 
         # Interactively load a light theme
