@@ -1,6 +1,9 @@
 # ▄▀█ █░░ █ ▄▀█ █▀
 # █▀█ █▄▄ █ █▀█ ▄█
 
+##--> Unsetting all the aliases <--##
+unalias -a
+
 ##--> Example aliases <--##
 # alias "alias_name"=<alias_command>
 

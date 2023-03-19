@@ -3,6 +3,7 @@
 
 if [ $USE_TMUX = "Yes" ]; then
     if command -v tmux >/dev/null; then
+    
         ##--> Tmux Launching <--##
         # -2 flag for TMUX to enable 256 colors, use exec in place of command to make terminal close after exiting tmux
         if [ -t 0 ] && [[ -z $TMUX ]] && [[ $- = *i* ]]; then command tmux -2; fi
