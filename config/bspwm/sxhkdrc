@@ -52,7 +52,7 @@ super + space
    bspc node -t "~"{floating,tiled}
 
 # Hide/Show Bar (Polybar and/or eww)
-super + {h,u}
+alt + {h,u}
 	HideBar {-h,-u}
 
 # Reload sxhkd
@@ -118,4 +118,3 @@ XF86Audio{RaiseVolume,LowerVolume,Mute}
 # Music Control
 XF86Audio{Next,Prev,Play,Stop}
 	MediaControl {--next,--previous,--toggle,--stop}
-
