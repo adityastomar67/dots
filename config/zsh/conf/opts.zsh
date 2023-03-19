@@ -1,6 +1,11 @@
 # █▀█ █▀█ ▀█▀ █ █▀█ █▄ █ █▀
 # █▄█ █▀▀  █  █ █▄█ █ ▀█ ▄█
 
+autoload -Uz add-zsh-hook
+autoload -Uz compinit
+autoload _vi_search_fix
+autoload -U colors && colors
+
 ##--> Changing the Title of the Terminals <--##
 function xterm_title_precmd () {
 	print -Pn -- '\e]2;%n@%m %~\a'
@@ -92,22 +97,16 @@ zmodload zsh/zle
 zmodload zsh/zpty
 zmodload zsh/complist
 
-autoload _vi_search_fix
-autoload -U colors && colors
-autoload -U compinit
-
 zle -N _vi_search_fix
 zle -N _sudo_command_line
 zle -N _toggle-right-prompt
 zle -N _toggle-left-prompt
 
-autoload -Uz compinit
 compinit -d ~/.config/zsh/zcompdump-$ZSH_VERSION
 _comp_options+=(globdots)
 
 ## On-demand rehash
 zshcache_time="$(date +%s%N)"
-autoload -Uz add-zsh-hook
  rehash_precmd() {
    if [[ -a /var/cache/zsh/pacman ]]; then
      local paccache_time="$(date -r /var/cache/zsh/pacman +%s%N)"
