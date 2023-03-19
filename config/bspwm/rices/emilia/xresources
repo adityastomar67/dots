@@ -7,6 +7,7 @@ Xft.lcdfilter:	  lcddefault
 
 ! font
 st.font:          Operator Mono Lig:style:medium:pixelsize=18
+dmenu.font:       Operator Mono Lig:style:medium:pixelsize=18
 
 ! window-padding
 st.borderpx:      20
