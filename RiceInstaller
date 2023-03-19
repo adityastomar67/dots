@@ -8,7 +8,6 @@
 #   Redone by: https://github.com/adityastomar67
 
 # TODO: Need to add wallpapers
-# TODO: Change the terminal to st
 
 CRE=$(tput setaf 1)
 CYE=$(tput setaf 3)
@@ -214,7 +213,7 @@ for archive in ~/dotfiles/misc/asciiart/*; do
   fi
 done
 
-cp -f $HOME/dotfiles/home/.zshrc $HOME/
+cp -rf $HOME/dotfiles/home/* $HOME/
 fc-cache -rv >/dev/null 2>&1
 printf "%s%sFiles copied succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 sleep 2
@@ -238,8 +237,13 @@ clear
 
 ########## ---------- Finish ---------- ##########
 
+chsh -s /usr/bin/zsh
+zsh
+
+cd $HOME
+command rm -rf $HOME/.zshrc*
+command cp -rf $HOME/dotfiles/home/.zshrc $HOME/
+
 logo "Installation Finished!"
 printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n" "${BLD}" "${CNC}"
 sleep 5
-chsh -s /usr/bin/zsh
-zsh
