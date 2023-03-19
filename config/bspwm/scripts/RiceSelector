@@ -19,4 +19,5 @@ selected=$(echo -e "${options_text}" | $rofi_command -dmenu)
 if [[ " ${options[@]} " =~ " ${selected} " ]]; then
     echo "$selected" > "${cfg_file}"
     bspc wm -r
+    xrdb merge "$HOME/.config/bspwm/rices/$RICETHEME/xresources" && kill -USR1 $(pidof st)
 fi
