@@ -3,28 +3,26 @@
 #   ║ ║╣ ╠╦╝║║║
 #   ╩ ╚═╝╩╚═╩ ╩
 #	Script to open with selected terminal
-#   Author: z0mbi3
-#	url: https://github.com/gh0stzk
-
-[ -f $HOME/.local/bin/alacritty ] && TERM=$HOME/.local/bin/alacritty || TERM=alacritty
+#   Author: https://github.com/gh0stzk
+#  	Redone: https://github.com/adityastomar67
 
 case "$1" in
   --ot)
-    $(TERM);;
+    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty || alacritty;;
   --oft)
-    $(TERM --class FloaTerm,Alacritty);;
+    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --class FloaTerm,Alacritty || alacritty --class FloaTerm,Alacritty;;
   --ou)
-    $(TERM --hold --class Updating,Alacritty -e yay -Syyu --devel);;
+    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --hold --class Updating,Alacritty -e yay -Syyu --devel || alacritty --hold --class Updating,Alacritty -e yay -Syyu --devel;;
   --ocu)
-	  $(TERM --hold --class Updating,Alacritty -e checkupdates);;
+	  [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --hold --class Updating,Alacritty -e checkupdates || alacritty --hold --class Updating,Alacritty -e checkupdates;;
   --or)
-    $(TERM --class Ranger,Alacritty -e ranger);;
+    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --class Ranger,Alacritty -e ranger || alacritty --class Ranger,Alacritty -e ranger;;
   --ov)
-    $(TERM -e nvim);;
+    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty -e nvim || alacritty -e nvim;;
   --om)
-    $(TERM --class MusicPlayer,Alacritty -e ncmpcpp);;
+    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --class MusicPlayer,Alacritty -e ncmpcpp || alacritty --class MusicPlayer,Alacritty -e ncmpcpp;;
   --of)
-    $(TERM --hold --class Sysfetch,Alacritty -e ~/.local/bin/sysfetch    );;
+    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --hold --class Sysfetch,Alacritty -e ~/.local/bin/sysfetch || alacritty --hold --class Sysfetch,Alacritty -e ~/.local/bin/sysfetch;;
   *)
     echo "Not a valid option!!";;
 esac
