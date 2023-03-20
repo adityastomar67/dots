@@ -6,23 +6,25 @@
 #   Author: z0mbi3
 #	url: https://github.com/gh0stzk
 
+[ -f $HOME/.local/bin/alacritty ] && TERM=$HOME/.local/bin/alacritty || TERM=alacritty
+
 case "$1" in
   --ot)
-    alacritty;;
+    $(TERM);;
   --oft)
-    alacritty --class FloaTerm,Alacritty;;
+    $(TERM --class FloaTerm,Alacritty);;
   --ou)
-    alacritty --hold --class Updating,Alacritty -e yay -Syyu --devel;;
+    $(TERM --hold --class Updating,Alacritty -e yay -Syyu --devel);;
   --ocu)
-	  alacritty --hold --class Updating,Alacritty -e checkupdates;;
+	  $(TERM --hold --class Updating,Alacritty -e checkupdates);;
   --or)
-    alacritty --class Ranger,Alacritty -e ranger;;
+    $(TERM --class Ranger,Alacritty -e ranger);;
   --ov)
-    alacritty -e nvim;;
+    $(TERM -e nvim);;
   --om)
-    alacritty --class MusicPlayer,Alacritty -e ncmpcpp;;
+    $(TERM --class MusicPlayer,Alacritty -e ncmpcpp);;
   --of)
-    alacritty --hold --class Sysfetch,Alacritty -e ~/.local/bin/sysfetch    ;;
+    $(TERM --hold --class Sysfetch,Alacritty -e ~/.local/bin/sysfetch    );;
   *)
-    echo "Opción no válida";;
+    echo "Not a valid option!!";;
 esac

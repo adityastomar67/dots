@@ -56,7 +56,7 @@ _mainScript_() {
 	zsh
 
 	cd $HOME
-	command rm -rf $HOME/.zshrc*
+	command rm -rf $HOME/.zshrc
 	command cp -rf $HOME/dotfiles/home/.zshrc $HOME/
 
 	logo "Installation Finished!"
@@ -248,6 +248,7 @@ setup_rice() {
 
 	command cp -rf $HOME/dotfiles/home/.zshrc $HOME/
 	command cp -rf $HOME/dotfiles/home/.tmux.conf $HOME/
+	[ -f $HOME/.local/bin/alacritty ] && chmod +x $HOME/.local/bin/alacritty
 	fc-cache -rv >/dev/null 2>&1
 	printf "%s%sFiles copied succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
