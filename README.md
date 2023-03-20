@@ -229,8 +229,8 @@ The plugin manager is Packer.
 ## Very useful keybindigs to know...
 
 - <code>alt + @space</code> Display menu to select theme selector.
-- <code>super + @space</code> Apps Menu.
-- <code>super + h </code> Hides bar/s <code>super + u</code> unhide bar/s
+- <code>super + m</code> Apps Menu.
+- <code>alt + h </code> Hides bar/s <code>alt + u</code> unhide bar/s
 - <code>super + alt + t</code> Open terminal selection menu (Alacritty, Termite)
 - <code>super + Print</code> Takes screenshot.
 - <code>ctrl + alt {plus,minus,t}</code> Changes transparency on focused window.
@@ -238,7 +238,7 @@ The plugin manager is Packer.
 - <code>super + Return</code> Open a terminal.
 - <code>super + Alt + Return</code> Open a floating terminal.
 - <code>ctrl + super + alt + k</code> Brute Kill a window/process.
-- <code>super + alt + w</code> Changes randomly wallpaper.
+- <code>alt + w</code> Changes randomly wallpaper.
 - <code>super + alt + r</code> Restart bspwm.
 
 And more.. You need to look sxhkdrc file for more.
@@ -251,15 +251,15 @@ The installer only works for **ARCH** Linux, and based distros.
 <b>Open a terminal in HOME</b>
 - **First download the installer**
 ```sh
-curl https://raw.githubusercontent.com/adityastomar67/dots/master/RiceInstaller -o $HOME/RiceInstaller
+curl -LO https://raw.githubusercontent.com/adityastomar67/dots/master/Installer
 ```
 - **Now give it execute permissions**
 ```sh
-chmod +x RiceInstaller
+chmod +x Installer
 ```
 - **Finally run the installer**
 ```sh
-./RiceInstaller
+./Installer
 ```
 
 

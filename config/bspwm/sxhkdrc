@@ -104,7 +104,7 @@ ctrl + alt {plus,minus,t}
 	{picom-trans -c -o +3, picom-trans -c -o -1, picom-trans -c -d}
 
 # Random wallpaper
-super + w
+alt + w
 	RandomWall
 
 # Manage brightness
