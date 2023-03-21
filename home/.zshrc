@@ -15,5 +15,4 @@ export OPENAI_API_KEY=""    # API Key for chatgpt opetions for commandline.
 
 ##--> Terminal Decorations <--##
 # [ -x motivate ]                     && motivate ;echo                    # Random Motivational Quotes
-# [ -x header ]                       && header ;echo                      # Header for adityastomar67
 [ -x $HOME/.local/bin/colorscript ] && $HOME/.local/bin/colorscript -r
