@@ -30,6 +30,12 @@ use Aloxaf/fzf-tab
 ice wait'3' lucid
 load zsh-users/zsh-history-substring-search
 
+ice wait'3' lucid
+load zsh-users/zsh-autosuggestions
+
+ice wait'3' lucid
+load zsh-users/zsh-syntax-highlighting
+
 ice wait'2' lucid
 load zdharma-continuum/history-search-multi-word
 
@@ -52,11 +58,6 @@ plugins=(
   dirhistory
 )
 source "$OMZ_HOME/oh-my-zsh.sh"
-
-##--> Offline Plugins <--##
-source ~/.config/zsh/plug/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.config/zsh/plug/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.config/zsh/plug/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 ##--> Other Plugins <--##
 command -v aws &>/dev/null && complete -C aws_completer aws
