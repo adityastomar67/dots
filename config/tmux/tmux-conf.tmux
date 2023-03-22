@@ -71,6 +71,12 @@ if-shell '[[ $(uname -s) = Linux ]]' {
     bind C-v run 'tmux set-buffer "$(xclip -o -sel clipboard)"; tmux paste-buffer'
 }
 
+# Open a project in new window
+bind o display-popup -T " Projects " -h 20 -w 50 -E '$SHELL -c $HOME/.config/tmux/scripts/finder'
+
+# Open manual or --help of a command
+bind h display-popup -T " Help " -h 3 -w 25 -E '$SHELL -c $HOME/.config/tmux/scripts/manner'
+
 # ----------------------------=== Theme ===--------------------------
 
 # NOTE: you can use vars with $<var> and ${<var>} as long as the str is double quoted: ""
