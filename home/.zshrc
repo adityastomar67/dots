@@ -11,7 +11,7 @@ export PROMPT_THEME="gh0st" # And many more like gh0st, z, 10k.
 export OPENAI_API_KEY=""    # API Key for chatgpt opetions for commandline.
 
 ##--> Sourcing main config files <--##
-[ -r "$HOME/.config/zsh/.zshrc" ] && source "$HOME/.config/zsh/.zshrc"
+[ -r "$HOME/.config/zsh/zshrc" ] && source "$HOME/.config/zsh/zshrc"
 
 ##--> Terminal Decorations <--##
 # [ -x motivate ]                     && motivate ;echo                    # Random Motivational Quotes
