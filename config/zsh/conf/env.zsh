@@ -28,6 +28,8 @@ export XDG_PICTURES_DIR="$HOME/Pictures"
 export XDG_VIDEOS_DIR="$HOME/Videos"
 export ARCHFLAGS="-arch x86_64"
 export LC_CTYPE="en_IN.UTF-8"
+export LC_ALL=en_IN.UTF-8
+export LANG=en_IN.UTF-8
 export GPG_TTY="$(tty)"
 export KEYTIMEOUT=1
 
