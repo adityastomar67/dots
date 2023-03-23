@@ -168,8 +168,9 @@ setup_rice() {
 
     # Set the source and destination directories
     src_dir="/path/to/source/directory"
-    dest_dir="/path/to/destination/directory"
 
+    
+cd $HOME/.config
     # Loop through each file in the source directory
     for file in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh mpd; do
     # Check if the file is a directory
@@ -208,6 +209,8 @@ setup_rice() {
 	[ ! -d ~/.local/share/applications ] && mkdir -p ~/.local/share/applications
 	[ ! -d ~/.local/share/fonts ] && mkdir -p ~/.local/share/fonts
 	[ ! -d ~/.local/share/asciiart ] && mkdir -p ~/.local/share/asciiart
+
+    cd $HOME/dotfiles
 
 	for archive in alacritty bspwm mpd ncmpcpp nvim ranger tmux zsh; do
 		ln -s ~/dotfiles/config/$archive ~/.config/$archive
