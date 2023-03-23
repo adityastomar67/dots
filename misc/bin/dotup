@@ -3,6 +3,8 @@
 ##--> A script to update the dotfiles <--##
 # URL - https://github.com/adityastomar67/dots
 
+# TODO: Add flags for only updating only singular items
+
 clear
 removeOrStash() {
     local text="${1:?}"

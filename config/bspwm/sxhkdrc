@@ -52,7 +52,7 @@ super + space
    bspc node -t "~"{floating,tiled}
 
 # Hide/Show Bar (Polybar and/or eww)
-alt + {h,u}
+super + alt + {h,u}
 	HideBar {-h,-u}
 
 # Reload sxhkd
