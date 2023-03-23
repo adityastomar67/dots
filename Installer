@@ -53,7 +53,7 @@ _mainScript_() {
 	enable_services
 
 	chsh -s /usr/bin/zsh
-	zsh
+	source $HOME/.config/zsh/zshrc
 
 	cd $HOME
 	command rm -rf $HOME/.zshrc
@@ -284,7 +284,6 @@ setup_rice() {
 		fi
 	done
 
-	ln -s $HOME/dotfiles/home/.zshrc $HOME/.zshrc
 	ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf
 	[ -f $HOME/.local/bin/alacritty ] && chmod +x $HOME/.local/bin/alacritty
 
