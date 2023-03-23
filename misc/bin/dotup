@@ -18,12 +18,12 @@ if [ $opt = "Remove" ]; then
     printf "\n$(tput setaf 1)❌ Removing the changes...$(tput sgr0)\n"
     sleep 2
     git reset --hard
-    printf "\n$(tput setaf 3) Updating the configuration...$(tput sgr0)\n"
+    printf "\n$(tput setaf 3)→ Updating the configuration...$(tput sgr0)\n"
     sleep 1
     git pull
 
 else
-    printf "\n$(tput setaf 3) Updating the configuration...$(tput sgr0)\n"
+    printf "\n$(tput setaf 3)→ Updating the configuration...$(tput sgr0)\n"
     git stash >/dev/null 2>&1
     git pull
     git stash pop >/dev/null 2>&1

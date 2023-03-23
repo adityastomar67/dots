@@ -104,7 +104,7 @@ install_pkg() {
 			sudo pacman -S $package --noconfirm
 			printf "\n"
 		else
-			printf '%s%s is already installed on your system!%s\n' "${CGR}" "$package" "${CNC}"
+			printf '%s✓ %s is already installed on your system!%s\n' "${CGR}" "$package" "${CNC}"
 			sleep 1
 		fi
 	done
@@ -232,7 +232,7 @@ setup_rice() {
 	for archive in $(command ls ~/dotfiles/config/); do
 		ln -s ~/dotfiles/config/$archive ~/.config/$archive
 		if [ $? -eq 0 ]; then
-			printf "%s%s%s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s→ %s%s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
 		else
 			printf "%s%s%s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
@@ -243,7 +243,7 @@ setup_rice() {
 	for archive in $(command ls ~/dotfiles/misc/bin/); do
 		ln -s ~/dotfiles/misc/bin/$archive ~/.local/bin/$archive
 		if [ $? -eq 0 ]; then
-			printf "%s%s%s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s→ %s%s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
 		else
 			printf "%s%s%s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
@@ -254,7 +254,7 @@ setup_rice() {
 	for archive in ~/dotfiles/misc/applications/*; do
 		command cp -R ${archive} ~/.local/share/applications/
 		if [ $? -eq 0 ]; then
-			printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s→ %s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
 		else
 			printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
@@ -276,7 +276,7 @@ setup_rice() {
 	for archive in $(command ls ~/dotfiles/misc/asciiart/); do
 		ln -s ~/dotfiles/misc/asciiart/$archive ~/.local/share/asciiart/$archive
 		if [ $? -eq 0 ]; then
-			printf "%s%s%s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s→ %s%s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
 		else
 			printf "%s%s%s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
