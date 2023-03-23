@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
-##--> A sscript to update the dotfiles <--##
-
-URL="https://github.com/adityastomar67/dots"
+##--> A script to update the dotfiles <--##
+# URL - https://github.com/adityastomar67/dots
 
 [ -d $HOME/dotfiles ] && cd $HOME/dotfiles
 clear
 
 printf "$(tput bold)Updating the config...$(tput sgr0)\n\n"
-printf "Choose wether you want to reset the changes or persist them over update?.."
+printf "Choose wether you want to reset the changes or persist them over update?..\n"
 select opt in "Remove" "Persist"; do
     if [ $opt ]; then
         break
@@ -16,15 +15,18 @@ select opt in "Remove" "Persist"; do
 done
 
 if [ $opt = "Remove" ]; then
-    printf "$(tput setaf 1)❌ Removing the changes...$(tput sgr0)"
+    printf "$(tput setaf 1)❌ Removing the changes...$(tput sgr0)\n"
     sleep 2
     git reset --hard
+    printf "$(tput setaf 3) Updating the configuration...$(tput sgr0)\n"
+    sleep 1
     git pull
 
 else
+    printf "$(tput setaf 3) Updating the configuration...$(tput sgr0)\n"
     git stash >/dev/null 2>&1
     git pull
     git stash pop >/dev/null 2>&1
 fi
 
-printf "$(tput setaf 2)$(tput bold)✓ $(tput setaf 3)Successfully Updated the Dotfiles.$(tput sgr0)"
+printf "$(tput setaf 2)$(tput bold)✓ Successfully Updated the Dotfiles.$(tput sgr0)\n"
