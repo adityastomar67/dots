@@ -5,7 +5,6 @@
 
 clear
 removeOrStash() {
-
     local text="${1:?}"
     printf "${text}"
     select opt in "Remove" "Persist"; do
@@ -61,6 +60,7 @@ removeOrStash "Choose wether you want to reset the changes or persist them over 
 ##--> Updating Neovim <--##
 nvimUpdate
 
+##--> Finishing <--##
 printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated the Dotfiles.$(tput sgr0)\n"
 sleep 2
 
