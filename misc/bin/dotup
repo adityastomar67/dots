@@ -5,8 +5,9 @@
 
 clear
 removeOrStash() {
-    printf $1
-    sleep 1
+
+    local text="${1:?}"
+    printf "${text}"
     select opt in "Remove" "Persist"; do
         if [ $opt ]; then
             break
