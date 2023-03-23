@@ -47,7 +47,6 @@ _mainScript_() {
 	clear
 	install_pkg
 	install_yay
-	# install_stow
 	setup_rice
 	install_eww
 	enable_services
@@ -141,11 +140,6 @@ install_eww() {
 	clear
 }
 
-##--> Install stow for dotfile management <--##
-# install_stow() {
-
-# }
-
 ##--> Setup the config file and backup old ones <--##
 setup_rice() {
 	##--> Cloning <--##
@@ -166,16 +160,59 @@ setup_rice() {
 		mkdir -p "$backup_folder"
 	fi
 
-	for folder in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh mpd; do
-		if [ -d "$HOME/.config/$folder" ]; then
-			mv "$HOME/.config/$folder" "$backup_folder/${folder}_$date"
-			echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"
-		else
-			echo "The folder $folder does not exist in $HOME/.config/"
-		fi
-	done
+    [ -d $HOME/.config ] && cd $HOME/.config
+    for file in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh st dmenu mpd; do
+        if [ -L "$file" ]; then
+            command rm -rf "$file"
+            echo "$file is a symlink and removed"
+            
+        elif [ -d "$file" ]; then
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file folder backed up successfully at $backup_folder/config/${file}_$date"
+        
+        elif [ -f "$file" ]; then
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file file backed up successfully at $backup_folder/config/${file}_$date"
+        fi
+    done
 
-	[ -f ~/.zshrc ] && mv ~/.zshrc ~/.RiceBackup/.zshrc-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
+    [ -d $HOME/.local/bin ] && cd $HOME/.local/bin
+    for file in $(command ls ~/dotfiles/misc/bin/); do
+        if [ -L "$file" ]; then
+            command rm -rf "$file"
+            echo "$file is a symlink and removed"
+            
+        elif [ -d "$file" ]; then
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file folder backed up successfully at $backup_folder/bin/${file}_$date"
+        
+        elif [ -f "$file" ]; then
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file file backed up successfully at $backup_folder/bin/${file}_$date"
+        fi
+    done
+
+	[ -d $HOME/.local/share/asciiart ] && cd $HOME/.local/share/asciiart
+    for file in $(command ls ~/dotfiles/misc/asciiart/); do
+        if [ -L "$file" ]; then
+            command rm -rf "$file"
+            echo "$file is a symlink and removed"
+            
+        elif [ -d "$file" ]; then
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file folder backed up successfully at $backup_folder/ascii/${file}_$date"
+        
+        elif [ -f "$file" ]; then
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file file backed up successfully at $backup_folder/ascii/${file}_$date"
+        fi
+    done
+
+    [ -L ~/.zshrc ] && rm -rf ~/.zshrc \
+        || [ -f ~/.zshrc ] && mv ~/.zshrc $backup_folder/.zshrc-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
+
+    [ -L ~/.tmux.conf ] && rm -rf ~/.tmux.conf \
+        || [ -f ~/.tmux.conf ] && mv ~/.tmux.conf $backup_folder/.tmux.conf-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
 
 	printf "%s%sDone!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 4
@@ -191,30 +228,30 @@ setup_rice() {
 	[ ! -d ~/.local/share/fonts ] && mkdir -p ~/.local/share/fonts
 	[ ! -d ~/.local/share/asciiart ] && mkdir -p ~/.local/share/asciiart
 
-	for archive in ~/dotfiles/config/*; do
-		ln -s ${archive} ~/.config/$archive
+	for archive in $(command ls ~/dotfiles/config/); do
+		ln -s ~/dotfiles/config/$archive ~/.config/$archive
 		if [ $? -eq 0 ]; then
-			printf "%s%s%s folder copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s%s%s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
 		else
-			printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
+			printf "%s%s%s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 			sleep 1
 		fi
 	done
 
-	for archive in ~/dotfiles/misc/bin/*; do
-		ln -s ${archive} ~/.local/bin/$archive
+	for archive in $(command ls ~/dotfiles/misc/bin/); do
+		ln -s ~/dotfiles/misc/bin/$archive ~/.local/bin/$archive
 		if [ $? -eq 0 ]; then
-			printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s%s%s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
 		else
-			printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
+			printf "%s%s%s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 			sleep 1
 		fi
 	done
 
 	for archive in ~/dotfiles/misc/applications/*; do
-		ln -s ${archive} ~/.local/share/applications/$archive
+		command cp -R ${archive} ~/.local/share/applications/
 		if [ $? -eq 0 ]; then
 			printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
@@ -235,13 +272,13 @@ setup_rice() {
 		fi
 	done
 
-	for archive in ~/dotfiles/misc/asciiart/*; do
-		ln -s ${archive} ~/.local/share/asciiart/$archive
+	for archive in $(command ls ~/dotfiles/misc/asciiart/); do
+		ln -s ~/dotfiles/misc/asciiart/$archive ~/.local/share/asciiart/$archive
 		if [ $? -eq 0 ]; then
-			printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s%s%s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
 		else
-			printf "%s%s%s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
+			printf "%s%s%s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 			sleep 1
 		fi
 	done
