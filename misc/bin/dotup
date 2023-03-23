@@ -2,17 +2,15 @@
 
 ##--> A sscript to update the dotfiles <--##
 
-RED="\033[0;31m"
-GREEN="\033[1;32m"
-BOLD="\033[4;37m"
-RESET="\033[0m"
 URL="https://github.com/adityastomar67/dots"
 
-[ -d $HOME/.dotfiles ] && cd $HOME/.dotfiles
+[ -d $HOME/dotfiles ] && cd $HOME/dotfiles
 
-echo "${BOLD}Updating the config...${RESET}\n\n"
+clear
 
-echo "⁉️ Choose wether you want to reset the changes or persist them over update?.."
+echo "$(tput bold)Updating the config...$(tput sgr0)\n\n"
+
+echo "Choose wether you want to reset the changes or persist them over update?.."
 select opt in "Remove" "Persist"; do
     if [ $opt ]; then
         break
@@ -20,7 +18,7 @@ select opt in "Remove" "Persist"; do
 done
 
 if [ $opt = "Remove" ]; then
-    echo "${RED}❌ Removing the changes...${RESET}"
+    echo "$(tput setaf 1)❌ Removing the changes...$(tput sgr0)"
     git reset --hard
     git pull
 
@@ -30,4 +28,4 @@ else
     git stash pop
 fi
 
-echo "${GREEN}✓ Successfully Updated the Dotfiles.${RESET}"
+echo "$(tput setaf 3)✓ Successfully Updated the Dotfiles.$(tput sgr0)"
