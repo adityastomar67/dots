@@ -1,4 +1,4 @@
-# This file was created by the dotfiles sourced zshrc by adityastomar67.
+# This file was created for the dotfile's sourced zshrc by adityastomar67.
 # Do not edit that file directly. Instead, add any settings overrides in this file.
 
 ##--> Some options for user <--##
