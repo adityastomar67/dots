@@ -57,7 +57,7 @@ _mainScript_() {
 
 	cd $HOME
 	command rm -rf $HOME/.zshrc
-	command cp -rf $HOME/dotfiles/home/.zshrc $HOME/
+	ln -s $HOME/dotfiles/home/.zshrc $HOME/.zshrc
 
 	logo "Installation Finished!"
 	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n" "${BLD}" "${CNC}"
@@ -192,7 +192,7 @@ setup_rice() {
 	[ ! -d ~/.local/share/asciiart ] && mkdir -p ~/.local/share/asciiart
 
 	for archive in ~/dotfiles/config/*; do
-		command cp -R ${archive} ~/.config/
+		ln -s ${archive} ~/.config/$archive
 		if [ $? -eq 0 ]; then
 			printf "%s%s%s folder copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
@@ -203,7 +203,7 @@ setup_rice() {
 	done
 
 	for archive in ~/dotfiles/misc/bin/*; do
-		command cp -R ${archive} ~/.local/bin/
+		ln -s ${archive} ~/.local/bin/$archive
 		if [ $? -eq 0 ]; then
 			printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
@@ -214,7 +214,7 @@ setup_rice() {
 	done
 
 	for archive in ~/dotfiles/misc/applications/*; do
-		command cp -R ${archive} ~/.local/share/applications/
+		ln -s ${archive} ~/.local/share/applications/$archive
 		if [ $? -eq 0 ]; then
 			printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
@@ -236,7 +236,7 @@ setup_rice() {
 	done
 
 	for archive in ~/dotfiles/misc/asciiart/*; do
-		command cp -R ${archive} ~/.local/share/asciiart/
+		ln -s ${archive} ~/.local/share/asciiart/$archive
 		if [ $? -eq 0 ]; then
 			printf "%s%s%s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
 			sleep 1
@@ -246,8 +246,8 @@ setup_rice() {
 		fi
 	done
 
-	command cp -rf $HOME/dotfiles/home/.zshrc $HOME/
-	command cp -rf $HOME/dotfiles/home/.tmux.conf $HOME/
+	ln -s $HOME/dotfiles/home/.zshrc $HOME/.zshrc
+	ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf
 	[ -f $HOME/.local/bin/alacritty ] && chmod +x $HOME/.local/bin/alacritty
 	fc-cache -rv >/dev/null 2>&1
 	printf "%s%sFiles copied succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
