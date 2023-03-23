@@ -169,8 +169,8 @@ setup_rice() {
     # Set the source and destination directories
     src_dir="/path/to/source/directory"
 
-    cd $HOME/.config
-    for file in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh mpd; do
+    [ -d $HOME/.config ] && cd $HOME/.config
+    for file in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh st dmenu mpd; do
         # Check if the file is a directory
         if [ -L "$file" ]; then
             # If it's a symlink, remove it
@@ -189,7 +189,7 @@ setup_rice() {
         fi
     done
 
-    cd $HOME/.local/bin
+    [ -d $HOME/.local/bin ] && cd $HOME/.local/bin
     for file in st dmenu alacritty colorscript gitssh sysfetch; do
         # Check if the file is a directory
         if [ -L "$file" ]; then
@@ -209,7 +209,8 @@ setup_rice() {
         fi
     done
 
-    for file in ~/.local/share/asciiart/*; do
+[ -d $HOME/.local/share/asciiart ] && cd $HOME/.local/share/asciiart
+    for file in $(command ls ~/.local/share/asciiart/); do
         # Check if the file is a directory
         if [ -L "$file" ]; then
             # If it's a symlink, remove it
