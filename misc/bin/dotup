@@ -3,7 +3,6 @@
 ##--> A script to update the dotfiles <--##
 # URL - https://github.com/adityastomar67/dots
 
-# TODO: Add flags for only updating only singular items
 
 clear
 removeOrStash() {
@@ -34,8 +33,9 @@ removeOrStash() {
 }
 
 nvimUpdate() {
+    clear
     [ ! -d $HOME/.config/nvim ] && return
-    echo "Do you want to update Neovim?"
+    echo "Do you want to update Neovim also?"
     select option in "Yes" "No"; do
         if [ $option ]; then
             break
@@ -44,7 +44,7 @@ nvimUpdate() {
 
     if [ $option = "Yes" ]; then
         cd $HOME/.config/nvim
-        removeOrStash "Choose wether you want to reset the Neovim options or persist them over the update?..\n"
+        removeOrStash "\n\nChoose wether you want to reset the Neovim options or persist them over the update?..\n"
         printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated Neovim.$(tput sgr0)\n"
         sleep 2
     fi
@@ -52,20 +52,42 @@ nvimUpdate() {
     unset option
 }
 
-printf "$(tput bold)Updating the config...$(tput sgr0)\n\n"
-sleep 1
+if [ $# -gt 0 ]; then
+    case "$1" in
+    -n | --nvim)
+        if [ -d $HOME/.config/nvim ]; then
+            printf "$(tput bold)Updating Neoovim...$(tput sgr0)\n\n"
+            sleep 2
+            cd $HOME/.config/nvim
+            removeOrStash "\n\nChoose wether you want to reset the Neovim options or persist them over the update?..\n"
+            printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated Neovim.$(tput sgr0)\n"
+            sleep 2
+            exit 1
+        else
+            printf "Neovim Configurations doesn't exists!"
+            exit 1
+        fi
+        ;;
+    ?)
+        # echo "script usage: $(basename \$0) [-l] [-h] [-a somevalue]" >&2
+        exit 1
+        ;;
+    esac
+else
+    printf "$(tput bold)Updating the config...$(tput sgr0)\n\n"
+    sleep 1
 
-##--> Updating dotfiles <--##
-[ -d $HOME/dotfiles ] && cd $HOME/dotfiles
-removeOrStash "Choose wether you want to reset the changes or persist them over the update?..\n"
+    ##--> Updating dotfiles <--##
+    [ -d $HOME/dotfiles ] && cd $HOME/dotfiles
+    removeOrStash "Choose wether you want to reset the changes or persist them over the update?..\n"
+    printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated the Dotfiles.$(tput sgr0)\n"
+    sleep 3
 
-##--> Updating Neovim <--##
-nvimUpdate
+    ##--> Updating Neovim <--##
+    nvimUpdate
 
-##--> Finishing <--##
-printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated the Dotfiles.$(tput sgr0)\n"
-sleep 2
-
-printf "\nSourcing zsh..."
-sleep 2
-zsh
+    ##--> Finishing <--##
+    printf "\nSourcing zsh..."
+    sleep 2
+    zsh
+fi
