@@ -3,31 +3,65 @@
 ##--> A script to update the dotfiles <--##
 # URL - https://github.com/adityastomar67/dots
 
-[ -d $HOME/dotfiles ] && cd $HOME/dotfiles
 clear
+removeOrStash() {
+    printf $1
+    select opt in "Remove" "Persist"; do
+        if [ $opt ]; then
+            break
+        fi
+    done
+    clear
+    if [ $opt = "Remove" ]; then
+        printf "$(tput setaf 1)❌ Removing the changes...$(tput sgr0)\n"
+        sleep 2
+        git reset --hard
+        printf "\n$(tput setaf 3)→ Updating the configuration...$(tput sgr0)\n"
+        sleep 1
+        git pull
+
+    else
+        printf "$(tput setaf 3)→ Updating the configuration...$(tput sgr0)\n"
+        git stash >/dev/null 2>&1
+        git pull
+        git stash apply >/dev/null 2>&1
+    fi
+
+    unset opt
+}
+
+nvimUpdate() {
+    [ ! -d $HOME/.config/nvim ] && return
+    echo "Do you want to update Neovim?"
+    select option in "Yes" "No"; do
+        if [ $option ]; then
+            break
+        fi
+    done
+
+    if [ $option = "Yes" ]; then
+        cd $HOME/.config/nvim
+        removeOrStash "Choose wether you want to reset the Neovim options or persist them over the update?..\n"
+        printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated Neovim.$(tput sgr0)\n"
+        sleep 2
+    fi
+
+    unset option
+}
 
 printf "$(tput bold)Updating the config...$(tput sgr0)\n\n"
-printf "Choose wether you want to reset the changes or persist them over update?..\n"
-select opt in "Remove" "Persist"; do
-    if [ $opt ]; then
-        break
-    fi
-done
+sleep 1
 
-clear
-if [ $opt = "Remove" ]; then
-    printf "$(tput setaf 1)❌ Removing the changes...$(tput sgr0)\n"
-    sleep 2
-    git reset --hard
-    printf "\n$(tput setaf 3)→ Updating the configuration...$(tput sgr0)\n"
-    sleep 1
-    git pull
+##--> Updating dotfiles <--##
+[ -d $HOME/dotfiles ] && cd $HOME/dotfiles
+removeOrStash "Choose wether you want to reset the changes or persist them over the update?..\n"
 
-else
-    printf "$(tput setaf 3)→ Updating the configuration...$(tput sgr0)\n"
-    git stash >/dev/null 2>&1
-    git pull
-    git stash pop >/dev/null 2>&1
-fi
+##--> Updating Neovim <--##
+nvimUpdate
 
 printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated the Dotfiles.$(tput sgr0)\n"
+sleep 2
+
+printf "\nSourcing zsh..."
+sleep 2
+zsh
