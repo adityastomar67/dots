@@ -14,8 +14,9 @@ select opt in "Remove" "Persist"; do
     fi
 done
 
+clear
 if [ $opt = "Remove" ]; then
-    printf "\n$(tput setaf 1)❌ Removing the changes...$(tput sgr0)\n"
+    printf "$(tput setaf 1)❌ Removing the changes...$(tput sgr0)\n"
     sleep 2
     git reset --hard
     printf "\n$(tput setaf 3)→ Updating the configuration...$(tput sgr0)\n"
@@ -23,7 +24,7 @@ if [ $opt = "Remove" ]; then
     git pull
 
 else
-    printf "\n$(tput setaf 3)→ Updating the configuration...$(tput sgr0)\n"
+    printf "$(tput setaf 3)→ Updating the configuration...$(tput sgr0)\n"
     git stash >/dev/null 2>&1
     git pull
     git stash pop >/dev/null 2>&1
