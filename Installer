@@ -32,6 +32,7 @@ fi
 
 ##--> Main Entry point of script <--##
 _mainScript_() {
+	clear
 	logo "Welcome!"
 	printf '%sThis script will install needed dependencies and copy my dotfiles to your bspwm setup.%s\n\nThis installer script does NOT change any configuration of your system.\nIts just a script that copies and moves my dotfiles to your ~/.config directory\n\n' "${CRE}" "${CNC}"
 	sleep 5
@@ -295,12 +296,13 @@ setup_rice() {
 	logo "Installing St and Dmenu..."
 	[ -d $HOME/.local/bin/st ] && cd $HOME/.local/bin/st
 	echo "Installing ST Terminal"
-	sudo make clean install 2>&1
+	sudo make clean install >/dev/null 2>&1
+	echo
 
 	sleep 2
 	[ -d $HOME/.local/bin/dmenu ] && cd $HOME/.local/bin/dmenu
 	echo "Installing ST Terminal"
-	sudo make clean install 2>&1
+	sudo make clean install >/dev/null 2>&1
 
 	sleep 2
 	clear
