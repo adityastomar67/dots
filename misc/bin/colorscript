@@ -9,8 +9,8 @@ else
 fi
 
 if command -v find &>/dev/null; then
-    LS_CMD="$(command -v find) ${DIR_COLORSCRIPTS} -maxdepth 1 -type f"
-    LS_CMD_B="$(command -v find) ${DIR_COLORSCRIPTS}/blacklisted -maxdepth 1 -type f"
+    LS_CMD="$(command -v find) ${DIR_COLORSCRIPTS} -maxdepth 1 -type f -o -type l"
+    LS_CMD_B="$(command -v find) ${DIR_COLORSCRIPTS}/blacklisted -maxdepth 1 -type f -o -type l"
 else
     LS_CMD="$(command -v ls) ${DIR_COLORSCRIPTS}"
     LS_CMD_B="$(command -v ls) ${DIR_COLORSCRIPTS}/blacklisted"
