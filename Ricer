@@ -170,17 +170,61 @@ setup_rice() {
     src_dir="/path/to/source/directory"
 
     cd $HOME/.config
-    # Loop through each file in the source directory
     for file in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh mpd; do
         # Check if the file is a directory
         if [ -L "$file" ]; then
             # If it's a symlink, remove it
-            rm -v "$file"
+            command rm -rf "$file"
             echo "$file is a symlink and removed"
+            
         elif [ -d "$file" ]; then
             # If it's a directory, move it to the destination directory
-            mv - "$file" "$backup_folder/${file}_$date"
-            echo "$file folder backed up successfully at $backup_folder/${file}_$date"
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file folder backed up successfully at $backup_folder/config/${file}_$date"
+        
+        elif [ -f "$file" ]; then
+            # If it's a directory, move it to the destination directory
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file file backed up successfully at $backup_folder/config/${file}_$date"
+        fi
+    done
+
+    cd $HOME/.local/bin
+    for file in st dmenu alacritty colorscript gitssh sysfetch; do
+        # Check if the file is a directory
+        if [ -L "$file" ]; then
+            # If it's a symlink, remove it
+            command rm -rf "$file"
+            echo "$file is a symlink and removed"
+            
+        elif [ -d "$file" ]; then
+            # If it's a directory, move it to the destination directory
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file folder backed up successfully at $backup_folder/bin/${file}_$date"
+        
+        elif [ -f "$file" ]; then
+            # If it's a directory, move it to the destination directory
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file file backed up successfully at $backup_folder/bin/${file}_$date"
+        fi
+    done
+
+    for file in ~/.local/share/asciiart/*; do
+        # Check if the file is a directory
+        if [ -L "$file" ]; then
+            # If it's a symlink, remove it
+            command rm -rf "$file"
+            echo "$file is a symlink and removed"
+            
+        elif [ -d "$file" ]; then
+            # If it's a directory, move it to the destination directory
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file folder backed up successfully at $backup_folder/ascii/${file}_$date"
+        
+        elif [ -f "$file" ]; then
+            # If it's a directory, move it to the destination directory
+            command mv -f "$file" "$backup_folder/${file}_$date"
+            echo "$file file backed up successfully at $backup_folder/ascii/${file}_$date"
         fi
     done
 
@@ -193,7 +237,12 @@ setup_rice() {
     # 	fi
     # done
 
-    [ -f ~/.zshrc ] && mv ~/.zshrc ~/.RiceBackup/.zshrc-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
+    [ -L ~/.zshrc ] && rm -rf ~/.zshrc \
+        || [ -f ~/.zshrc ] && mv ~/.zshrc $backup_folder/.zshrc-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
+
+    [ -L ~/.tmux.conf ] && rm -rf ~/.tmux.conf \
+        || [ -f ~/.tmux.conf ] && mv ~/.tmux.conf $backup_folder/.tmux.conf-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
+
 
     printf "%s%sDone!!%s\n" "${BLD}" "${CGR}" "${CNC}"
     sleep 4
