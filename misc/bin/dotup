@@ -6,6 +6,7 @@
 clear
 removeOrStash() {
     printf $1
+    sleep 1
     select opt in "Remove" "Persist"; do
         if [ $opt ]; then
             break
