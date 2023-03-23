@@ -44,7 +44,7 @@ _mainScript_() {
 		*) printf " Error: just write 'y' or 'n'\n\n" ;;
 		esac
 	done
-	# clear
+	clear
 	install_pkg
 	install_yay
 	# install_stow
@@ -109,7 +109,7 @@ install_pkg() {
 		fi
 	done
 	sleep 2
-	clear
+	# clear
 }
 
 ##--> Install AUR helper Yay <--##
@@ -130,7 +130,7 @@ install_yay() {
 		printf "%s%sYAY is already installed on your system%s\n" "${BLD}" "${CGR}" "${CNC}"
 	fi
 	sleep 2
-	clear
+	# clear
 }
 
 ##--> Install Eww for cool GUIs <--##
@@ -138,7 +138,7 @@ install_eww() {
 	logo "Installing needed packages from AUR"
 	yay -S eww --noconfirm --removemake --cleanafter
 	sleep 2
-	clear
+	# clear
 }
 
 ##--> Install stow for dotfile management <--##
@@ -155,7 +155,7 @@ setup_rice() {
 	cd $HOME
 	git clone --quiet --depth=1 https://github.com/adityastomar67/dots.git $HOME/dotfiles
 	sleep 2
-	clear
+	# clear
 
 	##--> Backup <--##
 	logo "Backup your files"
@@ -166,20 +166,38 @@ setup_rice() {
 		mkdir -p "$backup_folder"
 	fi
 
-	for folder in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh mpd; do
-		if [ -d "$HOME/.config/$folder" ]; then
-			mv "$HOME/.config/$folder" "$backup_folder/${folder}_$date"
-			echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"
-		else
-			echo "The folder $folder does not exist in $HOME/.config/"
-		fi
-	done
+    # Set the source and destination directories
+    src_dir="/path/to/source/directory"
+    dest_dir="/path/to/destination/directory"
+
+    # Loop through each file in the source directory
+    for file in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh mpd; do
+    # Check if the file is a directory
+    if [ -d "$file" ]; then
+        # If it's a directory, move it to the destination directory
+        mv -v "$file" "$backup_folder/${file}_$date"
+        echo "$file folder backed up successfully at $backup_folder/${file}_$date"
+    elif [ -L "$file" ]; then
+        # If it's a symlink, remove it
+        rm -v "$file"
+        echo "$file is a symlink and removed"
+    fi
+    done
+
+	# for folder in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh mpd; do
+	# 	if [ -d "$HOME/.config/$folder" ]; then
+	# 		mv "$HOME/.config/$folder" "$backup_folder/${folder}_$date"
+	# 		echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"
+	# 	else
+	# 		echo "The folder $folder does not exist in $HOME/.config/"
+	# 	fi
+	# done
 
 	[ -f ~/.zshrc ] && mv ~/.zshrc ~/.RiceBackup/.zshrc-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
 
 	printf "%s%sDone!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 4
-	clear
+	# clear
 
 	##--> Copy the Files <--##
 	logo "Copying Rice.."
@@ -252,7 +270,7 @@ setup_rice() {
 	fc-cache -rv >/dev/null 2>&1
 	printf "%s%sFiles copied succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
-	clear
+	# clear
 }
 
 ##--> Enable necessary services <--##
@@ -262,7 +280,7 @@ enable_services() {
 	systemctl --user start mpd.service
 	printf "%s%sDone!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
-	clear
+	# clear
 }
 
 _mainScript_
