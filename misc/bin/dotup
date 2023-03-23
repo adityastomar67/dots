@@ -5,12 +5,10 @@
 URL="https://github.com/adityastomar67/dots"
 
 [ -d $HOME/dotfiles ] && cd $HOME/dotfiles
-
 clear
 
-echo "$(tput bold)Updating the config...$(tput sgr0)\n\n"
-
-echo "Choose wether you want to reset the changes or persist them over update?.."
+printf "$(tput bold)Updating the config...$(tput sgr0)\n\n"
+printf "Choose wether you want to reset the changes or persist them over update?.."
 select opt in "Remove" "Persist"; do
     if [ $opt ]; then
         break
@@ -18,14 +16,15 @@ select opt in "Remove" "Persist"; do
 done
 
 if [ $opt = "Remove" ]; then
-    echo "$(tput setaf 1)❌ Removing the changes...$(tput sgr0)"
+    printf "$(tput setaf 1)❌ Removing the changes...$(tput sgr0)"
+    sleep 2
     git reset --hard
     git pull
 
 else
-    git stash
+    git stash >/dev/null 2>&1
     git pull
-    git stash pop
+    git stash pop >/dev/null 2>&1
 fi
 
-echo "$(tput setaf 3)✓ Successfully Updated the Dotfiles.$(tput sgr0)"
+printf "$(tput setaf 2)$(tput bold)✓ $(tput setaf 3)Successfully Updated the Dotfiles.$(tput sgr0)"
