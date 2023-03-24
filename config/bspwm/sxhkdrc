@@ -13,7 +13,7 @@ super + m
 
 # Dmenu Runner
 ctrl + Return
-	dmenu_run
+	dmenu_run -b
 
 # Theme Selector
 alt + @space

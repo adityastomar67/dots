@@ -1,9 +1,8 @@
 # ▄▀█ █ █ █ █▀▀ █▀ █▀█ █▀▄▀█ █▀▀ ▄▄ █▀▀ ▀█ █▀▀
 # █▀█ ▀▄▀▄▀ ██▄ ▄█ █▄█ █ ▀ █ ██▄    █▀  █▄ █▀
 
-if [ $USE_FUNCTION = "Yes" ]; then
-
-    if command -v fzf >/dev/null; then
+if command -v fzf >/dev/null; then
+    if [ $USE_FUNCTION = "Yes" ]; then
 
         AWESOME_FZF_LOCATION="$HOME/.config/zsh/conf/fzf.zsh"
         RED_FG=$(tput setaf 1)
@@ -219,33 +218,34 @@ if [ $USE_FUNCTION = "Yes" ]; then
                 exit 1
             fi
         }
+    fi
 
-        function _fzf_compgen_dir() {
-            fd --type d --hidden --follow --color=always --exclude ".git" --exclude ".hg" --exclude "node_modules" . "$1"
-        }
+    function _fzf_compgen_dir() {
+        fd --type d --hidden --follow --color=always --exclude ".git" --exclude ".hg" --exclude "node_modules" . "$1"
+    }
 
-        function _fzf_compgen_unalias() {
-            tmpfile=$(mktemp /tmp/zsh-complete.XXXXXX)
-            alias >"$tmpfile"
-            fzf "$@" --preview 'ESCAPED=$(printf "%s=" {} | sed -e '"'"'s/[]\/$*.^[]/\\&/g'"'"'); cat '"$tmpfile"' | grep "^$ESCAPED"'
-            rm "$tmpfile"
-        }
+    function _fzf_compgen_unalias() {
+        tmpfile=$(mktemp /tmp/zsh-complete.XXXXXX)
+        alias >"$tmpfile"
+        fzf "$@" --preview 'ESCAPED=$(printf "%s=" {} | sed -e '"'"'s/[]\/$*.^[]/\\&/g'"'"'); cat '"$tmpfile"' | grep "^$ESCAPED"'
+        rm "$tmpfile"
+    }
 
-        function _fzf_comprun() {
-            local command=$1
-            shift
+    function _fzf_comprun() {
+        local command=$1
+        shift
 
-            case "$command" in
-            cd) fzf "$@" --preview 'tree -C {} | head -200' ;;
-            export | unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
-            ssh | telnet) fzf "$@" --preview 'echo {}' ;;
-            unalias) _fzf_compgen_unalias "$@" ;;
-            *) fzf "$@" ;;
-            esac
-        }
+        case "$command" in
+        cd) fzf "$@" --preview 'tree -C {} | head -200' ;;
+        export | unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
+        ssh | telnet) fzf "$@" --preview 'echo {}' ;;
+        unalias) _fzf_compgen_unalias "$@" ;;
+        *) fzf "$@" ;;
+        esac
+    }
 
-        ##--> FZF Defaults <--##
-        export FZF_DEFAULT_OPTS="
+    ##--> FZF Defaults <--##
+    export FZF_DEFAULT_OPTS="
 --color fg:#d4d4d5
 --color fg+:#f5c9c9
 --color bg+:-1
@@ -272,9 +272,7 @@ if [ $USE_FUNCTION = "Yes" ]; then
 --pointer ' '
 --border none
 --height 40"
-        export FZF_DEFAULT_COMMAND='fd --hidden --follow'
-
-    fi
+    export FZF_DEFAULT_COMMAND='fd --hidden --follow'
 fi
 
 # vim:filetype=zsh
