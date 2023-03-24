@@ -44,7 +44,7 @@ nvimUpdate() {
 
     if [ $option = "Yes" ]; then
         cd $HOME/.config/nvim
-        removeOrStash "\n\nChoose wether you want to reset the Neovim options or persist them over the update?..\n"
+        removeOrStash "\n\nChoose whether you want to reset the Neovim options or persist them over the update?..\n"
         printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated Neovim.$(tput sgr0)\n"
         sleep 2
     fi
@@ -56,15 +56,16 @@ if [ $# -gt 0 ]; then
     case "$1" in
     -n | --nvim)
         if [ -d $HOME/.config/nvim ]; then
-            printf "$(tput bold)Updating Neoovim...$(tput sgr0)\n\n"
+            printf "$(tput bold)Updating Neovim...$(tput sgr0)"
             sleep 2
             cd $HOME/.config/nvim
-            removeOrStash "\n\nChoose wether you want to reset the Neovim options or persist them over the update?..\n"
+            removeOrStash "\n\nChoose whether you want to reset the Neovim options or persist them over the update?..\n"
             printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated Neovim.$(tput sgr0)\n"
             sleep 2
             exit 1
         else
-            printf "Neovim Configurations doesn't exists!"
+            printf "$(tput setaf 1)❌ Neovim Configurations doesn't exists!$(tput sgr0)\n"
+            clear
             exit 1
         fi
         ;;
@@ -79,7 +80,7 @@ else
 
     ##--> Updating dotfiles <--##
     [ -d $HOME/dotfiles ] && cd $HOME/dotfiles
-    removeOrStash "Choose wether you want to reset the changes or persist them over the update?..\n"
+    removeOrStash "Choose whether you want to reset the changes or persist them over the update?..\n"
     printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated the Dotfiles.$(tput sgr0)\n"
     sleep 3
 
