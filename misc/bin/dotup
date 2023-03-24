@@ -93,4 +93,13 @@ else
     sleep 2
     cd $HOME
     zsh
+
+    ##--> Reloading the BSPWM and keybindings, st also <--##
+    sleep 2
+    bspc wm -r; dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'Bspwm' 'The BSPWM has been reloaded successfully!'
+    sleep 1
+    pkill -USR1 -x sxhkd; dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'Sxhkd' 'The keybindings has been reloaded successfully!'
+    sleep 1
+    xrdb merge "$HOME/.config/bspwm/rices/$RICETHEME/xresources" && kill -USR1 $(pidof st); \
+        dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'ST Terminal' 'The terminal has been reloaded successfully!'
 fi
