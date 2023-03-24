@@ -15,7 +15,7 @@ if [ $OPT_THEME = "Yes" ]; then
 
         # Bind C-o to the last theme.
         bindkey '^O' last_theme
-        
+
         alias th='theme.sh -i'
 
         # Interactively load a light theme
@@ -25,6 +25,32 @@ if [ $OPT_THEME = "Yes" ]; then
         alias thd='theme.sh --dark -i'
     else
         sudo curl -Lo /usr/bin/theme.sh 'https://git.io/JM70M' && sudo chmod +x /usr/bin/theme.sh
+    fi
+fi
+
+if [ $CUSTOM_WALL = "Yes" ]; then
+    if [ -d "$HOME/.config/wall" ]; then
+        # Clone it to the perfect location
+        dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'Custom Walls' "Cloning adityastomar67's Walls..."
+        git clone --quiet https://github.com/adityastomar67/Wallpapers "$HOME/.config/wall"
+
+        # Move all the static wallpapers to `wall` directory and select the files with .png extension
+        cd "$HOME/.config/wall" || exit
+        command mv Static/* .
+        /usr/bin/ls | grep "wall[0-9]*.png" >list.txt
+
+        # Move all the .png files to .jpg
+        list="./list.txt"
+        while IFS= read -r file; do
+            mv -- "$file" "${file%.png}.jpg"
+        done <"$list"
+
+        # Remove unnecessary files and set wallpaper
+        command rm -rf .git/ README.md Static Live list.txt
+    fi
+elif [ $CUSTOM_WALL = "No" ]; then
+    if [ -d "$HOME/.config/wall" ]; then
+        command rm -rf $HOME/.config/wall
     fi
 fi
 
