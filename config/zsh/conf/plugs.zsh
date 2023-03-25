@@ -1,6 +1,8 @@
 # █▀█ █   █ █ █▀▀ █ █▄ █ █▀
 # █▀▀ █▄▄ █▄█ █▄█ █ █ ▀█ ▄█
 
+export ZSH_COMPDUMP=~/.cache/.zcompdump-$HOST
+
 OMZ_HOME="$HOME/.oh-my-zsh"
 ZINIT_HOME="$HOME/.zinit"
 
@@ -18,10 +20,6 @@ alias load='zinit load'
 
 ice depth"1"
 use zsh-users/zsh-completions
-
-autoload compinit
-compinit
-
 use hlissner/zsh-autopair
 use zdharma-continuum/fast-syntax-highlighting
 use MichaelAquilina/zsh-you-should-use

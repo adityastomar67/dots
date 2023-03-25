@@ -156,7 +156,6 @@ zstyle ':autocomplete:*' insert-unambiguous no
 zstyle ':autocomplete:*' widget-style complete-word
 zstyle ':autocomplete:*' fzf-completion no
 zstyle ':autocomplete:*' add-space executables aliases functions builtins reserved-words commands
-zstyle :compinstall filename '~/.zshrc'
 
 ##--> A little OMZ Config <--##
 HISTFILE="$HOME/.config/zsh/zhistory"
