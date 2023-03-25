@@ -7,11 +7,12 @@ ZINIT_HOME="$HOME/.zinit"
 
 ##--> Zinit setup <--##
 if [ ! -d "$ZINIT_HOME" ]; then
+  clear
   echo "ZINIT not found. Cloning..."
   git clone --depth 1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
-
 source "$ZINIT_HOME/zinit.zsh"
+
 alias use='zinit light'
 alias ice='zinit ice'
 alias load='zinit load'
@@ -41,6 +42,7 @@ unalias use ice load
 ##--> OMZ setup <--##
 if [ $OMZ = "Yes" ]; then
   if [ ! -d "$OMZ_HOME" ]; then
+    clear
     echo "OH-MY-ZSH not found. Cloning..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
