@@ -10,8 +10,8 @@ do
   [ -f "$HOME/.config/zsh/conf/$F.zsh" ] && source "$HOME/.config/zsh/conf/$F.zsh"
 done <<-EOF
     opts
-    env
     plugs
+    env
     theme
     keys
     prompt

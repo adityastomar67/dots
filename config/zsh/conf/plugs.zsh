@@ -2,8 +2,8 @@
 # █▀▀ █▄▄ █▄█ █▄█ █ █ ▀█ ▄█
 
 export ZSH_COMPDUMP=~/.cache/.zcompdump-$HOST
-OMZ_HOME="$HOME/.cache/oh-my-zsh"
-ZINIT_HOME="$HOME/.zinit"
+OMZ_HOME="$HOME/.cache/.oh-my-zsh"
+ZINIT_HOME="$HOME/.cache/.zinit"
 
 ##--> Zinit setup <--##
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -53,6 +53,8 @@ if [ $OMZ = "Yes" ]; then
     dirhistory
   )
   source "$OMZ_HOME/oh-my-zsh.sh"
+elif [ $OMZ = "Yes" ]; then
+  [ -d $OMZ_HOME ] && rm -rf $OMZ_HOME &
 fi
 
 ##--> Other Plugins <--##
