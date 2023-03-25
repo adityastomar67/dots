@@ -141,7 +141,7 @@ setup_rice() {
 	printf "→ Cloning gh0stzk's rice. (adityastomar67 fork)\n\n"
 	cd $HOME
 	git clone --quiet --depth=1 https://github.com/adityastomar67/dots.git $HOME/dotfiles
-	printf "%s%s✓ Configuration Cloned to $HOME/dotfiles.%s" "${BLD}" "${CGR}" "${CNC}"
+	printf "%s%s✓ Configuration Cloned to $HOME/dotfiles.%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 
 	##--> Backup <--##
@@ -157,15 +157,19 @@ setup_rice() {
 	for file in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh st dmenu mpd; do
 		if [ -L "$file" ]; then
 			command rm -rf "$file"
-			printf "%s✗ $file is a symlink and removed%s" "${CRE}" "${CNC}"
+			printf "%s✗ $file is a symlink and removed%s\n" "${CRE}" "${CNC}"
+			sleep 1
 		elif [ -d "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
-			printf "%s✓ $file folder backed up successfully at $backup_folder/config/${file}_$date%s" "${CGR}" "${CNC}"
+			printf "%s✓ $file folder backed up successfully at $backup_folder/config/${file}_$date%s\n" "${CGR}" "${CNC}"
+			sleep 1
 		elif [ -f "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
-			printf "%s✓ $file file backed up successfully at $backup_folder/config/${file}_$date%s" "${CGR}" "${CNC}"
+			printf "%s✓ $file file backed up successfully at $backup_folder/config/${file}_$date%s\n" "${CGR}" "${CNC}"
+			sleep 1
 		else
-			printf "%s✗ $file not found!%s" "${CRE}" "${CNC}"
+			printf "%s✗ $file not found!%s\n" "${CRE}" "${CNC}"
+			sleep 1
 		fi
 	done
 
@@ -173,15 +177,19 @@ setup_rice() {
 	for file in $(command ls ~/dotfiles/misc/bin/); do
 		if [ -L "$file" ]; then
 			command rm -rf "$file"
-			printf "%s✗ $file is a symlink and removed%s" "${CRE}" "${CNC}"
+			printf "%s✗ $file is a symlink and removed%s\n" "${CRE}" "${CNC}"
+			sleep 1
 		elif [ -d "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
-			printf "%s✓ $file folder backed up successfully at $backup_folder/bin/${file}_$date%s" "${CGR}" "${CNC}"
+			printf "%s✓ $file folder backed up successfully at $backup_folder/bin/${file}_$date%s\n" "${CGR}" "${CNC}"
+			sleep 1
 		elif [ -f "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
-			printf "%s✓ $file file backed up successfully at $backup_folder/bin/${file}_$date%s" "${CGR}" "${CNC}"
+			printf "%s✓ $file file backed up successfully at $backup_folder/bin/${file}_$date%s\n" "${CGR}" "${CNC}"
+			sleep 1
 		else
-			printf "%s✗ $file not found!%s" "${CRE}" "${CNC}"
+			printf "%s✗ $file not found!%s\n" "${CRE}" "${CNC}"
+			sleep 1
 		fi
 	done
 
@@ -189,15 +197,19 @@ setup_rice() {
 	for file in $(command ls ~/dotfiles/misc/asciiart/); do
 		if [ -L "$file" ]; then
 			command rm -rf "$file"
-			printf "%s✗ $file is a symlink and removed%s" "${CRE}" "${CNC}"
+			printf "%s✗ $file is a symlink and removed%s\n" "${CRE}" "${CNC}"
+			sleep 1
 		elif [ -d "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
-			printf "%s✓ $file folder backed up successfully at $backup_folder/ascii/${file}_$date%s" "${CGR}" "${CNC}"
+			printf "%s✓ $file folder backed up successfully at $backup_folder/ascii/${file}_$date%s\n" "${CGR}" "${CNC}"
+			sleep 1
 		elif [ -f "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
-			printf "%s✓ $file file backed up successfully at $backup_folder/ascii/${file}_$date%s" "${CGR}" "${CNC}"
+			printf "%s✓ $file file backed up successfully at $backup_folder/ascii/${file}_$date%s\n" "${CGR}" "${CNC}"
+			sleep 1
 		else
-			printf "%s✗ $file not found!%s" "${CRE}" "${CNC}"
+			printf "%s✗ $file not found!%s\n" "${CRE}" "${CNC}"
+			sleep 1
 		fi
 	done
 
@@ -224,6 +236,7 @@ setup_rice() {
 		ln -s ~/dotfiles/config/$archive ~/.config/$archive
 		if [ $? -eq 0 ]; then
 			printf "%s%s→ %s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			sleep 1
 		else
 			printf "%s%s✗ %s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 			sleep 1
@@ -234,6 +247,7 @@ setup_rice() {
 		ln -s ~/dotfiles/misc/bin/$archive ~/.local/bin/$archive
 		if [ $? -eq 0 ]; then
 			printf "%s%s→ %s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			sleep 1
 		else
 			printf "%s%s✗ %s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 			sleep 1
@@ -244,6 +258,7 @@ setup_rice() {
 		command cp -R ${archive} ~/.local/share/applications/
 		if [ $? -eq 0 ]; then
 			printf "%s%s→ %s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			sleep 1
 		else
 			printf "%s%s✗ %s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 			sleep 1
@@ -254,6 +269,7 @@ setup_rice() {
 		command cp -R ${archive} ~/.local/share/fonts/
 		if [ $? -eq 0 ]; then
 			printf "%s%s→ %s copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			sleep 1
 		else
 			printf "%s%s✗ %s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 			sleep 1
@@ -264,6 +280,7 @@ setup_rice() {
 		ln -s ~/dotfiles/misc/asciiart/$archive ~/.local/share/asciiart/$archive
 		if [ $? -eq 0 ]; then
 			printf "%s%s→ %s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			sleep 1
 		else
 			printf "%s%s✗ %s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
 			sleep 1
@@ -273,8 +290,8 @@ setup_rice() {
 	sleep 2
 
 	logo "Configuring ZSH & Tmux"
-	ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf && printf "%s→ Tmux conf linked succesfully!%s\n" "${CGR}" "${CNC}"
-	ln -s $HOME/dotfiles/home/.zshrc $HOME/.zshrc && printf "%s→ Zshrc linked succesfully!%s\n" "${CGR}" "${CNC}"
+	ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf && printf "%s→ Tmux conf linked succesfully!%s\n" "${CGR}" "${CNC}" && sleep 1
+	ln -s $HOME/dotfiles/home/.zshrc $HOME/.zshrc && printf "%s→ Zshrc linked succesfully!%s\n" "${CGR}" "${CNC}" && sleep 1
 	[ -f $HOME/.local/bin/alacritty ] && chmod +x $HOME/.local/bin/alacritty
 	printf "%s%s✓ Done succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
@@ -286,11 +303,11 @@ setup_rice() {
 
 	logo "Configuring Suckless Tools"
 	[ -d $HOME/.local/bin/st ] && cd $HOME/.local/bin/st
-	printf "%s→ Installing ST Terminal%s" "${CYE}" "${CNC}"
+	printf "%s→ Installing ST Terminal%s\n" "${CYE}" "${CNC}"
 	sudo make clean install >/dev/null 2>&1
 
 	[ -d $HOME/.local/bin/dmenu ] && cd $HOME/.local/bin/dmenu
-	printf "%s→ Installing Dmenu%s" "${CYE}" "${CNC}"
+	printf "%s→ Installing Dmenu%s\n" "${CYE}" "${CNC}"
 	sudo make clean install >/dev/null 2>&1
 
 	printf "%s%s✓ Done succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
@@ -299,12 +316,12 @@ setup_rice() {
 
 ##--> Enable necessary services <--##
 enable_services() {
+	logo "Enabling services..."
 	if is_installed lightdm; then
-		sudo systemctl enable lightdm -f
+		sudo systemctl enable lightdm -f >/dev/null 2>&1
 		printf '%s✓ LightDM services enabled on your system!%s\n' "${CGR}" "${CNC}"
 		sleep 2
 	fi
-	logo "Enabling MPD service"
 	systemctl --user enable mpd.service
 	systemctl --user start mpd.service
 	printf "%s%s✓ Services enabled!!%s\n" "${BLD}" "${CGR}" "${CNC}"
