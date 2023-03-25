@@ -2,8 +2,8 @@
 # █▀▀ █▄▄ █▄█ █▄█ █ █ ▀█ ▄█
 
 export ZSH_COMPDUMP=~/.cache/.zcompdump-$HOST
-OMZ_HOME="$HOME/.cache/.oh-my-zsh"
-ZINIT_HOME="$HOME/.cache/.zinit"
+OMZ_HOME="$HOME/.oh-my-zsh"
+ZINIT_HOME="$HOME/.zinit"
 
 ##--> Zinit setup <--##
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -42,7 +42,7 @@ unalias use ice load
 if [ $OMZ = "Yes" ]; then
   if [ ! -d "$OMZ_HOME" ]; then
     echo "OH-MY-ZSH not found. Cloning..."
-    git clone --quiet https://github.com/ohmyzsh/ohmyzsh.git $OMZ_HOME
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
 
   plugins=(
