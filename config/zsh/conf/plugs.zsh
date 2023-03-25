@@ -2,8 +2,8 @@
 # █▀▀ █▄▄ █▄█ █▄█ █ █ ▀█ ▄█
 
 export ZSH_COMPDUMP=~/.cache/.zcompdump-$HOST
-OMZ_HOME="$HOME/.cache/.oh-my-zsh"
-ZINIT_HOME="$HOME/.cache/.zinit"
+OMZ_HOME="$ZDOTDIR/oh-my-zsh"
+ZINIT_HOME="$ZDOTDIR/zinit"
 
 ##--> Zinit setup <--##
 if [ ! -d "$ZINIT_HOME" ]
