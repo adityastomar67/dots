@@ -158,15 +158,12 @@ setup_rice() {
 		if [ -L "$file" ]; then
 			command rm -rf "$file"
 			printf "%s✗ $file is a symlink and removed%s" "${CRE}" "${CNC}"
-
 		elif [ -d "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
 			printf "%s✓ $file folder backed up successfully at $backup_folder/config/${file}_$date%s" "${CGR}" "${CNC}"
-
 		elif [ -f "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
 			printf "%s✓ $file file backed up successfully at $backup_folder/config/${file}_$date%s" "${CGR}" "${CNC}"
-
 		else
 			printf "%s✗ $file not found!%s" "${CRE}" "${CNC}"
 		fi
@@ -177,11 +174,9 @@ setup_rice() {
 		if [ -L "$file" ]; then
 			command rm -rf "$file"
 			printf "%s✗ $file is a symlink and removed%s" "${CRE}" "${CNC}"
-
 		elif [ -d "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
 			printf "%s✓ $file folder backed up successfully at $backup_folder/bin/${file}_$date%s" "${CGR}" "${CNC}"
-
 		elif [ -f "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
 			printf "%s✓ $file file backed up successfully at $backup_folder/bin/${file}_$date%s" "${CGR}" "${CNC}"
@@ -195,11 +190,9 @@ setup_rice() {
 		if [ -L "$file" ]; then
 			command rm -rf "$file"
 			printf "%s✗ $file is a symlink and removed%s" "${CRE}" "${CNC}"
-
 		elif [ -d "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
 			printf "%s✓ $file folder backed up successfully at $backup_folder/ascii/${file}_$date%s" "${CGR}" "${CNC}"
-
 		elif [ -f "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
 			printf "%s✓ $file file backed up successfully at $backup_folder/ascii/${file}_$date%s" "${CGR}" "${CNC}"
