@@ -2,14 +2,13 @@
 # █▀▀ █▄▄ █▄█ █▄█ █ █ ▀█ ▄█
 
 export ZSH_COMPDUMP=~/.cache/.zcompdump-$HOST
-OMZ_HOME="$ZDOTDIR/oh-my-zsh"
-ZINIT_HOME="$ZDOTDIR/zinit"
+OMZ_HOME="$HOME/.cache/oh-my-zsh"
+ZINIT_HOME="$HOME/.zinit"
 
 ##--> Zinit setup <--##
-if [ ! -d "$ZINIT_HOME" ]
-then
-    echo "ZINIT not found. Cloning..."
-    git clone --depth 1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+if [ ! -d "$ZINIT_HOME" ]; then
+  echo "ZINIT not found. Cloning..."
+  git clone --depth 1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 source "$ZINIT_HOME/zinit.zsh"
@@ -40,20 +39,21 @@ ice wait'5' lucid
 unalias use ice load
 
 ##--> OMZ setup <--##
-if [ ! -d "$OMZ_HOME" ]
-then
+if [ $OMZ = "Yes" ]; then
+  if [ ! -d "$OMZ_HOME" ]; then
     echo "OH-MY-ZSH not found. Cloning..."
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
+    git clone --quiet https://github.com/ohmyzsh/ohmyzsh.git $OMZ_HOME
+  fi
 
-plugins=(
-  git
-  history
-  web-search
-  copybuffer
-  dirhistory
-)
-source "$OMZ_HOME/oh-my-zsh.sh"
+  plugins=(
+    git
+    history
+    web-search
+    copybuffer
+    dirhistory
+  )
+  source "$OMZ_HOME/oh-my-zsh.sh"
+fi
 
 ##--> Other Plugins <--##
 command -v aws &>/dev/null && complete -C aws_completer aws
