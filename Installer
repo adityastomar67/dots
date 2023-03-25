@@ -196,8 +196,6 @@ setup_rice() {
 		elif [ -f "$file" ]; then
 			command mv -f "$file" "$backup_folder/${file}_$date"
 			printf "%s✓ $file file backed up successfully at $backup_folder/ascii/${file}_$date%s" "${CGR}" "${CNC}"
-		else
-			printf "%s✗ $file not found!%s" "${CRE}" "${CNC}"
 		fi
 	done
 
