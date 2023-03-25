@@ -62,10 +62,10 @@ _mainScript_() {
 logo() {
 	clear
 	local text="${1:?}"
-	echo -en "                                  
-	               %%%                
-	        %%%%%//%%%%%              
-	      %%************%%%           
+	echo -en "
+	               %%%
+	        %%%%%//%%%%%
+	      %%************%%%
 	  (%%//############*****%%
 	%%%%%**###&&&&&&&&&###**//
 	%%(**##&&&#########&&&##**
@@ -78,7 +78,7 @@ logo() {
 	       &&&         &&&
 	       &&&////   &&
 	          &&//@@@**
-	            ..***                
+	            ..***
 			  z0mbi3 Script (adityastomar67 fork)\n\n"
 	printf ' %s [%s%s %s%s %s]%s\n\n' "${CRE}" "${CNC}" "${CYE}" "${text}" "${CNC}" "${CRE}" "${CNC}"
 	sleep 2
@@ -292,7 +292,6 @@ setup_rice() {
 	logo "Configuring ZSH & Tmux"
 	ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf && printf "%s→ Tmux conf linked succesfully!%s\n" "${CGR}" "${CNC}" && sleep 1
 	ln -s $HOME/dotfiles/home/.zshrc $HOME/.zshrc && printf "%s→ Zshrc linked succesfully!%s\n" "${CGR}" "${CNC}" && sleep 1
-	[ -f $HOME/.local/bin/alacritty ] && chmod +x $HOME/.local/bin/alacritty
 	printf "%s%s✓ Done succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 
