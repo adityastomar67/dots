@@ -54,7 +54,8 @@ _mainScript_() {
 	zsh
 
 	logo "Installation Finished!"
-	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n\n" "${BLD}" "${CNC}"
+	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n" "${BLD}" "${CNC}"
+	printf "%s%sRun dotup command to update configs anytime.%s\n\n" "${BLD}" "${CYE}" "${CNC}"	
 
 	while true; do
 		read -rp " Do you wish to remove your backup configs? [y/N]: " yn
