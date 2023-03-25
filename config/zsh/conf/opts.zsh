@@ -102,7 +102,11 @@ zle -N _sudo_command_line
 zle -N _toggle-right-prompt
 zle -N _toggle-left-prompt
 
-compinit -d ~/.config/zsh/zcompdump-$ZSH_VERSION
+for dump in ~/.config/zsh/zcompdump(N.mh+24); do
+  compinit ~/.config/zsh/zcompdump
+done
+
+compinit -C -d ~/.config/zsh/zcompdump
 _comp_options+=(globdots)
 
 ## On-demand rehash

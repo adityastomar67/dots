@@ -4,7 +4,7 @@
 #  ╩╚═╩╚═╝╚═╝  ╚═╝╚═╝╩═╝╚═╝╚═╝ ╩ ╚═╝╩╚═  - z0mbi3.zk@protonmail.com
 
 cfg_file="$HOME/.config/bspwm/rice.cfg"
-rofi_command="rofi -theme $HOME/.config/bspwm/scripts/RiceSelector.rasi"
+rofi_command="rofi -no-lazy-grab -dmenu -theme $HOME/.config/bspwm/scripts/RiceSelector.rasi & disown"
 
 # Array Options
 options=("emilia" "jan" "aline" "isabel" "andrea" "cynthia" "silvia" "melissa" "pamela" "cristina" "karla" "z0mbi3")
