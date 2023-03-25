@@ -285,6 +285,7 @@ setup_rice() {
 	done
 
 	ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf
+	ln -s $HOME/dotfiles/home/.zshrc $HOME/.zshrc
 	[ -f $HOME/.local/bin/alacritty ] && chmod +x $HOME/.local/bin/alacritty
 
 	clear

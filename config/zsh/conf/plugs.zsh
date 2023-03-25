@@ -53,8 +53,13 @@ if [ $OMZ = "Yes" ]; then
     dirhistory
   )
   source "$OMZ_HOME/oh-my-zsh.sh"
+  sleep 2
+  if [ -f $HOME/.zshrc.pre-oh-my-zsh ]; then
+    rm -rf $HOME/.zshrc
+    command mv $HOME/.zshrc.pre-oh-my-zsh $HOME/.zshrc
+  fi
 elif [ $OMZ = "No" ]; then
-  [ -d $OMZ_HOME ] && rm -rf $OMZ_HOME &
+  [ -d $OMZ_HOME ] && rm -rf $OMZ_HOME
 fi
 
 ##--> Other Plugins <--##
