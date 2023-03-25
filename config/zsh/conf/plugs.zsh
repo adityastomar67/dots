@@ -60,6 +60,9 @@ if [ $OMZ = "Yes" ]; then
     rm -rf $HOME/.zshrc
     command mv $HOME/.zshrc.pre-oh-my-zsh $HOME/.zshrc
   fi
+  if [ -f $HOME/.zcompdump ]; then
+    rm -rf $HOME/.zcompdump
+  fi
 elif [ $OMZ = "No" ]; then
   [ -d $OMZ_HOME ] && rm -rf $OMZ_HOME
 fi
