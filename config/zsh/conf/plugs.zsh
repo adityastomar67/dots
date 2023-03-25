@@ -2,9 +2,8 @@
 # █▀▀ █▄▄ █▄█ █▄█ █ █ ▀█ ▄█
 
 export ZSH_COMPDUMP=~/.cache/.zcompdump-$HOST
-
-OMZ_HOME="$HOME/.oh-my-zsh"
-ZINIT_HOME="$HOME/.zinit"
+OMZ_HOME="$HOME/.cache/.oh-my-zsh"
+ZINIT_HOME="$HOME/.cache/.zinit"
 
 ##--> Zinit setup <--##
 if [ ! -d "$ZINIT_HOME" ]
@@ -48,7 +47,6 @@ then
 fi
 
 plugins=(
-  z
   git
   history
   web-search
