@@ -54,7 +54,17 @@ _mainScript_() {
 	zsh
 
 	logo "Installation Finished!"
-	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n" "${BLD}" "${CNC}"
+	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n\n" "${BLD}" "${CNC}"
+
+	while true; do
+		read -rp " Do you wish to remove your backup configs? [y/N]: " yn
+		case $yn in
+		[Yy]*) rm -rf $backup_folder && break ;;
+		[Nn]*) echo "Backup files stored at $backup_folder" && break ;;
+		*) printf "✗ Error: just write 'y' or 'n'\n\n" ;;
+		esac
+	done
+
 	sleep 5
 }
 
