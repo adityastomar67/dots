@@ -49,7 +49,7 @@ _mainScript_() {
 	install_pkg
 	install_yay
 	setup_rice
-	install_eww
+	# install_eww
 	enable_services
 
 	chsh -s /usr/bin/zsh
@@ -287,11 +287,13 @@ setup_rice() {
 	ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf
 	[ -f $HOME/.local/bin/alacritty ] && chmod +x $HOME/.local/bin/alacritty
 
+	clear
 	logo "Caching fonts..."
 	fc-cache -rv >/dev/null 2>&1
 	printf "%s%sFiles copied succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 
+	clear
 	logo "Installing St and Dmenu..."
 	[ -d $HOME/.local/bin/st ] && cd $HOME/.local/bin/st
 	echo "Installing ST Terminal"
@@ -300,7 +302,7 @@ setup_rice() {
 
 	sleep 2
 	[ -d $HOME/.local/bin/dmenu ] && cd $HOME/.local/bin/dmenu
-	echo "Installing ST Terminal"
+	echo "Installing Dmenu"
 	sudo make clean install >/dev/null 2>&1
 
 	sleep 2

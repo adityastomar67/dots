@@ -53,7 +53,7 @@ if [ $OMZ = "Yes" ]; then
     dirhistory
   )
   source "$OMZ_HOME/oh-my-zsh.sh"
-elif [ $OMZ = "Yes" ]; then
+elif [ $OMZ = "No" ]; then
   [ -d $OMZ_HOME ] && rm -rf $OMZ_HOME &
 fi
 
