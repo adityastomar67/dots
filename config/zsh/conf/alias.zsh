@@ -21,9 +21,9 @@ if [ $USE_ALIAS = "Yes" ]; then
     unset command
 
     ##--> Use neovim for vim if present. <--##
-    [ is_installed "nvim" ] && alias vim="nvim" vimdiff="nvim -d"
+    is_installed nvim && alias vim="nvim" vimdiff="nvim -d"
 
-    if [ is_installed "exa" ]; then
+    if is_installed exa; then
         alias ls="clr && exa -al --color=always --icons --git --group-directories-first"
         alias la="exa -a --color=always --icons --group-directories-first"
         alias ll="exa -l --color=always --icons --group-directories-first"
@@ -32,16 +32,16 @@ if [ $USE_ALIAS = "Yes" ]; then
         alias l="exa -l --color=always --icons --git --group-directories-first"
     fi
 
-    if [ is_installed "lsd" ]; then
+    if is_installed lsd; then
         alias ls="lsd -a --group-directories-first"
         alias ll="lsd -la --group-directories-first"
     fi
 
-    if [ is_installed "mycli" ]; then
+    if is_installed mycli; then
         alias mysql="mycli"
     fi
 
-    if [ is_installed "logo-ls" ]; then
+    if is_installed logo-ls; then
         alias lls="logo-ls"
         alias lla="logo-ls -l --all"
     fi
