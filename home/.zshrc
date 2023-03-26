@@ -9,7 +9,7 @@ export USE_ALIAS="Yes"      # Pretty self explainotory.
 export USE_FUNCTION="Yes"   # Pretty self explainotory as well.
 export CUSTOM_WALL="No"     # For my personal wallpapers, source zsh after changing
 export PROMPT_THEME="gh0st" # And many more like gh0st, z, 10k.
-export OPENAI_API_KEY=""    # API Key for chatgpt opetions for commandline.
+export OPENAI_API_KEY=""    # API Key for chatgpt options for commandline.
 
 ##--> Sourcing main config files <--##
 [ -r "$HOME/.config/zsh/zshrc" ] && source "$HOME/.config/zsh/zshrc"

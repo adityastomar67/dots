@@ -52,8 +52,8 @@ if [ $USE_FUNCTION = "Yes" ]; then
 
     ##--> Empty Trash Bin <--##
     function empty_trash() {
+        [ ! -d "$HOME/.Trash/files" ] && return
         printf "%s\n" "EMPTYING TRASH"
-        [ ! -d "$HOME/.Trash/files" ] && mkdir -p "$HOME/.Trash/files"
         sudo command rm -rf $HOME/.Trash/files/*
     }
 
@@ -149,6 +149,7 @@ if [ $USE_FUNCTION = "Yes" ]; then
             *.go) go run "$1" ;;
             *.js) node "$1" ;;
             *.php) php "$1" ;;
+            *) echo "'$1' is not a supported file type." ;;
             esac
         else
             echo "'$1' is not a valid file"
@@ -208,6 +209,7 @@ if [ $USE_FUNCTION = "Yes" ]; then
 
     ##--> Editing .zshrc and sourcing <--##
     function editZsh() {
+        [ ! -f ~/.zshrc ] && return
         nvim ~/.zshrc
         source ~/.zshrc
         backupToDrive ~/.zshrc
