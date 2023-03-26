@@ -46,43 +46,43 @@ if [ $USE_ALIAS = "Yes" ]; then
         alias lla="logo-ls -l --all"
     fi
 
-    if [ is_installed ripgrep ]; then
+    if is_installed ripgrep; then
         alias grep="ripgrep"
     fi
 
-    if [ is_installed go-mtpfs ]; then
+    if is_installed go-mtpfs; then
         alias mount-phone="go-mtpfs $HOME/Phone &>/dev/null & disown"
     fi
 
-    if [ is_installed fusermount ]; then
+    if is_installed fusermount; then
         alias unmount-phone="fusermount -u $HOME/Phone"
     fi
 
-    if [ is_installed udisksctl ]; then
+    if is_installed udisksctl; then
         alias mount-iso="udisksctl loop-setup -r -f"
         alias unmount-iso="udisksctl loop-delete -b"
         alias mount-ssd="udisksctl mount -b /dev/nvme0n1p1"
         alias unmount-ssd="udisksctl unmount -b /dev/nvme0n1p1"
     fi
 
-    if [ is_installed ranger ]; then
+    if is_installed ranger; then
         alias r="ranger"
         alias fm="ranger"
     fi
 
-    if [ is_installed broot ]; then
+    if is_installed broot; then
         alias br="broot -dhp"
         alias bs="broot --sizes"
     fi
 
-    if [ is_installed ptsh ]; then
+    if is_installed ptsh; then
         # alias ls="ptls -la"
         # alias touch=pttouch
         alias me-in=ptpwd
         alias mkdir=ptmkdir
     fi
 
-    if [ is_installed youtube-dl ]; then
+    if is_installed youtube-dl; then
         alias yta-aac="youtube-dl --extract-audio --audio-format aac "
         alias yta-best="youtube-dl --extract-audio --audio-format best "
         alias yta-flac="youtube-dl --extract-audio --audio-format flac "
@@ -94,13 +94,13 @@ if [ $USE_ALIAS = "Yes" ]; then
         alias ytv-best="youtube-dl -f bestvideo+bestaudio "
     fi
 
-    if [ is_installed duf ]; then
+    if is_installed duf; then
         alias df="duf"
     else
         alias df="df -h"
     fi
 
-    if [ is_installed yay ]; then
+    if is_installed yay; then
         alias yaconf="yay -Pg"
         alias yaupg="yay -Syu"
         alias yas="yay -Syu --noconfirm"
@@ -120,7 +120,7 @@ if [ $USE_ALIAS = "Yes" ]; then
         alias upgrade="yay -Syu"
     fi
 
-    if [ is_installed emacs ]; then
+    if is_installed emacs; then
         alias em="/usr/bin/emacs -nw"
         alias emacs="emacsclient -c -a 'emacs'"
         alias doomsync="~/.emacs.d/bin/doom sync"
@@ -128,14 +128,14 @@ if [ $USE_ALIAS = "Yes" ]; then
         alias doomupgrade="~/.emacs.d/bin/doom upgrade"
     fi
 
-    [ is_installed transmission-cli ] && alias tsm='transmission-cli -D -u 10 -w ~/Downloads/torrents'
-    [ is_installed fzf ] && alias f="clear && fzf"
-    [ is_installed sc-im ] && alias scim='sc-im'
-    [ is_installed protonvpn-cli ] && alias pvpn='protonvpn-cli'
-    [ is_installed neomutt ] && alias mail="neomutt"
-    [ is_installed bat ] && alias cat='bat'
-    [ is_installed bluetoothctl ] && alias bt=bluetoothctl
-    [ is_installed journalctl ] && alias jctl="journalctl -p 3 -xb"
+    is_installed transmission-cli && alias tsm='transmission-cli -D -u 10 -w ~/Downloads/torrents'
+    is_installed fzf && alias f="clear && fzf"
+    is_installed sc-im && alias scim='sc-im'
+    is_installed protonvpn-cli && alias pvpn='protonvpn-cli'
+    is_installed neomutt && alias mail="neomutt"
+    is_installed bat && alias cat='bat'
+    is_installed bluetoothctl && alias bt=bluetoothctl
+    is_installed journalctl && alias jctl="journalctl -p 3 -xb"
     alias music="youtube-viewer"
     alias anime="ani-cli"
     alias flix="notflix"
@@ -223,7 +223,7 @@ if [ $USE_ALIAS = "Yes" ]; then
     alias ccbonsai="cbonsai -ilt 0.02 -c '  ,  ,  ,  ,  ' -L 5"
     alias fzr="fzf --layout=reverse --prompt ' ' --pointer '=>' --preview='less {}' --bind shift-up:preview-page-up,shift-down:preview-page-down"
 
-    [ is_installed ytfzf ] && alias yt="ytfzf -t"
+    is_installed ytfzf && alias yt="ytfzf -t"
 
     ##--> Directories <--##
     [ -d ~/Documents ] && alias dc="cd ~/Documents"
@@ -254,7 +254,7 @@ if [ $USE_ALIAS = "Yes" ]; then
     alias .9="cd -9"
 
     ##--> Pacman <--##
-    if [ is_installed pacman ]; then
+    if is_installed pacman; then
         alias i="pacman -S"
         alias pacupg="pacman -Syu"
         alias pacin="pacman -S"
@@ -279,7 +279,7 @@ if [ $USE_ALIAS = "Yes" ]; then
     fi
 
     ##--> Git Stuff <--##
-    if [ is_installed git ]; then
+    if is_installed git; then
         [ -d $HOME/Downloads/git-repos/ ] && alias clone="cd $HOME/Downloads/git-repos/ && git clone"
         alias commit="git commit -m"
         alias push="git push origin"
@@ -494,11 +494,11 @@ if [ $USE_ALIAS = "Yes" ]; then
     alias sorter="sort -n -r"
     alias unexport="unset"
 
-    [ is_installed rsync ] && alias cp="rsync -WavP --human-readable --progress"
+    is_installed rsync && alias cp="rsync -WavP --human-readable --progress"
 
-    [ is_installed trash ] && alias rm="trash --trash-dir='$HOME/.Trash' --recursive"
+    is_installed trash && alias rm="trash --trash-dir='$HOME/.Trash' --recursive"
 
-    if [ is_installed zathura ]; then
+    if is_installed zathura; then
         alias zth=zathura
         alias pdf=zathura
     fi
@@ -522,7 +522,7 @@ if [ $USE_ALIAS = "Yes" ]; then
     alias py=python
 
     ##--> Tmux Aliases <--##
-    if [ is_installed tmux ]; then
+    if is_installed tmux; then
         alias attach="tmux attach -t"
         alias ts="tmux ls"
     fi
