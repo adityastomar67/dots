@@ -88,6 +88,7 @@ else
     [ -d $HOME/.config/nvim ] && nvimUpdate
 
     ##--> Reloading the BSPWM and keybindings, st also <--##
+    clear
     printf "$(tput bold)Reloading BSPWM, SXHKD and Suckless tools...$(tput sgr0)\n"
     sleep 2
     bspc wm -r; sleep 2; dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'Bspwm' 'The BSPWM has been reloaded successfully!'
@@ -97,6 +98,7 @@ else
         dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'ST Terminal' 'The terminal has been reloaded successfully!'
 
     ##--> Finishing <--##
+    clear
     printf "\n$(tput bold)Sourcing zsh...$(tput sgr0)"
     sleep 2
     cd $HOME
