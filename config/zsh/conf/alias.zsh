@@ -118,8 +118,8 @@ if [ $USE_ALIAS = "Yes" ]; then
     alias zedit="$EDITOR ~/.zshrc"
     alias bedit="$EDITOR ~/.bashrc"
     alias visudo="$EDITOR /etc/sudoers"
+    alias nvedit="cd $XDG_NVIM && $EDITOR init.lua"
     alias fedit="$EDITOR ~/.config/fish/config.fish"
-    alias nvconfig="cd ~/.config/nvim && $EDITOR init.lua"
 
     ##--> System <--##
     alias _="sudo"
