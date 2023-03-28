@@ -55,7 +55,7 @@ _mainScript_() {
 
 	logo "Installation Finished!"
 	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n" "${BLD}" "${CNC}"
-	printf "%s%sRun dotup command to update configs anytime.%s\n\n" "${BLD}" "${CYE}" "${CNC}"	
+	printf "%s%sRun dotup command to update configs anytime.%s\n\n" "${BLD}" "${CYE}" "${CNC}"
 
 	while true; do
 		read -rp " Do you wish to remove your backup configs? [y/N]: " yn
@@ -138,10 +138,20 @@ install_yay() {
 
 ##--> Install Eww for cool GUIs <--##
 install_eww() {
-	logo "Installing needed packages from AUR"
-	yay -S eww --noconfirm --removemake --cleanafter
-	printf "%s%s✓ EWW Installed!!%s\n" "${BLD}" "${CGR}" "${CNC}"
-	sleep 2
+	logo "Installing EWW..."
+	printf "%s%sNow eww will be downloaded, compiled and installed.. this could take 10 mins or more.%s\n" "${BLD}" "${CBL}" "${CNC}"
+	cd $HOME
+	sudo pacman -S rustup gtk3
+	git clone https://github.com/elkowar/eww
+	cd eww
+	rustup toolchain install nightly
+	cargo +nightly build --no-default-features --features x11 --release
+	sudo install -Dm755 target/release/eww /usr/bin/
+
+	cd $HOME
+	rm -rf {eww,.cargo,.rustup}
+	printf "%s%sDone%s\n" "${BLD}" "${CGR}" "${CNC}"
+	sleep 5
 }
 
 ##--> Setup the config file and backup old ones <--##
