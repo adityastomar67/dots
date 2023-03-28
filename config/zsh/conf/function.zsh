@@ -20,11 +20,32 @@ if [ $USE_FUNCTION = "Yes" ]; then
 
     ##--> For Launcing NeoVim and SudoEdit with same command <--##
     function v() {
-        file=$1
-        if [[ -e $file && ! -w $file ]]; then
-            sudoedit $file
+        # TODO: set a check for neovim version on 0.9.0
+        if [ $# -gt 0 ] && [ ! -f $1 ] && [ ! -d $1 ]; then
+            case "$1" in
+            -a | --astro)
+                NVIM_APPNAME=AstroNvim nvim $2
+                ;;
+            -l | --lazy)
+                NVIM_APPNAME=LazyVim nvim $2
+                ;;
+            -c | --chad)
+                NVIM_APPNAME=NvChad nvim $2
+                ;;
+            -n | --nv)
+                NVIM_APPNAME=LazyNV nvim $2
+                ;;
+            *)
+                echo "No config found for the choice!" >&2
+                ;;
+            esac
         else
-            nvim $file
+            file=$1
+            if [[ -e $file && ! -w $file ]]; then
+                sudoedit $file
+            else
+                nvim $file
+            fi
         fi
     }
 
