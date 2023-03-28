@@ -4,7 +4,6 @@
 
 ##--> Check for user choice <--##
 if [ $MULTI_NEOVIM = "Yes" ]; then
-    # if [ $(nvim --version | grep -oP '(?<=^NVIM v)[0-9|.]+') ]
 
     ##--> Clone configs if not found <--##
     [ ! -d ~/.config/LazyVim ] && git clone --quiet https://github.com/LazyVim/starter ~/.config/LazyVim &&
@@ -18,6 +17,7 @@ if [ $MULTI_NEOVIM = "Yes" ]; then
 
     function nvims() {
         # TODO: set a check for neovim version on 0.9.0
+        # if [ $(nvim --version | grep -oP '(?<=^NVIM v)[0-9|.]+') -eq "" ]; then
         if [ $# -gt 0 ] && [ ! -f $1 ] && [ ! -d $1 ]; then
             case "$1" in
             -a | --astro)
@@ -47,6 +47,7 @@ if [ $MULTI_NEOVIM = "Yes" ]; then
             fi
             NVIM_APPNAME=$config nvim $@
         fi
+        # fi
     }
 
     bindkey -s ^a "nvims\n"
