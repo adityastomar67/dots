@@ -4,17 +4,17 @@
 
 ##--> Check for user choice <--##
 if [ $MULTI_NEOVIM = "Yes" ]; then
-# if [ $(nvim --version | grep -oP '(?<=^NVIM v)[0-9|.]+') ]
+    # if [ $(nvim --version | grep -oP '(?<=^NVIM v)[0-9|.]+') ]
 
     ##--> Clone configs if not found <--##
-    [ ! -d ~/.config/LazyVim ] && git clone --quiet https://github.com/LazyVim/starter ~/.config/LazyVim \
-        && echo "Cloning LazyVim configs..."
-    [ ! -d ~/.config/NvChad ] && git clone --quiet --depth 1 https://github.com/adityastomar67/NvChad ~/.config/NvChad \
-        && echo "Cloning NvChad configs..."
-    [ ! -d ~/.config/LazyNV ] && git clone --quiet --depth 1 https://github.com/adityastomar67/LazyNV ~/.config/LazyNV \
-        && echo "Cloning LazyNV configs..."
-    [ ! -d ~/.config/AstroNvim ] && git clone --quiet --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/AstroNvim \
-        && echo "Cloning AstroNvim configs..."
+    [ ! -d ~/.config/LazyVim ] && git clone --quiet https://github.com/LazyVim/starter ~/.config/LazyVim &&
+        echo "Cloning LazyVim configs..."
+    [ ! -d ~/.config/NvChad ] && git clone --quiet --depth 1 https://github.com/adityastomar67/NvChad ~/.config/NvChad &&
+        echo "Cloning NvChad configs..."
+    [ ! -d ~/.config/LazyNV ] && git clone --quiet --depth 1 https://github.com/adityastomar67/LazyNV ~/.config/LazyNV &&
+        echo "Cloning LazyNV configs..."
+    [ ! -d ~/.config/AstroNvim ] && git clone --quiet --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/AstroNvim &&
+        echo "Cloning AstroNvim configs..."
 
     function nvims() {
         ##--> Pre check for flags <--##
@@ -38,18 +38,16 @@ if [ $MULTI_NEOVIM = "Yes" ]; then
                 ;;
             esac
         else
-            echo "No args"
+            items=("default" "LazyNV" "LazyVim" "NvChad" "AstroNvim")
+            config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+            if [[ -z $config ]]; then
+                echo "Nothing selected"
+                return 0
+            elif [[ $config == "default" ]]; then
+                config=""
+            fi
+            NVIM_APPNAME=$config nvim $@
         fi
-
-        items=("default" "LazyNV" "LazyVim" "NvChad" "AstroNvim")
-        config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-        if [[ -z $config ]]; then
-            echo "Nothing selected"
-            return 0
-        elif [[ $config == "default" ]]; then
-            config=""
-        fi
-        NVIM_APPNAME=$config nvim $@
     }
 
     bindkey -s ^a "nvims\n"
