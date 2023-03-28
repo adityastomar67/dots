@@ -7,6 +7,7 @@ export OMZ="No"             # For oh-my-zsh setup, if wants omz with this setup,
 export USE_TMUX="No"        # Change it to "Yes", to automatically load tmux on every new instance of the terminal.
 export USE_ALIAS="No"       # Pretty self explainotory.
 export USE_FUNCTION="No"    # Pretty self explainotory as well.
+export MULTI_NEOVIM="No"    # To use multiple neovim configurations. By by @elijahmanor
 export CUSTOM_WALL="No"     # For my personal wallpapers, source zsh after changing
 export PROMPT_THEME="gh0st" # And many more like gh0st, z, 10k.
 export OPENAI_API_KEY=""    # API Key for chatgpt options for commandline.

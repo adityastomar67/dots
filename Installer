@@ -47,7 +47,7 @@ _mainScript_() {
 	install_pkg
 	install_yay
 	setup_rice
-	# install_eww
+	install_eww
 	enable_services
 
 	chsh -s /usr/bin/zsh
