@@ -16,6 +16,7 @@ done <<-EOF
     keys
     prompt
     fzf
+    nvim
     alias
     function
 EOF
