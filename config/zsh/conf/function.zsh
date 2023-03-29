@@ -20,8 +20,7 @@ if [ $USE_FUNCTION = "Yes" ]; then
 
     ##--> For Launcing NeoVim and SudoEdit with same command <--##
     function v() {
-        # TODO: set a check for neovim version on 0.9.0
-        if [ $# -gt 0 ] && [ ! -f $1 ] && [ ! -d $1 ]; then
+        if [ $(nvim --version | grep -oP '(?<=^NVIM v)[0-9|.][0-9|.][0-9|.]') = 0.9 ] && [ $# -gt 0 ] && [ ! -f $1 ] && [ ! -d $1 ]; then
             case "$1" in
             -a | --astro)
                 NVIM_APPNAME=AstroNvim nvim $2
