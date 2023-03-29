@@ -10,19 +10,19 @@ case "$1" in
   --ot)
     [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty || alacritty;;
   --oft)
-    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --class FloaTerm,Alacritty || alacritty --class FloaTerm,Alacritty;;
+    alacritty --class FloaTerm,Alacritty;;
   --ou)
-    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --hold --class Updating,Alacritty -e yay -Syyu --devel || alacritty --hold --class Updating,Alacritty -e yay -Syyu --devel;;
+    alacritty --hold --class Updating,Alacritty -e yay -Syyu --devel;;
   --ocu)
-	  [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --hold --class Updating,Alacritty -e checkupdates || alacritty --hold --class Updating,Alacritty -e checkupdates;;
+	  alacritty --hold --class Updating,Alacritty -e checkupdates;;
   --or)
-    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --class Ranger,Alacritty -e ranger || alacritty --class Ranger,Alacritty -e ranger;;
+    alacritty --class Ranger,Alacritty -e ranger;;
   --ov)
     [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty -e nvim || alacritty -e nvim;;
   --om)
-    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --class MusicPlayer,Alacritty -e ncmpcpp || alacritty --class MusicPlayer,Alacritty -e ncmpcpp;;
+    alacritty --class MusicPlayer,Alacritty -e ncmpcpp;;
   --of)
-    [ -f $HOME/.local/bin/alacritty ] && $HOME/.local/bin/alacritty --hold --class Sysfetch,Alacritty -e ~/.local/bin/sysfetch || alacritty --hold --class Sysfetch,Alacritty -e ~/.local/bin/sysfetch;;
+    alacritty --hold --class Sysfetch,Alacritty -e ~/.local/bin/sysfetch;;
   *)
     echo "Not a valid option!!";;
 esac
