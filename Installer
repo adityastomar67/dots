@@ -50,6 +50,12 @@ _mainScript_() {
 	install_eww
 	enable_services
 
+	if [ -d $HOME/.mozilla/firefox/*.default-release/ ]; then
+		mv $HOME/.mozilla/firefox/*.default-release/chrome $backup_folder/firefox_$date/
+		cp -R $HOME/dotfiles/misc/firefox/chrome $HOME/.mozilla/firefox/*.default-release/
+		cp -R $HOME/dotfiles/misc/firefox/user.js $HOME/.mozilla/firefox/*.default-release/
+	fi
+
 	chsh -s /usr/bin/zsh
 	zsh
 
@@ -160,8 +166,8 @@ setup_rice() {
 	logo "Cloning Rice..."
 	[ -d ~/dotfiles ] && rm -rf ~/dotfiles
 	printf "→ Cloning gh0stzk's rice. (adityastomar67 fork)\n\n"
-	cd $HOME
-	git clone --quiet --depth=1 https://github.com/adityastomar67/dots.git $HOME/dotfiles
+
+	cd $HOME && git clone --quiet --depth=1 https://github.com/adityastomar67/dots.git $HOME/dotfiles
 	printf "%s%s✓ Configuration Cloned to $HOME/dotfiles.%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 
@@ -170,10 +176,12 @@ setup_rice() {
 	printf "→ Backup files will be stored in %s%s%s/.RiceBackup%s \n\n" "${BLD}" "${CRE}" "$HOME" "${CNC}"
 	sleep 2
 
+	# Check if backup folder exists
 	if [ ! -d "$backup_folder" ]; then
 		mkdir -p "$backup_folder"
 	fi
 
+	# Backing up the .config files
 	[ -d $HOME/.config ] && cd $HOME/.config
 	for file in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh st dmenu mpd; do
 		if [ -L "$file" ]; then
@@ -194,6 +202,7 @@ setup_rice() {
 		fi
 	done
 
+	# Backing up the local bin files
 	[ -d $HOME/.local/bin ] && cd $HOME/.local/bin
 	for file in $(command ls ~/dotfiles/misc/bin/); do
 		if [ -L "$file" ]; then
@@ -214,6 +223,7 @@ setup_rice() {
 		fi
 	done
 
+	# Backing up all the asciiarts
 	[ -d $HOME/.local/share/asciiart ] && cd $HOME/.local/share/asciiart
 	for file in $(command ls ~/dotfiles/misc/asciiart/); do
 		if [ -L "$file" ]; then
@@ -234,9 +244,11 @@ setup_rice() {
 		fi
 	done
 
+	# Backing up the zsh config
 	[ -L ~/.zshrc ] && rm -rf ~/.zshrc ||
 		[ -f ~/.zshrc ] && mv ~/.zshrc $backup_folder/.zshrc-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
 
+	# Backing up the tmux config
 	[ -L ~/.tmux.conf ] && rm -rf ~/.tmux.conf ||
 		[ -f ~/.tmux.conf ] && mv ~/.tmux.conf $backup_folder/.tmux.conf-backup-"$(date +%Y.%m.%d-%H.%M.%S)"
 
@@ -245,14 +257,16 @@ setup_rice() {
 
 	##--> Copy the Files <--##
 	logo "Copying Rice..."
-	printf "→ Linking files to respective directories..\n"
+	printf "→ Linking files to there respective directories..\n"
 
+	# Creating all the important directories
 	[ ! -d ~/.config ] && mkdir -p ~/.config
 	[ ! -d ~/.local/bin ] && mkdir -p ~/.local/bin
 	[ ! -d ~/.local/share/applications ] && mkdir -p ~/.local/share/applications
 	[ ! -d ~/.local/share/fonts ] && mkdir -p ~/.local/share/fonts
 	[ ! -d ~/.local/share/asciiart ] && mkdir -p ~/.local/share/asciiart
 
+	# Linking the .config files
 	for archive in $(command ls ~/dotfiles/config/); do
 		ln -s ~/dotfiles/config/$archive ~/.config/$archive
 		if [ $? -eq 0 ]; then
@@ -264,6 +278,7 @@ setup_rice() {
 		fi
 	done
 
+	# Linking the local bin files
 	for archive in $(command ls ~/dotfiles/misc/bin/); do
 		ln -s ~/dotfiles/misc/bin/$archive ~/.local/bin/$archive
 		if [ $? -eq 0 ]; then
@@ -275,6 +290,7 @@ setup_rice() {
 		fi
 	done
 
+	# Linking all the applications
 	for archive in ~/dotfiles/misc/applications/*; do
 		command cp -R ${archive} ~/.local/share/applications/
 		if [ $? -eq 0 ]; then
@@ -286,6 +302,7 @@ setup_rice() {
 		fi
 	done
 
+	# Copying all the fonts
 	for archive in ~/dotfiles/misc/fonts/*; do
 		command cp -R ${archive} ~/.local/share/fonts/
 		if [ $? -eq 0 ]; then
@@ -297,6 +314,7 @@ setup_rice() {
 		fi
 	done
 
+	# Linking ascii art for terminal bling
 	for archive in $(command ls ~/dotfiles/misc/asciiart/); do
 		ln -s ~/dotfiles/misc/asciiart/$archive ~/.local/share/asciiart/$archive
 		if [ $? -eq 0 ]; then
@@ -307,6 +325,7 @@ setup_rice() {
 			sleep 1
 		fi
 	done
+
 	printf "%s%s✓ Files copied succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 
