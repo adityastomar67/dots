@@ -50,12 +50,14 @@ _mainScript_() {
 	install_eww
 	enable_services
 
+	# Mozilla Firefox rice
 	if [ -d $HOME/.mozilla/firefox/*.default-release/ ]; then
 		mv $HOME/.mozilla/firefox/*.default-release/chrome $backup_folder/firefox_$date/
 		cp -R $HOME/dotfiles/misc/firefox/chrome $HOME/.mozilla/firefox/*.default-release/
 		cp -R $HOME/dotfiles/misc/firefox/user.js $HOME/.mozilla/firefox/*.default-release/
 	fi
 
+	# Changing shell to Zsh
 	chsh -s /usr/bin/zsh
 	zsh
 
@@ -64,14 +66,13 @@ _mainScript_() {
 	printf "%s%sRun dotup command to update configs anytime.%s\n\n" "${BLD}" "${CYE}" "${CNC}"
 
 	while true; do
-		read -rp " Do you wish to remove your backup configs? [y/N]: " yn
+		read -rp "Do you wish to remove your backup configs? [y/N]: " yn
 		case $yn in
 		[Yy]*) rm -rf $backup_folder && break ;;
 		[Nn]*) echo "Backup files stored at $backup_folder" && break ;;
 		*) printf "✗ Error: just write 'y' or 'n'\n\n" ;;
 		esac
 	done
-
 	sleep 5
 }
 
@@ -361,8 +362,8 @@ enable_services() {
 		printf '%s✓ LightDM services enabled on your system!%s\n' "${CGR}" "${CNC}"
 		sleep 2
 	fi
-	systemctl --user enable mpd.service
-	systemctl --user start mpd.service
+	sudo systemctl enable mpd.service
+	sudo systemctl start mpd.service
 	printf "%s%s✓ Services enabled!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 }
