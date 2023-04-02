@@ -145,19 +145,24 @@ install_yay() {
 
 ##--> Install Eww for cool GUIs <--##
 install_eww() {
-	logo "Installing EWW..."
-	printf "%s%sNow eww will be downloaded, compiled and installed.. this could take 10 mins or more.%s\n" "${BLD}" "${CBL}" "${CNC}"
-	cd $HOME
-	sudo pacman -S rustup gtk3
-	git clone https://github.com/elkowar/eww
-	cd eww
-	rustup toolchain install nightly
-	cargo +nightly build --no-default-features --features x11 --release
-	sudo install -Dm755 target/release/eww /usr/bin/
 
-	cd $HOME
-	rm -rf {eww,.cargo,.rustup}
-	printf "%s%sDone%s\n" "${BLD}" "${CGR}" "${CNC}"
+	logo "Installing EWW..."
+	if ! is_installed "eww"; then
+		printf "%s%sNow eww will be downloaded, compiled and installed.. this could take 10 mins or more.%s\n" "${BLD}" "${CBL}" "${CNC}"
+		cd $HOME
+		sudo pacman -S rustup gtk3
+		git clone https://github.com/elkowar/eww
+		cd eww
+		rustup toolchain install nightly
+		cargo +nightly build --no-default-features --features x11 --release
+		sudo install -Dm755 target/release/eww /usr/bin/
+
+		cd $HOME
+		rm -rf {eww,.cargo,.rustup}
+		printf "%s%sDone%s\n" "${BLD}" "${CGR}" "${CNC}"
+	fi
+
+	printf "%sEww is installed.%s" "${CGR}" "${CNC}"
 	sleep 5
 }
 
