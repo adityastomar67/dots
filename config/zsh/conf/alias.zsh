@@ -439,13 +439,13 @@ if [ $USE_ALIAS = "Yes" ]; then
         alias gamscp="git am --show-current-patch"
         alias gswm='git switch $(git_main_branch)'
         alias gdcw="git diff --cached --word-diff"
-        alias gcm="git checkout $(git_main_branch)"
+        alias gcm='git checkout $(git_main_branch)'
         alias glgm="git log --graph --max-count=10"
         alias gclr="git clone --recurse-submodules"
         alias grbd='git rebase $(git_develop_branch)'
         alias gswd='git switch $(git_develop_branch)'
         alias gfa="git fetch --all --prune --jobs=10"
-        alias gcd="git checkout $(git_develop_branch)"
+        alias gcd='git checkout $(git_develop_branch)'
         alias "gcn!"="git commit -v --no-edit --amend"
         alias glgga="git log --graph --decorate --all"
         alias gcor="git checkout --recurse-submodules"
@@ -475,13 +475,13 @@ if [ $USE_ALIAS = "Yes" ]; then
         alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
         alias gpsup='git push --set-upstream origin $(git_current_branch)'
         alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
-        alias ggsup="git branch --set-upstream-to=origin/$(git_current_branch)"
+        alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
         alias gtl='gtl(){ git tag --sort=-v:refname -n -l "${1}*" }; noglob gtl'
         alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
         alias grwh='git rm --cached `git ls-files -i -c --exclude-from=.gitignore`'
         alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
         alias grwhx='git ls-files -i -c --exclude-from=.gitignore | xargs git rm --cached'
-        alias git-svn-dcommit-push="git svn dcommit && git push github $(git_main_branch):svntrunk"
+        alias git-svn-dcommit-push='git svn dcommit && git push github $(git_main_branch):svntrunk'
         [ -d $HOME/Downloads/git-repos/ ] && alias clone="cd $HOME/Downloads/git-repos/ && git clone"
         alias glod='git log --graph --pretty='\''%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'\'
         alias glol='git log --graph --pretty='\''%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'\'
