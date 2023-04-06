@@ -235,16 +235,16 @@ if [ $USE_ALIAS = "Yes" ]; then
         alias mkdir=ptmkdir
     fi
 
-    if is_installed youtube-dl; then
-        alias ytv-best="youtube-dl -f bestvideo+bestaudio "
-        alias yta-aac="youtube-dl --extract-audio --audio-format aac "
-        alias yta-m4a="youtube-dl --extract-audio --audio-format m4a "
-        alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
-        alias yta-wav="youtube-dl --extract-audio --audio-format wav "
-        alias yta-best="youtube-dl --extract-audio --audio-format best "
-        alias yta-flac="youtube-dl --extract-audio --audio-format flac "
-        alias yta-opus="youtube-dl --extract-audio --audio-format opus "
-        alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis "
+    if is_installed yt-dlp; then
+        alias ytv-best="yt-dlp -f bestvideo+bestaudio "
+        alias yta-aac="yt-dlp --extract-audio --audio-format aac "
+        alias yta-m4a="yt-dlp --extract-audio --audio-format m4a "
+        alias yta-mp3="yt-dlp --extract-audio --audio-format mp3 "
+        alias yta-wav="yt-dlp --extract-audio --audio-format wav "
+        alias yta-best="yt-dlp --extract-audio --audio-format best "
+        alias yta-flac="yt-dlp --extract-audio --audio-format flac "
+        alias yta-opus="yt-dlp --extract-audio --audio-format opus "
+        alias yta-vorbis="yt-dlp --extract-audio --audio-format vorbis "
     fi
 
     if is_installed yay; then
