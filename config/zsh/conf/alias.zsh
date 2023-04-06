@@ -58,7 +58,13 @@ if [ $USE_ALIAS = "Yes" ]; then
     alias java="java $JDK_JAVA_OPTIONS"
 
     ##--> Directories <--##
-    [ -d ~/dotfiles ] && alias dt="cd ~/dotfiles"
+    if [[ -d ~/dotfiles ]]; then
+       alias dt="cd ~/dotfiles"
+    elif [[ -d ~/.dotfiles ]]; then
+       alias dt="cd ~/.dotfiles"
+    elif [[ -d ~/.dots ]]; then
+       alias dt="cd ~/.dots"
+    fi
     [ -d ~/Projects ] && alias pj="cd ~/Projects"
     [ -d ~/Documents ] && alias dc="cd ~/Documents"
     [ -d ~/Downloads ] && alias dl="cd ~/Downloads"
