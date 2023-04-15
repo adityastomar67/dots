@@ -18,6 +18,8 @@ alias ice='zinit ice'
 alias load='zinit load'
 
 ice depth"1"
+
+use jeffreytse/zsh-vi-mode
 use zsh-users/zsh-completions
 use hlissner/zsh-autopair
 use zdharma-continuum/fast-syntax-highlighting
@@ -35,6 +37,9 @@ load zsh-users/zsh-syntax-highlighting
 
 ice wait'2' lucid
 load zdharma-continuum/history-search-multi-word
+
+ice wait'2' lucid
+load jeffreytse/zsh-vi-mode
 
 ice wait'5' lucid
 unalias use ice load
