@@ -3,21 +3,16 @@
 #  ╠╦╝║║  ║╣   ╚═╗║╣ ║  ║╣ ║   ║ ║ ║╠╦╝  - https://github.com/gh0stzk/dotfiles
 #  ╩╚═╩╚═╝╚═╝  ╚═╝╚═╝╩═╝╚═╝╚═╝ ╩ ╚═╝╩╚═  - z0mbi3.zk@protonmail.com
 
-cfg_file="$HOME/.config/bspwm/rice.cfg"
-rofi_command="rofi -no-lazy-grab -dmenu -theme $HOME/.config/bspwm/scripts/RiceSelector.rasi"
+rofi_command="rofi -dmenu -theme $HOME/.config/bspwm/scripts/RiceSelector.rasi"
 
-# Array Options
+# Array de opciones
 options=("emilia" "jan" "aline" "isabel" "andrea" "cynthia" "silvia" "melissa" "pamela" "cristina" "karla" "z0mbi3")
 
-# Generate a list of options for rofi.
+# Mostrar el menú de selección de rofi y almacenar el resultado en una variable
 selected=$(printf "%s\n" "${options[@]}" | $rofi_command)
 
-# If a valid option was selected, write the value to the configuration file and restart the window manager.
+# Si se seleccionó una opción válida, escribir el valor en el archivo de configuración y reiniciar el gestor de ventanas
 if [[ -n "$selected" ]]; then
-	echo "$selected" > "$HOME"/.config/bspwm/rice.cfg
-	sleep 0.5
+	echo "$selected" > "$HOME"/.config/bspwm/.rice
 	bspc wm -r
-    xrdb merge "$HOME/.config/bspwm/rices/$RICETHEME/xresources" && kill -USR1 $(pidof st)
-else
-	exit 1
 fi

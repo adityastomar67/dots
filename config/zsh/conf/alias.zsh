@@ -92,7 +92,7 @@ if [ $USE_ALIAS = "Yes" ]; then
     alias .9="cd -9"
 
     ##--> Updating <--##
-    alias update="pacman -Syyu"
+    alias update="paru -Syu --nocombinedupgrade"
     alias font-up='sudo fc-cache -fv'
     alias npm-up="sudo npm install npm@latest -g"
     alias upgrade="npm-up && pip-up && pacman -Syyu"
