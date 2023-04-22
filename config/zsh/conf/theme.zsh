@@ -4,28 +4,28 @@
 if [ $OPT_THEME = "Yes" ]; then
 
     ##--> Theme.sh Config <--##
-    if command -v theme.sh >/dev/null; then
-        [ -e ~/.theme_history ] && theme.sh "$(theme.sh -l | tail -n1)"
-
-        # Optional
-        last_theme() {
-            theme.sh "$(theme.sh -l | tail -n2 | head -n1)"
-        }
-        zle -N last_theme
-
-        # Bind C-o to the last theme.
-        bindkey '^O' last_theme
-
-        alias th='theme.sh -i'
-
-        # Interactively load a light theme
-        alias thl='theme.sh --light -i'
-
-        # Interactively load a dark theme
-        alias thd='theme.sh --dark -i'
-    else
+    if ! command -v theme.sh >/dev/null; then
         sudo curl -Lo /usr/bin/theme.sh 'https://git.io/JM70M' && sudo chmod +x /usr/bin/theme.sh
     fi
+
+    [ -e ~/.theme_history ] && theme.sh "$(theme.sh -l | tail -n1)"
+
+    # Optional
+    last_theme() {
+        theme.sh "$(theme.sh -l | tail -n2 | head -n1)"
+    }
+    zle -N last_theme
+
+    # Bind C-o to the last theme.
+    bindkey '^O' last_theme
+
+    alias th='theme.sh -i'
+
+    # Interactively load a light theme
+    alias thl='theme.sh --light -i'
+
+    # Interactively load a dark theme
+    alias thd='theme.sh --dark -i'
 fi
 
 if [ $CUSTOM_WALL = "Yes" ]; then
@@ -48,13 +48,12 @@ if [ $CUSTOM_WALL = "Yes" ]; then
 
         # Remove unnecessary files and set wallpaper
         command rm -rf .git/ README.md Static Live list.txt
-        RandomWall
     fi
 elif [ $CUSTOM_WALL = "No" ]; then
     if [ -d "$HOME/.config/wall" ]; then
         command rm -rf $HOME/.config/wall
-        RandomWall
     fi
 fi
+RandomWall
 
 # vim:filetype=zsh

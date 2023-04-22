@@ -35,13 +35,6 @@ export XDG_DATA_DIRS="/usr/local/share:/usr/share:/var/lib/flatpak/exports/share
 # If either nvim, vim or bat is present
 if command -v nvim >/dev/null; then
   export MANPAGER='nvim +Man! +"set nocul" +"set noshowcmd" +"set noruler" +"set noshowmode" +"set laststatus=0" +"set showtabline=0" +"set nonumber"'
-elif command -v vim >/dev/null; then
-  export MANPAGER='/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
-elif command -v bat >/dev/null; then
-  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-fi
-
-if [ ! $(echo $MANPAGER | awk '{print $1}') = nvim ]; then
   export LESS_TERMCAP_me=$'\e[0m'
   export LESS_TERMCAP_se=$'\e[0m'
   export LESS_TERMCAP_ue=$'\e[0m'
@@ -51,6 +44,10 @@ if [ ! $(echo $MANPAGER | awk '{print $1}') = nvim ]; then
   export LESS_TERMCAP_md=$'\e[1;32m'
   export LESS_TERMCAP_so=$'\e[01;33m'
   export LESS_TERMCAP_us=$'\e[1;4;31m'
+elif command -v vim >/dev/null; then
+  export MANPAGER='/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
+elif command -v bat >/dev/null; then
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
 export SXHKD_SHELL="zsh"
@@ -99,8 +96,6 @@ fi
 ##--> Checking for temporary alias file <--##
 if [ $TEMP_OFFLINE_ALIAS = "Yes" ]; then
   [ ! -f "$HOME/.temp_src" ] && command touch $HOME/.temp_src
-elif [ $TEMP_OFFLINE_ALIAS = "No" ]; then
-  [ -f "$HOME/.temp_src" ] && echo "Deleting temporary alias file..." && rm -rf $HOME/.temp_src  
 fi
 
 ##--> Fix LS_COLORS being unreadable <--##
