@@ -14,14 +14,14 @@ BLD=$(tput bold)
 CNC=$(tput sgr0)
 backup_folder=~/.RiceBackup
 date=$(date +%Y%m%d-%H%M%S)
-dependencies=(base-devel pacman-contrib bspwm polybar sxhkd
-	tmux brightnessctl dunst rofi lsd
-	jq polkit-gnome git playerctl mpd
-	ncmpcpp geany ranger mpc picom fzf
-	feh ueberzug maim pamixer libwebp
-	webp-pixbuf-loader xorg-xprop xorg-xkill physlock papirus-icon-theme
-	ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels
-	zsh zsh-history-substring-search)
+dependencies=(base-devel rustup pacman-contrib bspwm polybar sxhkd \
+			  alacritty brightnessctl dunst rofi lsd \
+			  jq polkit-gnome git playerctl mpd fzf \
+			  ncmpcpp geany ranger mpc picom tmux \
+			  feh ueberzug maim pamixer libwebp xdg-user-dirs \
+			  webp-pixbuf-loader xorg-xprop xorg-xkill physlock papirus-icon-theme \
+			  ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels \
+			  zsh zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting xorg-xsetroot)
 
 ##--> Check if it's running as root <--##
 if [ "$(id -u)" = 0 ]; then
@@ -44,24 +44,52 @@ _mainScript_() {
 		*) printf "✗ Error: just write 'y' or 'n'\n\n" ;;
 		esac
 	done
+
+	logo "Preparing Folders"
+	if [ ! -e $HOME/.config/user-dirs.dirs ]; then
+		xdg-user-dirs-update
+		echo "Creating xdg-user-dirs"
+	else
+		echo "user-dirs.dirs already exists"
+	fi	
+	sleep 2 
+
 	install_pkg
-	install_yay
 	setup_rice
 	install_eww
 	enable_services
 
 	# Mozilla Firefox rice
 	logo "Installing Firefox CSS..."
-	if [ -d "$HOME/.mozilla/firefox/*.default-release/" ]; then
-		mv "$HOME/.mozilla/firefox/*.default-release/chrome" "$backup_folder/firefox_$date/"
-		cp -R "$HOME/dotfiles/misc/firefox/chrome" "$HOME/.mozilla/firefox/*.default-release/"
-		cp -R "$HOME/dotfiles/misc/firefox/user.js" "$HOME/.mozilla/firefox/*.default-release/"
-	fi
+	for folder in chrome; do
+		if [ -d "$HOME"/.mozilla/firefox/*.default-release/$folder ]; then
+			command mv "$HOME"/.mozilla/firefox/*.default-release/$folder "$backup_folder"/${folder}_$date
+			echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"
+		else
+			echo "The folder $folder does not exist in $HOME/.mozilla/firefox/"
+		fi
+		done
+
+		for file in user.js; do
+		if [ -e "$HOME"/.mozilla/firefox/*.default-release/$file ]; then
+			command mv "$HOME"/.mozilla/firefox/*.default-release/$file "$backup_folder"/${file}_$date
+			echo "$file file backed up successfully at $backup_folder/${file}_$date"
+		else
+			echo "The file $file does not exist in $HOME/.mozilla/firefox/"
+		fi
+	done
 	printf "%s%s✓ Firefox Done!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 
 	# Changing shell to Zsh
-	chsh -s /usr/bin/zsh
+	logo "Changing default shell to zsh"
+	printf "%s%sIf your shell is not zsh will be changed now.\nYour root password is needed to make the change.\n\nAfter that is important for you to reboot.\n %s\n" "${BLD}" "${CYE}" "${CNC}"
+	if [[ $SHELL != "/usr/bin/zsh" ]]; then
+		echo "Changing shell to zsh, your root pass is needed."
+		chsh -s /usr/bin/zsh
+	else
+		printf "%s%sYour shell is already zsh\nGood bye! installation finished, now reboot%s\n" "${BLD}" "${CGR}" "${CNC}"
+	fi
 
 	logo "Installation Finished!"
 	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n" "${BLD}" "${CNC}"
@@ -77,6 +105,7 @@ _mainScript_() {
 	done
 	sleep 5
 
+	# Sourcing the shell
 	zsh
 }
 
@@ -132,7 +161,7 @@ install_pkg() {
 install_yay() {
 	logo "Checking if yay is installed"
 
-	if ! command -v yay &>/dev/null; then
+	if ! is_installed yay; then
 		printf "%s%s✗ Error YAY is not installed%s\n" "${BLD}" "${CRE}" "${CNC}"
 		sleep 1
 		printf "%s%s→ Installing YAY..%s\n\n" "${BLD}" "${CYE}" "${CNC}"
@@ -150,24 +179,29 @@ install_yay() {
 ##--> Install Eww for cool GUIs <--##
 install_eww() {
 
-	logo "Installing EWW..."
-	if ! is_installed eww; then
-		printf "%s%sNow eww will be downloaded, compiled and installed.. this could take 10 mins or more.%s\n" "${BLD}" "${CBL}" "${CNC}"
-		cd $HOME
-		sudo pacman -S rustup gtk3
-		git clone https://github.com/elkowar/eww
-		cd eww
-		rustup toolchain install nightly
-		cargo +nightly build --no-default-features --features x11 --release
-		sudo install -Dm755 target/release/eww /usr/bin/
+	logo "Installing EWW & Paru..."
 
-		cd $HOME
-		rm -rf {eww,.cargo,.rustup}
-		printf "%s%sDone%s\n" "${BLD}" "${CGR}" "${CNC}"
+	if ! is_installed paru; then
+		printf "%s%sInstalling paru%s\n" "${BLD}" "${CBL}" "${CNC}"
+		cd
+		git clone https://aur.archlinux.org/paru-bin.git
+		cd paru-bin
+		makepkg -si --noconfirm
+		cd
+	else
+		printf "%s%sParu is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
 	fi
 
-	printf "%sEww is installed.%s" "${CGR}" "${CNC}"
+	if ! is_installed eww; then 
+		printf "\n%s%sInstalling Eww, this could take 10 mins or more.%s\n" "${BLD}" "${CBL}" "${CNC}"
+		paru -S eww --skipreview --noconfirm
+		rm -rf {paru-bin,.cargo,.rustup}
+		rm -rf $HOME/.cache/paru/clone/eww
+	else
+		printf "\n%s%sEww is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
+	fi
 	sleep 5
+	printf "%s%sDone%s\n" "${BLD}" "${CGR}" "${CNC}"
 }
 
 ##--> Setup the config file and backup old ones <--##
@@ -193,7 +227,7 @@ setup_rice() {
 
 	# Backing up the .config files
 	[ -d $HOME/.config ] && cd $HOME/.config
-	for file in bspwm alacritty picom rofi eww sxhkd dunst polybar ncmpcpp tmux nvim ranger tmux zsh st dmenu mpd; do
+	for file in $(command ls ~/dotfiles/.config/); do
 		if [ -L "$file" ]; then
 			command rm -rf "$file"
 			printf "%s✗ $file is a symlink and removed%s\n" "${CRE}" "${CNC}"
@@ -277,49 +311,49 @@ setup_rice() {
 	[ ! -d ~/.local/share/asciiart ] && mkdir -p ~/.local/share/asciiart
 
 	# Linking the .config files
-	for archive in $(command ls ~/dotfiles/config/); do
-		ln -s ~/dotfiles/config/$archive ~/.config/$archive
+	for conf in $(command ls ~/dotfiles/config/); do
+		ln -s ~/dotfiles/config/$conf ~/.config/$conf
 		if [ $? -eq 0 ]; then
-			printf "%s%s→ %s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s%s→ %s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${conf}" "${CNC}"
 			sleep 1
 		else
-			printf "%s%s✗ %s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
+			printf "%s%s✗ %s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${conf}" "${CNC}"
 			sleep 1
 		fi
 	done
 
 	# Linking the local bin files
-	for archive in $(command ls ~/dotfiles/misc/bin/); do
-		ln -s ~/dotfiles/misc/bin/$archive ~/.local/bin/$archive
+	for file in $(command ls ~/dotfiles/misc/bin/); do
+		ln -s ~/dotfiles/misc/bin/$file ~/.local/bin/$file
 		if [ $? -eq 0 ]; then
-			printf "%s%s→ %s linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s%s→ %s linked succesfully!%s\n" "${BLD}" "${CGR}" "${file}" "${CNC}"
 			sleep 1
 		else
-			printf "%s%s✗ %s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
+			printf "%s%s✗ %s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${file}" "${CNC}"
 			sleep 1
 		fi
 	done
 
 	# Linking all the applications
-	for archive in ~/dotfiles/misc/applications/*; do
-		command cp -R ${archive} ~/.local/share/applications/
+	for art in ~/dotfiles/misc/applications/*; do
+		command cp -R ${art} ~/.local/share/applications/
 		if [ $? -eq 0 ]; then
-			printf "%s%s→ %s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s%s→ %s file copied succesfully!%s\n" "${BLD}" "${CGR}" "${art}" "${CNC}"
 			sleep 1
 		else
-			printf "%s%s✗ %s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
+			printf "%s%s✗ %s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${art}" "${CNC}"
 			sleep 1
 		fi
 	done
 
 	# Linking ascii art for terminal bling
-	for archive in $(command ls ~/dotfiles/misc/asciiart/); do
-		ln -s ~/dotfiles/misc/asciiart/$archive ~/.local/share/asciiart/$archive
+	for art in $(command ls ~/dotfiles/misc/asciiart/); do
+		ln -s ~/dotfiles/misc/asciiart/$art ~/.local/share/asciiart/$art
 		if [ $? -eq 0 ]; then
-			printf "%s%s→ %s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s%s→ %s folder linked succesfully!%s\n" "${BLD}" "${CGR}" "${art}" "${CNC}"
 			sleep 1
 		else
-			printf "%s%s✗ %s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
+			printf "%s%s✗ %s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${art}" "${CNC}"
 			sleep 1
 		fi
 	done
@@ -335,13 +369,13 @@ setup_rice() {
 
 	logo "Caching fonts..."
 	# Copying all the fonts
-	for archive in ~/dotfiles/misc/fonts/*; do
-		command cp -R ${archive} ~/.local/share/fonts/
+	for font in ~/dotfiles/misc/fonts/*; do
+		command cp -R ${font} ~/.local/share/fonts/
 		if [ $? -eq 0 ]; then
-			printf "%s%s→ %s copied succesfully!%s\n" "${BLD}" "${CGR}" "${archive}" "${CNC}"
+			printf "%s%s→ %s copied succesfully!%s\n" "${BLD}" "${CGR}" "${font}" "${CNC}"
 			sleep 1
 		else
-			printf "%s%s✗ %s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
+			printf "%s%s✗ %s failed to been copied, you must copy it manually%s\n" "${BLD}" "${CRE}" "${font}" "${CNC}"
 			sleep 1
 		fi
 	done
@@ -371,8 +405,8 @@ enable_services() {
 		sleep 2
 	fi
 	if is_installed mpd; then
-		sudo systemctl enable mpd.service >/dev/null 2>&1
-		sudo systemctl start mpd.service >/dev/null 2>&1
+		systemctl --user enable mpd.service >/dev/null 2>&1
+		systemctl --user start mpd.service >/dev/null 2>&1
 		printf '%s✓ Mpd services enabled on your system!%s\n\n' "${CGR}" "${CNC}"
 		sleep 2
 	fi
