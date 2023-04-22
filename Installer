@@ -45,6 +45,7 @@ _mainScript_() {
 		esac
 	done
 
+	install_pkg
 	logo "Preparing Folders"
 	if [ ! -e $HOME/.config/user-dirs.dirs ]; then
 		xdg-user-dirs-update
@@ -54,7 +55,6 @@ _mainScript_() {
 	fi	
 	sleep 2 
 
-	install_pkg
 	setup_rice
 	install_eww
 	enable_services
@@ -227,7 +227,7 @@ setup_rice() {
 
 	# Backing up the .config files
 	[ -d $HOME/.config ] && cd $HOME/.config
-	for file in $(command ls ~/dotfiles/.config/); do
+	for file in $(command ls ~/dotfiles/config/); do
 		if [ -L "$file" ]; then
 			command rm -rf "$file"
 			printf "%s✗ $file is a symlink and removed%s\n" "${CRE}" "${CNC}"
