@@ -49,11 +49,7 @@ if [ $CUSTOM_WALL = "Yes" ]; then
         # Remove unnecessary files and set wallpaper
         command rm -rf .git/ README.md Static Live list.txt
     fi
-elif [ $CUSTOM_WALL = "No" ]; then
-    if [ -d "$HOME/.config/wall" ]; then
-        command rm -rf $HOME/.config/wall
-    fi
+    RandomWall
 fi
-RandomWall
 
 # vim:filetype=zsh
