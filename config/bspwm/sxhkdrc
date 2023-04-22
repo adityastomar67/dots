@@ -215,123 +215,110 @@ XF86Audio{Next,Prev,Play,Stop}
 
 
 
-#  ╔═╗═╗ ╦╦ ╦╦╔═╔╦╗╦═╗╔═╗  - z0mbi3
-#  ╚═╗╔╩╦╝╠═╣╠╩╗ ║║╠╦╝║    - https://github.com/gh0stzk/dotfiles
-#  ╚═╝╩ ╚═╩ ╩╩ ╩═╩╝╩╚═╚═╝  - z0mbi3.zk@protonmail.com
-#			z0mbi3 config..
 
-# Open Terminal (alacritty)
-super + Return
-	Term --ot
 
-# Menu aplicaciones
-super + m
-	rofi -no-lazy-grab -show drun -theme $HOME/.config/bspwm/rices/$RICETHEME/launcher.rasi
 
 # Dmenu Runner
 ctrl + Return
 	dmenu_run -b
 
-# Theme Selector
-alt + @space
-	RiceSelector
 
-# Power off, Reboot, Log out, Lockscreen, kill an app
-ctrl + super + alt + {p,r,q,l,k}
-	{systemctl poweroff, systemctl reboot,bspc quit,physlock -d,xkill}
+# # Power off, Reboot, Log out, Lockscreen, kill an app
+# ctrl + super + alt + {p,r,q,l,k}
+# 	{systemctl poweroff, systemctl reboot,bspc quit,physlock -d,xkill}
 
-# Kill server and close window
-ctrl + alt + q
-	bspc node -{c,k} && tmux kill-server
+# # Kill server and close window
+# ctrl + alt + q
+# 	bspc node -{c,k} && tmux kill-server
 
-# Kill Tmux Server
-ctrl + alt + t
-	tmux kill-server
+# # Kill Tmux Server
+# ctrl + alt + t
+# 	tmux kill-server
 
-# close and kill
-super + {_,shift + }c
-	bspc node -{c,k}
+# # close and kill
+# super + {_,shift + }c
+# 	bspc node -{c,k}
 
-# Quit/Restart bspwm
-ctrl + shift + {q,r}
-	bspc {quit,wm -r; dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'sxhkd' 'The BSPWM has been reloaded successfully!'}
+# # Quit/Restart bspwm
+# ctrl + shift + {q,r}
+# 	bspc {quit,wm -r; dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'sxhkd' 'The BSPWM has been reloaded successfully!'}
 
-# Split horizontal, vertical or cancel
-super + {e,s,q}
-   bspc node -p {east,south,cancel}
+# # Split horizontal, vertical or cancel
+# super + {e,s,q}
+#    bspc node -p {east,south,cancel}
 
-# Fullscreen or Monocle
-super + f
-   bspc node -t "~"fullscreen
+# # Fullscreen or Monocle
+# super + f
+#    bspc node -t "~"fullscreen
 
-# Toggle beetwen floating & tiled
-super + space
-   bspc node -t "~"{floating,tiled}
+# # Toggle beetwen floating & tiled
+# super + space
+#    bspc node -t "~"{floating,tiled}
 
-# Hide/Show Bar (Polybar and/or eww)
-super + alt + {h,u}
-	HideBar {-h,-u}
+# # Hide/Show Bar (Polybar and/or eww)
+# super + alt + {h,u}
+# 	HideBar {-h,-u}
 
-# Reload sxhkd
-super + Escape
-	pkill -USR1 -x sxhkd; dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'sxhkd' 'The keybindings has been reloaded successfully!'
+# # Reload sxhkd
+# super + Escape
+# 	pkill -USR1 -x sxhkd; dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'sxhkd' 'The keybindings has been reloaded successfully!'
 
-# Send the window to another edge of the screen
-super + {_,shift + }{h,j,k,l}
-   bspc node -{f,s} {west,south,north,east}
+# # Send the window to another edge of the screen
+# super + {_,shift + }{h,j,k,l}
+#    bspc node -{f,s} {west,south,north,east}
 
-# Screenshot Now
-Print
-	ScreenShoTer --now
+# # Screenshot Now
+# Print
+# 	ScreenShoTer --now
 
-# Screenshot Select
-super + Print
-	ScreenShoTer --sel
+# # Screenshot Select
+# super + Print
+# 	ScreenShoTer --sel
 
-# Screenshot in 10s
-alt + Print
-	ScreenShoTer --in10
+# # Screenshot in 10s
+# alt + Print
+# 	ScreenShoTer --in10
 
-# Switch workspace
-ctrl + alt + {h,l}
-	bspc desktop -f {prev,next}.local
+# # Switch workspace
+# ctrl + alt + {h,l}
+# 	bspc desktop -f {prev,next}.local
 
-# Change focus to next window, including floating window
-super + {l,h}
-   bspc node -f {next.local,prev.local}
+# # Change focus to next window, including floating window
+# super + {l,h}
+#    bspc node -f {next.local,prev.local}
 
-# Send focused window to another workspace
-ctrl + {_,shift + }{1-8}
-   bspc {desktop -f,node -d} '^{1-8}'
+# # Send focused window to another workspace
+# ctrl + {_,shift + }{1-8}
+#    bspc {desktop -f,node -d} '^{1-8}'
 
-# Expanding windows
-super + control + {h,l,j,k}
-   bspc node -z {left -20 0,right 20 0,top 0 -20,bottom 0 20}
+# # Expanding windows
+# super + control + {h,l,j,k}
+#    bspc node -z {left -20 0,right 20 0,top 0 -20,bottom 0 20}
 
-## Shrinking windows
-super + alt + {h,l,j,k}
-	bspc node -z {left 20 0,right -20 0,top 0 20,bottom 0 -20}
+# ## Shrinking windows
+# super + alt + {h,l,j,k}
+# 	bspc node -z {left 20 0,right -20 0,top 0 20,bottom 0 -20}
 
-## Move floating windows
-alt + shift + {h,j,k,l}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+# ## Move floating windows
+# alt + shift + {h,j,k,l}
+# 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
-# Change transparency on focused window
-ctrl + alt {plus,minus,t}
-	{picom-trans -c -o +3, picom-trans -c -o -1, picom-trans -c -d}
+# # Change transparency on focused window
+# ctrl + alt {plus,minus,t}
+# 	{picom-trans -c -o +3, picom-trans -c -o -1, picom-trans -c -d}
 
-# Random wallpaper
-alt + w
-	RandomWall
+# # Random wallpaper
+# alt + w
+# 	RandomWall
 
-# Manage brightness
-XF86MonBrightness{Up,Down}
-    sh Brightness {up,down}
+# # Manage brightness
+# XF86MonBrightness{Up,Down}
+#     sh Brightness {up,down}
 
-# Volume control
-XF86Audio{RaiseVolume,LowerVolume,Mute}
-	Volume{ --inc, --dec, --toggle}
+# # Volume control
+# XF86Audio{RaiseVolume,LowerVolume,Mute}
+# 	Volume{ --inc, --dec, --toggle}
 
-# Music Control
-XF86Audio{Next,Prev,Play,Stop}
-	MediaControl {--next,--previous,--toggle,--stop}
+# # Music Control
+# XF86Audio{Next,Prev,Play,Stop}
+# 	MediaControl {--next,--previous,--toggle,--stop}
