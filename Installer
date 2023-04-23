@@ -391,8 +391,8 @@ firefox_css() {
 		pkill -f firefox
 
 		for folder in chrome; do
-			if [ -d "$HOME"/.mozilla/firefox/*.default-release/$folder ]; then
-				command mv "$HOME"/.mozilla/firefox/*.default-release/$folder "$backup_folder"/${folder}_$date
+			if [ -d "$HOME/.mozilla/firefox/*.default-release/$folder" ]; then
+				command mv "$HOME"/.mozilla/firefox/*.default-release/$folder "$backup_folder"/${folder}_$date && \
 				printf "%s%s→ %s copied succesfully at %s!%s\n" "${BLD}" "${CGR}" "${folder}" "$backup_folder/${folder}_$date" "${CNC}"
 			else
 				printf "%s✗ $folder folder does not exist in $HOME/.mozilla/firefox/!%s\n" "${CRE}" "${CNC}"
@@ -400,8 +400,8 @@ firefox_css() {
 		done
 
 		for file in user.js; do
-			if [ -e "$HOME"/.mozilla/firefox/*.default-release/$file ]; then
-				command mv "$HOME"/.mozilla/firefox/*.default-release/$file "$backup_folder"/${file}_$date
+			if [ -e "$HOME/.mozilla/firefox/*.default-release/$file" ]; then
+				command mv "$HOME"/.mozilla/firefox/*.default-release/$file "$backup_folder"/${file}_$date && \
 				printf "%s%s→ %s copied succesfully at %s!%s\n" "${BLD}" "${CGR}" "${file}" "$backup_folder/${file}_$date" "${CNC}"
 			else
 				printf "%s✗ $file file does not exist in $HOME/.mozilla/firefox/!%s\n" "${CRE}" "${CNC}"
