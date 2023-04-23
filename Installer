@@ -60,26 +60,7 @@ _mainScript_() {
 	enable_services
 
 	# Mozilla Firefox rice
-	logo "Installing Firefox CSS..."
-	for folder in chrome; do
-		if [ -d "$HOME"/.mozilla/firefox/*.default-release/$folder ]; then
-			command mv "$HOME"/.mozilla/firefox/*.default-release/$folder "$backup_folder"/${folder}_$date
-			echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"
-		else
-			echo "The folder $folder does not exist in $HOME/.mozilla/firefox/"
-		fi
-		done
-
-		for file in user.js; do
-		if [ -e "$HOME"/.mozilla/firefox/*.default-release/$file ]; then
-			command mv "$HOME"/.mozilla/firefox/*.default-release/$file "$backup_folder"/${file}_$date
-			echo "$file file backed up successfully at $backup_folder/${file}_$date"
-		else
-			echo "The file $file does not exist in $HOME/.mozilla/firefox/"
-		fi
-	done
-	printf "%s%s✓ Firefox Done!!%s\n" "${BLD}" "${CGR}" "${CNC}"
-	sleep 2
+	firefox_css
 
 	# Changing shell to Zsh
 	logo "Changing default shell to zsh"
@@ -394,6 +375,37 @@ setup_rice() {
 	sudo make clean install >/dev/null 2>&1
 
 	printf "\n\n%s%s✓ Done succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
+	sleep 2
+}
+
+##--> Setup the css for firefox <--##
+firefox_css() {
+	logo "Installing Firefox CSS..."
+	for folder in chrome; do
+		if [ -d "$HOME"/.mozilla/firefox/*.default-release/$folder ]; then
+			command mv "$HOME"/.mozilla/firefox/*.default-release/$folder "$backup_folder"/${folder}_$date
+			echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"
+		else
+			echo "The folder $folder does not exist in $HOME/.mozilla/firefox/"
+		fi
+	done
+	echo
+
+	for file in user.js; do
+		if [ -e "$HOME"/.mozilla/firefox/*.default-release/$file ]; then
+			command mv "$HOME"/.mozilla/firefox/*.default-release/$file "$backup_folder"/${file}_$date
+			echo "$file file backed up successfully at $backup_folder/${file}_$date"
+		else
+			echo "The file $file does not exist in $HOME/.mozilla/firefox/"
+		fi
+	done
+
+	if [ -d "$HOME/.mozilla/firefox/*.default-release/" ]; then
+		cp -R "$HOME/dotfiles/misc/firefox/chrome" "$HOME/.mozilla/firefox/*.default-release/"
+		cp -R "$HOME/dotfiles/misc/firefox/user.js" "$HOME/.mozilla/firefox/*.default-release/"
+	fi
+
+	printf "%s%s✓ Firefox Done!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 }
 
