@@ -393,18 +393,18 @@ firefox_css() {
 		for folder in chrome; do
 			if [ -d "$HOME"/.mozilla/firefox/*.default-release/$folder ]; then
 				command mv "$HOME"/.mozilla/firefox/*.default-release/$folder "$backup_folder"/${folder}_$date
-				echo "$folder folder backed up successfully at $backup_folder/${folder}_$date"
+				printf "%s%s→ %s copied succesfully at %s!%s\n" "${BLD}" "${CGR}" "${folder}" "$backup_folder/${folder}_$date" "${CNC}"
 			else
-				echo "The folder $folder does not exist in $HOME/.mozilla/firefox/"
+				printf "%s✗ $folder folder does not exist in $HOME/.mozilla/firefox/!%s\n" "${CRE}" "${CNC}"
 			fi
 		done
 
 		for file in user.js; do
 			if [ -e "$HOME"/.mozilla/firefox/*.default-release/$file ]; then
 				command mv "$HOME"/.mozilla/firefox/*.default-release/$file "$backup_folder"/${file}_$date
-				echo "$file file backed up successfully at $backup_folder/${file}_$date"
+				printf "%s%s→ %s copied succesfully at %s!%s\n" "${BLD}" "${CGR}" "${file}" "$backup_folder/${file}_$date" "${CNC}"
 			else
-				echo "The file $file does not exist in $HOME/.mozilla/firefox/"
+				printf "%s✗ $file file does not exist in $HOME/.mozilla/firefox/!%s\n" "${CRE}" "${CNC}"
 			fi
 		done
 		sleep 2
