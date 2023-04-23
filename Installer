@@ -64,8 +64,8 @@ _mainScript_() {
 
 	# Changing shell to Zsh
 	logo "Changing default shell to zsh"
-	sleep 8
 	printf "%s%sIf your shell is not zsh will be changed now.\nYour root password is needed to make the change.\n\nAfter that is important for you to reboot.\n %s\n" "${BLD}" "${CYE}" "${CNC}"
+	sleep 5
 	if [[ $SHELL != "/usr/bin/zsh" ]]; then
 		echo "Changing shell to zsh, your root pass is needed."
 		chsh -s /usr/bin/zsh
@@ -384,12 +384,12 @@ setup_rice() {
 
 ##--> Setup the css for firefox <--##
 firefox_css() {
+	logo "Installing Firefox CSS..."
 	if is_installed firefox; then
 		firefox &
 		sleep 5
 		pkill -f firefox
 
-		logo "Installing Firefox CSS..."
 		for folder in chrome; do
 			if [ -d "$HOME"/.mozilla/firefox/*.default-release/$folder ]; then
 				command mv "$HOME"/.mozilla/firefox/*.default-release/$folder "$backup_folder"/${folder}_$date
@@ -412,10 +412,13 @@ firefox_css() {
 		if [ -d "$HOME/.mozilla/firefox/*.default-release/" ]; then
 			cp -R "$HOME/dotfiles/misc/firefox/chrome" "$HOME/.mozilla/firefox/*.default-release/"
 			cp -R "$HOME/dotfiles/misc/firefox/user.js" "$HOME/.mozilla/firefox/*.default-release/"
+			printf "%s%s✓ Firefox CSS Done!!%s\n" "${BLD}" "${CGR}" "${CNC}"
+			sleep 2
+		else
+			printf "%s✗ Firefox CSS cannot be Done!!%s\n" "${CRE}" "${CNC}"
+			sleep 2
 		fi
 
-		printf "%s%s✓ Firefox CSS Done!!%s\n" "${BLD}" "${CGR}" "${CNC}"
-		sleep 2
 	else
 		printf "%s✗ firefox is not instaleed on the system%s\n" "${CRE}" "${CNC}"
 		sleep 2
