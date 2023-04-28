@@ -62,20 +62,6 @@ _mainScript_() {
 	# Mozilla Firefox rice
 	firefox_css
 
-	# Changing shell to Zsh
-	logo "Changing default shell to zsh"
-	printf "%s%sIf your shell is not zsh will be changed now.\nYour root password is needed to make the change.\n\nAfter that is important for you to reboot.\n %s\n" "${BLD}" "${CYE}" "${CNC}"
-	sleep 5
-	if [[ $SHELL != "/usr/bin/zsh" ]]; then
-		echo "Changing shell to zsh, your root pass is needed."
-		chsh -s /usr/bin/zsh
-		printf '%s✓ Shell changed to ZSH!%s\n' "${CGR}" "${CNC}"
-		sleep 5
-	else
-		printf "%s%sYour shell is already ZSH%s\n" "${BLD}" "${CGR}" "${CNC}"
-		sleep 5
-	fi
-
 	logo "Installation Finished!"
 	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n" "${BLD}" "${CNC}"
 	printf "%s%sRun dotup command to update configs anytime.%s\n\n" "${BLD}" "${CYE}" "${CNC}"
@@ -90,8 +76,9 @@ _mainScript_() {
 	done
 	sleep 5
 
-	# Sourcing the shell
-	zsh
+	# Setting up Zsh
+	logo "Setting up zsh"
+	bash <(curl -s https://raw.githubusercontent.com/adityastomar67/zsh-conf/master/install.zsh)
 }
 
 ##--> Logo <--##
@@ -347,8 +334,8 @@ setup_rice() {
 	printf "\n\n%s%s✓ Files copied succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 
-	logo "Configuring ZSH & Tmux"
-	ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf && printf "%s→ Tmux conf linked succesfully!%s\n" "${CGR}" "${CNC}" && sleep 1
+	logo "Configuring Tmux"
+	# ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf && printf "%s→ Tmux conf linked succesfully!%s\n" "${CGR}" "${CNC}" && sleep 1
 	ln -s $HOME/dotfiles/home/.zshrc $HOME/.zshrc && printf "%s→ Zshrc linked succesfully!%s\n" "${CGR}" "${CNC}" && sleep 1
 	printf "\n\n%s%s✓ Done succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
