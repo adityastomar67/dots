@@ -72,7 +72,6 @@ if [ $# -gt 0 ]; then
         fi
         ;;
     ?)
-        # echo "script usage: $(basename \$0) [-l] [-h] [-a somevalue]" >&2
         exit 1
         ;;
     esac

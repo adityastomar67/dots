@@ -407,6 +407,7 @@ firefox_css() {
 		firefox &
 		sleep 5
 		pkill -f firefox
+		sleep 2
 
 		for folder in chrome; do
 			if [ -d "$HOME"/.mozilla/firefox/*.default-release/$folder ]; then
