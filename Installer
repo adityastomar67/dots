@@ -20,8 +20,8 @@ dependencies=(base-devel rustup pacman-contrib bspwm polybar sxhkd \
 			  ncmpcpp geany ranger mpc picom tmux \
 			  feh ueberzug maim pamixer libwebp xdg-user-dirs \
 			  webp-pixbuf-loader xorg-xprop xorg-xkill physlock papirus-icon-theme \
-			  ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels \
-			  zsh zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting xorg-xsetroot)
+			  ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd \
+			  ttf-inconsolata ttf-joypixels zsh xorg-xsetroot)
 
 ##--> Check if it's running as root <--##
 if [ "$(id -u)" = 0 ]; then
@@ -47,12 +47,16 @@ _mainScript_() {
 
 	install_pkg
 	logo "Preparing Folders"
-	if [ ! -e $HOME/.config/user-dirs.dirs ]; then
-		xdg-user-dirs-update
-		echo "Creating xdg-user-dirs"
-	else
-		echo "user-dirs.dirs already exists"
-	fi	
+	read -q "res?Would you like to create XDG_DIRS? [y/N] "
+    echo ""
+    [[ $res == "y" ]] && {
+		if [ ! -e $HOME/.config/user-dirs.dirs ]; then
+			xdg-user-dirs-update
+			echo "Creating xdg-user-dirs"
+		else
+			echo "user-dirs.dirs already exists"
+		fi	
+    }
 	sleep 2 
 
 	setup_rice
@@ -76,6 +80,7 @@ _mainScript_() {
 	done
 	sleep 5
 
+	[ -d "$HOME/.tmux" ] && rm -rf "$HOME/.tmux"
 	# Setting up Zsh
 	logo "Setting up zsh"
 	bash <(curl -s https://raw.githubusercontent.com/adityastomar67/zsh-conf/master/install.zsh)
