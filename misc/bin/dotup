@@ -96,7 +96,7 @@ else
     bspc wm -r; sleep 2; dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'Bspwm' 'The BSPWM has been reloaded successfully!'
     pkill -USR1 -x sxhkd >/dev/null 2>&1; dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'Sxhkd' 'The keybindings has been reloaded successfully!'
     sleep 2
-    xrdb merge "$HOME/.config/bspwm/rices/$RICETHEME/xresources" && kill -USR1 $(pidof st) >/dev/null 2>&1; \
+    xrdb merge "$HOME/.config/bspwm/xresources" && kill -USR1 $(pidof st) >/dev/null 2>&1; \
         dunstify -u low -i ~/.config/bspwm/assets/reload.svg 'ST Terminal' 'The terminal has been reloaded successfully!'
 
     ##--> Finishing <--##
