@@ -90,7 +90,13 @@ _mainScript_() {
 	done
 	sleep 5
 
-	[ -d "$HOME/.tmux" ] && rm -rf "$HOME/.tmux"
+	# Cleanup
+	for file in $HOME/{.tmux,.rustup,.xsession-*} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
+        if [ -e $file ]; then
+            rm -rf $file    
+        fi
+    done
+
 	# Setting up Zsh
 	logo "Setting up zsh"
 	bash <(curl -s https://raw.githubusercontent.com/adityastomar67/zsh-conf/master/install.zsh)
