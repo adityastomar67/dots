@@ -16,7 +16,7 @@ def hook_init(fm):
 ranger.api.hook_init = hook_init
 
 
-class jump(Command):
+class j(Command):
     """:j
     Uses autojump to set the current directory.
     """
