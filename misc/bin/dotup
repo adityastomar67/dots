@@ -107,8 +107,8 @@ else
     zsh
 fi
 
-for file in $($HOME/.tmux $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}); do
+for file in $HOME/{.tmux,.rustup,.xsession-*} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
     if [ -e $file ]; then
-        echo $file    
+        rm -rf $file    
     fi
 done
