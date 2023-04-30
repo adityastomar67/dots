@@ -167,6 +167,7 @@ launch_bars() {
 
 set_bspwm_config
 set_term_config
+set_xresources_config
 set_picom_config
 set_dunst_config
 launch_bars
