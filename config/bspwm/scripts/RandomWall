@@ -6,9 +6,10 @@
 #   Author: z0mbi3
 #	url: https://github.com/gh0stzk
 
-if [ -d "$HOME/.config/wall" ]; then
+if [ $CUSTOM_WALL = "Yes" ]; then
     feh --randomize --no-fehbg --bg-fill $HOME/.config/wall/
 else
     feh --randomize --no-fehbg --bg-fill $HOME/.config/bspwm/rices/$RICETHEME/walls/
 fi
+
 exit 0
