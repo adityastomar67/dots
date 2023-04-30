@@ -104,11 +104,10 @@ else
     printf "$(tput bold)Sourcing zsh...$(tput sgr0)"
     sleep 2
     cd $HOME
+    for file in $HOME/{.tmux,.rustup,.xsession-*} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
+        if [ -e $file ]; then
+            rm -rf $file    
+        fi
+    done
     zsh
 fi
-
-for file in $HOME/{.tmux,.rustup,.xsession-*} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
-    if [ -e $file ]; then
-        rm -rf $file    
-    fi
-done
