@@ -6,23 +6,168 @@
 ## and launch the bars corresponding to each theme.
 
 # Set bspwm configuration for Cristina
-bspc config border_width 0
-bspc config top_padding 10
-bspc config bottom_padding 60
-bspc config normal_border_color "#9bced7"
-bspc config active_border_color "#9bced7"
-bspc config focused_border_color "#c3a5e6"
-bspc config presel_feedback_color "#c3a5e6"
-bspc config left_padding 5
-bspc config right_padding 5
-bspc config window_gap 10
+set_bspwm_config() {
+		bspc config border_width 0
+		bspc config top_padding 2
+		bspc config bottom_padding 60
+		bspc config normal_border_color "#9bced7"
+		bspc config active_border_color "#9bced7"
+		bspc config focused_border_color "#c3a5e6"
+		bspc config presel_feedback_color "#c3a5e6"
+		bspc config left_padding 2
+		bspc config right_padding 2
+		bspc config window_gap 6
+}
 
 # Reload terminal colors
-cat "$HOME"/.config/bspwm/rices/cristina/alacrittyrc > "$HOME"/.config/alacritty/alacritty.yml
+set_term_config() {
+		sed -i "$HOME"/.config/alacritty/fonts.yml \
+		-e "s/family: .*/family: JetBrainsMono Nerd Font/g" \
+		-e "s/size: .*/size: 10/g"
+		
+		command cat > "$HOME"/.config/alacritty/colors.yml <<- _EOF_
+				# Colors (Rose-Pine Moon) Cristina Rice
+				colors:
+				  primary:
+				    background: '#1f1d29'
+				    foreground: '#eaeaea'
+
+				  normal:
+				    black:   '#6f6e85'
+				    red:     '#ea6f91'
+				    green:   '#9bced7'
+				    yellow:  '#f1ca93'
+				    blue:    '#34738e'
+				    magenta: '#c3a5e6'
+				    cyan:    '#eabbb9'
+				    white:   '#faebd7'
+
+				  bright:
+				    black:   '#6f6e85'
+				    red:     '#ea6f91'
+				    green:   '#9bced7'
+				    yellow:  '#f1ca93'
+				    blue:    '#34738e'
+				    magenta: '#c3a5e6'
+				    cyan:    '#ebbcba'
+				    white:   '#e0def4'
+    
+				  cursor:
+				    cursor: '#c3a5e6'
+				    text:	'#1f1d29'
+_EOF_
+}
+
+# Reload xresources colors
+set_xresources_config() {
+		command cat > "$HOME"/.config/bspwm/xresources <<- _EOF_
+				Xft.antialias:	  1
+				Xft.hinting:	  1
+				Xft.autohint:	  0
+				Xft.hintstyle:	  hintslight
+				Xft.rgba:	      rgb
+				Xft.lcdfilter:	  lcddefault
+
+				! font
+				st.font:          Operator Mono Lig:style:medium:pixelsize=18
+				dmenu.font:       Operator Mono Lig:style:medium:pixelsize=18
+
+				! window-padding
+				st.borderpx:      20
+
+				! transparency
+				st.alpha:         0.9
+
+				! special
+				*.foreground:     #eaeaea
+				*.background:     #1f1d29
+
+				! black
+				*.color0:         #6f6e85
+				*.color8:         #6f6e85
+
+				! red
+				*.color1:         #ea6f91
+				*.color9:         #ea6f91
+
+				! green
+				*.color2:         #9bced7
+				*.color10:        #9bced7
+
+				! yellow
+				*.color3:         #f1ca93
+				*.color11:        #f1ca93
+
+				! blue
+				*.color4:         #34738e
+				*.color12:        #34738e
+
+				! magenta
+				*.color5:         #c3a5e6
+				*.color13:        #c3a5e6
+
+				! cyan
+				*.color6:         #eabbb9
+				*.color14:        #ebbcba
+
+				! white
+				*.color7:         #faebd7
+				*.color15:        #e0def4
+_EOF_
+}
+
+# Set compositor configuration
+set_picom_config() {
+		sed -i "$HOME"/.config/bspwm/picom.conf \
+			-e "s/shadow-color = .*/shadow-color = \"#000000\"/g" \
+			-e "s/corner-radius = .*/corner-radius = 6/g" \
+			-e "s/\".*:class_g = 'Alacritty'\"/\"100:class_g = 'Alacritty'\"/g" \
+			-e "s/\".*:class_g = 'FloaTerm'\"/\"100:class_g = 'FloaTerm'\"/g" \
+			-e "s/\".*:class_g = 'Updating'\"/\"100:class_g = 'Updating'\"/g" \
+			-e "s/\".*:class_g = 'MusicPlayer'\"/\"100:class_g = 'MusicPlayer'\"/g" \
+			-e "s/\".*:class_g = 'Sysfetch'\"/\"100:class_g = 'Sysfetch'\"/g" \
+			-e "s/\".*:class_g = 'scratch'\"/\"90:class_g = 'scratch'\"/g"
+}
+
+# Set dunst notification daemon config
+set_dunst_config() {
+		sed -i "$HOME"/.config/bspwm/dunstrc \
+		-e "s/transparency = .*/transparency = 0/g" \
+		-e "s/frame_color = .*/frame_color = \"#1f1d29\"/g" \
+		-e "s/separator_color = .*/separator_color = \"#ea6f91\"/g" \
+		-e "s/font = .*/font = JetBrainsMono Nerd Font Medium 9/g" \
+		-e "s/foreground='.*'/foreground='#9bced7'/g"
+		
+		sed -i '/urgency_low/Q' "$HOME"/.config/bspwm/dunstrc
+		command cat >> "$HOME"/.config/bspwm/dunstrc <<- _EOF_
+				[urgency_low]
+				timeout = 3
+				background = "#1f1d29"
+				foreground = "#eaeaea"
+
+				[urgency_normal]
+				timeout = 6
+				background = "#1f1d29"
+				foreground = "#eaeaea"
+
+				[urgency_critical]
+				timeout = 0
+				background = "#1f1d29"
+				foreground = "#eaeaea"
+_EOF_
+}
 
 # Launch the bar and or eww widgets
-eww -c $HOME/.config/bspwm/rices/cristina/widgets daemon &
-polybar -q cristina-bar -c $HOME/.config/bspwm/rices/cristina/config.ini &
+launch_bars() {
+		eww -c ${rice_dir}/widgets daemon &
+		polybar -q cristina-bar -c ${rice_dir}/config.ini &
+}
 
-# Launch dunst notification daemon
-dunst -config "$HOME"/.config/bspwm/rices/cristina/dunstrc &
+
+### ---------- Apply Configurations ---------- ###
+
+set_bspwm_config
+set_term_config
+set_picom_config
+set_dunst_config
+launch_bars

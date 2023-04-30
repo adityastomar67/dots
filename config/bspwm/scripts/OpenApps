@@ -11,9 +11,9 @@
 case "$1" in
   --menu)
     rofi -show drun \
-    -theme $HOME/.config/bspwm/rices/$RICETHEME/launcher.rasi & disown;;
+    -theme $HOME/.config/bspwm/rices/${RICETHEME}/launcher.rasi & disown;;
   --rice)
-	  RiceSelector & disown;;
+	RiceSelector & disown;;
   --terminal)
     alacritty & disown;;
   --floating)
@@ -21,7 +21,7 @@ case "$1" in
   --update)
     alacritty --hold --class FloaTerm,Alacritty -e Updates --update-system & disown;;
   --checkupdates)
-	  alacritty --hold --class Updating,Alacritty -e Updates --print-updates & disown;;
+	alacritty --hold --class Updating,Alacritty -e Updates --print-updates & disown;;
   --ranger)
     alacritty --class Ranger,Alacritty -e ranger & disown;;
   --nvim)
@@ -30,18 +30,19 @@ case "$1" in
     alacritty --class MusicPlayer,Alacritty -e ncmpcpp & disown;;
   --fetch)
     alacritty --hold --class Sysfetch,Alacritty -e ~/.local/bin/sysfetch & disown;;
+  #Apps
   --filemanager)
-	  thunar & disown;;
+	thunar & disown;;
   --browser)
-	  firefox & disown;;
+	firefox & disown;;
   --editor)
-	  geany & disown;;
+	geany & disown;;
   --telegram)
-	  telegram & disown;;
+	telegram & disown;;
   --whats)
-	  whatsapp-nativefier --disable-gpu & disown;;
+	whatsapp-nativefier --disable-gpu & disown;;
   --soundcontrol)
     pavucontrol & disown;;
   *)
-    echo "No Valid Option!!";;
+    echo "Opción no válida";;
 esac

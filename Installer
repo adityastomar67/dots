@@ -17,11 +17,12 @@ date=$(date +%Y%m%d-%H%M%S)
 dependencies=(base-devel rustup pacman-contrib bspwm polybar sxhkd \
 			  alacritty brightnessctl dunst rofi lsd \
 			  jq polkit-gnome git playerctl mpd fzf \
-			  ncmpcpp geany ranger mpc picom tmux \
+			  ncmpcpp geany ranger mpc picom xdotool tmux \
 			  feh ueberzug maim pamixer libwebp xdg-user-dirs \
 			  webp-pixbuf-loader xorg-xprop xorg-xkill physlock papirus-icon-theme \
-			  ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd \
-			  ttf-inconsolata ttf-joypixels zsh xorg-xsetroot)
+			  ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels \
+			  zsh xorg-xsetroot xorg-xwininfo)
+
 
 ##--> Check if it's running as root <--##
 if [ "$(id -u)" = 0 ]; then
@@ -66,7 +67,16 @@ _mainScript_() {
 	# Mozilla Firefox rice
 	firefox_css
 
+	## Intalling tdrop for scratchpads
+	if is_installed tdrop; then
+		printf "\n%s%sInstalling tdrop, this must be fast!.%s\n" "${BLD}" "${CBL}" "${CNC}"
+		paru -S tdrop-git --skipreview --noconfirm
+	else
+		printf "\n%s%sTdrop is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
+	fi
+
 	logo "Installation Finished!"
+	command rm -rf $HOME/.tmux $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}
 	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n" "${BLD}" "${CNC}"
 	printf "%s%sRun dotup command to update configs anytime.%s\n\n" "${BLD}" "${CYE}" "${CNC}"
 
@@ -225,46 +235,56 @@ setup_rice() {
 	done
 
 	# Backing up the local bin files
-	[ -d $HOME/.local/bin ] && cd $HOME/.local/bin
-	for file in $(command ls ~/dotfiles/misc/bin/); do
-		if [ -L "$file" ]; then
-			command rm -rf "$file"
-			printf "%s✗ $file is a symlink and removed%s\n" "${CRE}" "${CNC}"
-			sleep 1
-		elif [ -d "$file" ]; then
-			command mv -f "$file" "$backup_folder/${file}_$date"
-			printf "%s✓ $file folder backed up successfully at $backup_folder/bin/${file}_$date%s\n" "${CGR}" "${CNC}"
-			sleep 1
-		elif [ -f "$file" ]; then
-			command mv -f "$file" "$backup_folder/${file}_$date"
-			printf "%s✓ $file file backed up successfully at $backup_folder/bin/${file}_$date%s\n" "${CGR}" "${CNC}"
-			sleep 1
-		else
-			printf "%s✗ $file not found!%s\n" "${CRE}" "${CNC}"
-			sleep 1
-		fi
-	done
+	if [ -d $HOME/.local/bin ]; then
+		cd $HOME/.local/bin
+		for file in $(command ls ~/dotfiles/misc/bin/); do
+			if [ -L "$file" ]; then
+				command rm -rf "$file"
+				printf "%s✗ $file is a symlink and removed%s\n" "${CRE}" "${CNC}"
+				sleep 1
+			elif [ -d "$file" ]; then
+				command mv -f "$file" "$backup_folder/${file}_$date"
+				printf "%s✓ $file folder backed up successfully at $backup_folder/bin/${file}_$date%s\n" "${CGR}" "${CNC}"
+				sleep 1
+			elif [ -f "$file" ]; then
+				command mv -f "$file" "$backup_folder/${file}_$date"
+				printf "%s✓ $file file backed up successfully at $backup_folder/bin/${file}_$date%s\n" "${CGR}" "${CNC}"
+				sleep 1
+			else
+				printf "%s✗ $file not found!%s\n" "${CRE}" "${CNC}"
+				sleep 1
+			fi
+		done
+	else
+		printf "%s✗ $HOME/.local/bin folder not found!%s\n" "${CRE}" "${CNC}"
+		sleep 1
+	fi
 
 	# Backing up all the asciiarts
-	[ -d $HOME/.local/share/asciiart ] && cd $HOME/.local/share/asciiart
-	for file in $(command ls ~/dotfiles/misc/asciiart/); do
-		if [ -L "$file" ]; then
-			command rm -rf "$file"
-			printf "%s✗ $file is a symlink and removed%s\n" "${CRE}" "${CNC}"
-			sleep 1
-		elif [ -d "$file" ]; then
-			command mv -f "$file" "$backup_folder/${file}_$date"
-			printf "%s✓ $file folder backed up successfully at $backup_folder/ascii/${file}_$date%s\n" "${CGR}" "${CNC}"
-			sleep 1
-		elif [ -f "$file" ]; then
-			command mv -f "$file" "$backup_folder/${file}_$date"
-			printf "%s✓ $file file backed up successfully at $backup_folder/ascii/${file}_$date%s\n" "${CGR}" "${CNC}"
-			sleep 1
-		else
-			printf "%s✗ $file not found!%s\n" "${CRE}" "${CNC}"
-			sleep 1
-		fi
-	done
+	if [ -d $HOME/.local/share/asciiart ]; then
+		cd $HOME/.local/share/asciiart
+		for file in $(command ls ~/dotfiles/misc/asciiart/); do
+			if [ -L "$file" ]; then
+				command rm -rf "$file"
+				printf "%s✗ $file is a symlink and removed%s\n" "${CRE}" "${CNC}"
+				sleep 1
+			elif [ -d "$file" ]; then
+				command mv -f "$file" "$backup_folder/${file}_$date"
+				printf "%s✓ $file folder backed up successfully at $backup_folder/ascii/${file}_$date%s\n" "${CGR}" "${CNC}"
+				sleep 1
+			elif [ -f "$file" ]; then
+				command mv -f "$file" "$backup_folder/${file}_$date"
+				printf "%s✓ $file file backed up successfully at $backup_folder/ascii/${file}_$date%s\n" "${CGR}" "${CNC}"
+				sleep 1
+			else
+				printf "%s✗ $file not found!%s\n" "${CRE}" "${CNC}"
+				sleep 1
+			fi
+		done
+	else
+		printf "%s✗ $HOME/.local/share/asciiart folder not found!%s\n" "${CRE}" "${CNC}"
+		sleep 1
+	fi
 
 	# Backing up the zsh config
 	[ -L ~/.zshrc ] && rm -rf ~/.zshrc ||
@@ -340,8 +360,8 @@ setup_rice() {
 	sleep 2
 
 	logo "Configuring Tmux"
-	# ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf && printf "%s→ Tmux conf linked succesfully!%s\n" "${CGR}" "${CNC}" && sleep 1
-	ln -s $HOME/dotfiles/home/.zshrc $HOME/.zshrc && printf "%s→ Zshrc linked succesfully!%s\n" "${CGR}" "${CNC}" && sleep 1
+	ln -s $HOME/dotfiles/home/.tmux.conf $HOME/.tmux.conf && printf "%s→ Tmux conf linked succesfully!%s\n" "${CGR}" "${CNC}" && sleep 1
+	sleep 1
 	printf "\n\n%s%s✓ Done succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 
@@ -383,36 +403,40 @@ firefox_css() {
 		pkill -f firefox
 
 		for folder in chrome; do
-			if [ -d "$HOME/.mozilla/firefox/*.default-release/$folder" ]; then
-				command mv "$HOME"/.mozilla/firefox/*.default-release/$folder "$backup_folder"/${folder}_$date && \
-				printf "%s%s→ %s copied succesfully at %s!%s\n" "${BLD}" "${CGR}" "${folder}" "$backup_folder/${folder}_$date" "${CNC}"
+			if [ -d "$HOME"/.mozilla/firefox/*.default-release/$folder ]; then
+				mv "$HOME"/.mozilla/firefox/*.default-release/$folder "$backup_folder"/${folder}_$date
+				printf "%s✓ $file folder backed up successfully at $backup_folder/config/${file}_$date%s\n" "${CGR}" "${CNC}"
+				sleep 1
 			else
-				printf "%s✗ $folder folder does not exist in $HOME/.mozilla/firefox/!%s\n" "${CRE}" "${CNC}"
+				printf "%s✗The folder $folder does not exist in $HOME/.mozilla/firefox/%s\n" "${CRE}" "${CNC}"
+				sleep 1
 			fi
 		done
 
 		for file in user.js; do
-			if [ -e "$HOME/.mozilla/firefox/*.default-release/$file" ]; then
-				command mv "$HOME"/.mozilla/firefox/*.default-release/$file "$backup_folder"/${file}_$date && \
-				printf "%s%s→ %s copied succesfully at %s!%s\n" "${BLD}" "${CGR}" "${file}" "$backup_folder/${file}_$date" "${CNC}"
+			if [ -e "$HOME"/.mozilla/firefox/*.default-release/$file ]; then
+				mv "$HOME"/.mozilla/firefox/*.default-release/$file "$backup_folder"/${file}_$date
+				printf "%s✓ $file file backed up successfully at $backup_folder/config/${file}_$date%s\n" "${CGR}" "${CNC}"
+				sleep 1
 			else
-				printf "%s✗ $file file does not exist in $HOME/.mozilla/firefox/!%s\n" "${CRE}" "${CNC}"
+				printf "%s✗The file $file does not exist in $HOME/.mozilla/firefox/%s\n" "${CRE}" "${CNC}"
+				sleep 1
 			fi
 		done
-		sleep 2
 
-		if [ -d "$HOME/.mozilla/firefox/*.default-release/" ]; then
-			cp -R "$HOME/dotfiles/misc/firefox/chrome" "$HOME/.mozilla/firefox/*.default-release/"
-			cp -R "$HOME/dotfiles/misc/firefox/user.js" "$HOME/.mozilla/firefox/*.default-release/"
-			printf "%s%s✓ Firefox CSS Done!!%s\n" "${BLD}" "${CGR}" "${CNC}"
-			sleep 2
-		else
-			printf "%s✗ Firefox CSS cannot be Done!!%s\n" "${CRE}" "${CNC}"
-			sleep 2
-		fi
+		for archive in ~/dotfiles/misc/firefox/*; do
+			cp -R "${archive}" ~/.mozilla/firefox/*.default-release/
+			if [ $? -eq 0 ]; then
+				printf "%s%s✓ Firefox CSS Done!!%s\n" "${BLD}" "${CGR}" "${CNC}"
+				sleep 1
+			else
+				printf "%s✗ Firefox CSS cannot be Done!!%s\n" "${CRE}" "${CNC}"				
+				sleep 1
+			fi
+		done
 
 	else
-		printf "%s✗ firefox is not instaleed on the system%s\n" "${CRE}" "${CNC}"
+		printf "%s✗ Firefox is not instaleed on the system%s\n" "${CRE}" "${CNC}"
 		sleep 2
 	fi
 }
