@@ -14,6 +14,8 @@ BLD=$(tput bold)
 CNC=$(tput sgr0)
 backup_folder=~/.RiceBackup
 date=$(date +%Y%m%d-%H%M%S)
+
+##--> Dependecies for smoother experience <--##
 dependencies=(base-devel rustup pacman-contrib bspwm polybar sxhkd \
 			  alacritty brightnessctl dunst rofi lsd \
 			  jq polkit-gnome git playerctl mpd fzf \
@@ -22,7 +24,6 @@ dependencies=(base-devel rustup pacman-contrib bspwm polybar sxhkd \
 			  webp-pixbuf-loader xorg-xprop xorg-xkill physlock papirus-icon-theme \
 			  ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels \
 			  zsh xorg-xsetroot xorg-xwininfo)
-
 
 ##--> Check if it's running as root <--##
 if [ "$(id -u)" = 0 ]; then
@@ -466,4 +467,5 @@ enable_services() {
 	sleep 2
 }
 
+##--> Starting the execution <--##
 _mainScript_

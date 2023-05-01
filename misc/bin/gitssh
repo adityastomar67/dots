@@ -28,7 +28,7 @@ echo "------------------------------"
 echo
 echo "1. Copy the following public key and paste into $HOST ssh dashboard"
 echo
-cat "$KEY_FILE.pub"
+command cat "$KEY_FILE.pub"
 echo
 echo "2. Paste the following into ~/.ssh/config"
 echo "
