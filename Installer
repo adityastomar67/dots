@@ -64,8 +64,6 @@ _mainScript_() {
 	setup_rice
 	install_eww
 	enable_services
-
-	# Mozilla Firefox rice
 	firefox_css
 
 	## Intalling tdrop for scratchpads
@@ -76,11 +74,6 @@ _mainScript_() {
 		printf "\n%s%sTdrop is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
 	fi
 
-	logo "Installation Finished!"
-	command rm -rf "$HOME"/.tmux "$HOME"/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}
-	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n" "${BLD}" "${CNC}"
-	printf "%s%sRun dotup command to update configs anytime.%s\n\n" "${BLD}" "${CYE}" "${CNC}"
-
 	while true; do
 		read -rp "Do you wish to remove your backup configs? [y/N]: " yn
 		case $yn in
@@ -89,7 +82,7 @@ _mainScript_() {
 		*) printf "✗ Error: just write 'y' or 'n'\n\n" ;;
 		esac
 	done
-	sleep 5
+	sleep 2
 
 	# Cleanup
 	for file in $HOME/{.tmux,.rustup,.xsession-*} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
@@ -97,6 +90,11 @@ _mainScript_() {
             rm -rf "$file"    
         fi
     done
+
+	logo "Installation Finished!"
+	printf "%sReboot is necessary, then choose bspwm in your login manager and login.%s\n" "${BLD}" "${CNC}"
+	printf "%s%sRun dotup command to update configs anytime.%s\n\n" "${BLD}" "${CYE}" "${CNC}"
+	sleep 5
 
 	# Setting up Zsh
 	logo "Setting up zsh"
