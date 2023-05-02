@@ -8,7 +8,6 @@ DOTFILES_DIR="$HOME/dotfiles"
 NVIM_DIR="$HOME/.config/nvim"
 ZSH_DIR="$HOME/.config/zsh"
 
-clear
 removeOrStash() {
     local text="${1:?}"
     printf "${text}"
@@ -46,55 +45,44 @@ cleanup() {
 }
 
 nvimUpdate() {
-    clear
     if [ -d $NVIM_DIR ]; then
         git -C $NVIM_DIR rev-parse 2>/dev/null
         if [ $? -eq 0 ]; then
             if [ $# -gt 0 ]; then
-                case $1 in
-                    1)
-                        echo "Do you want to update Neovim also?"
-                        select option in "Yes" "No"; do
-                            if [ $option ]; then
-                                break
-                            fi
-                        done
+                printf "$(tput bold)Updating Neovim...$(tput sgr0)"
+                sleep 2
+                cd $NVIM_DIR
+                removeOrStash "\n\nChoose whether you want to reset the Neovim options or persist them over the update?..\n"
+                printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated Neovim.$(tput sgr0)\n"
+                sleep 2
+                cd $HOME
+            else
+                echo "Do you want to update Neovim also?"
+                select option in "Yes" "No"; do
+                    if [ $option ]; then
+                        break
+                    fi
+                done
 
-                        if [ $option = "Yes" ]; then
-                            cd $NVIM_DIR
-                            removeOrStash "\n\nChoose whether you want to reset the Neovim options or persist them over the update?..\n"
-                            printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated Neovim.$(tput sgr0)\n"
-                            sleep 2
-                        fi
-                        ;;
-                    2)
-                        printf "$(tput bold)Updating Neovim...$(tput sgr0)"
-                        sleep 2
-                        cd $NVIM_DIR
-                        removeOrStash "\n\nChoose whether you want to reset the Neovim options or persist them over the update?..\n"
-                        printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated Neovim.$(tput sgr0)\n"
-                        sleep 2
-                        cd $HOME
-                        exit 1
-                        ;;
-                esac
+                if [ $option = "Yes" ]; then
+                    cd $NVIM_DIR
+                    removeOrStash "\n\nChoose whether you want to reset the Neovim options or persist them over the update?..\n"
+                    printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated Neovim.$(tput sgr0)\n"
+                    sleep 2
+                fi
+            fi
         else
             printf "$(tput setaf 1)❌ Neovim Configurations directory is not a git directory!$(tput sgr0)\n"
-            clear
         fi
     else
         printf "$(tput setaf 1)❌ Neovim Configurations doesn't exists!$(tput sgr0)\n"
-        clear
     fi
-
-    unset option
 }
-
 
 if [ $# -gt 0 ]; then
     case "$1" in
     -n | --nvim)
-        nvimUpdate 2
+        nvimUpdate "up"
         ;;
     -z | --zsh)
         if [ -d $ZSH_DIR ]; then
@@ -134,7 +122,7 @@ else
     sleep 3
 
     ##--> Updating Neovim <--##
-    nvimUpdate 1
+    nvimUpdate
 
     ##--> Reloading the BSPWM and keybindings, st also <--##
     clear
