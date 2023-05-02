@@ -398,28 +398,6 @@ firefox_css() {
 			sleep 2
 		fi
 
-		# for folder in chrome; do
-		# 	if [ -d "$HOME/.mozilla/firefox/*.default-release/$folder" ]; then
-		# 		mv "$HOME/.mozilla/firefox/*.default-release/$folder" "$backup_folder/$folder_$date"
-		# 		printf "%s✓ $file folder backed up successfully at $backup_folder/config/${file}_$date%s\n" "${CGR}" "${CNC}"
-		# 		sleep 1
-		# 	else
-		# 		printf "%s✗ The folder $folder does not exist in $HOME/.mozilla/firefox/%s\n" "${CRE}" "${CNC}"
-		# 		sleep 1
-		# 	fi
-		# done
-
-		# for file in user.js; do
-		# 	if [ -e "$HOME/.mozilla/firefox/*.default-release/$file" ]; then
-		# 		mv "$HOME/.mozilla/firefox/*.default-release/$file" "$backup_folder/$file_$date"
-		# 		printf "%s✓ $file file backed up successfully at $backup_folder/config/${file}_$date%s\n" "${CGR}" "${CNC}"
-		# 		sleep 1
-		# 	else
-		# 		printf "%s✗ The file $file does not exist in $HOME/.mozilla/firefox/%s\n" "${CRE}" "${CNC}"
-		# 		sleep 1
-		# 	fi
-		# done
-
 		for archive in $(command ls ~/dotfiles/misc/firefox/); do
 			if [ -e "$HOME/.mozilla/firefox/*.default-release/$archive" ]; then
 				mv "$HOME/.mozilla/firefox/*.default-release/$archive" "$backup_folder/$archive_$date"
@@ -434,8 +412,8 @@ firefox_css() {
 			sleep 1
 		done
 
-		for archive in $(command ls ~/dotfiles/misc/firefox/*); do
-			cp -R "$HOME/dotfiles/misc/firefox/$archive" "$HOME/.mozilla/firefox/*.default-release/"
+		for archive in $(command ls ~/dotfiles/misc/firefox/); do
+			cp -R "$HOME/dotfiles/misc/firefox/$archive" ~/.mozilla/firefox/*.default-release/
 			if [ $? -eq 0 ]; then
 				printf "%s%s✓ $archive copied!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 			else
