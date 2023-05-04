@@ -8,6 +8,8 @@
 
 # From here you can control your favorite applications for all themes.
 
+[ -x $HOME/.local/bin/alacritty ] && TERM="$HOME/.local/bin/alacritty" || TERM="alacritty"
+
 case "$1" in
   --menu)
     rofi -show drun \
@@ -15,7 +17,7 @@ case "$1" in
   --rice)
 	RiceSelector & disown;;
   --terminal)
-    alacritty & disown;;
+    $TERM & disown;;
   --floating)
     alacritty --class FloaTerm,Alacritty & disown;;
   --update)
@@ -25,7 +27,7 @@ case "$1" in
   --ranger)
     alacritty --class Ranger,Alacritty -e ranger & disown;;
   --nvim)
-    alacritty -e nvim & disown;;
+    $TERM -e nvim & disown;;
   --music)
     alacritty --class MusicPlayer,Alacritty -e ncmpcpp & disown;;
   --fetch)
