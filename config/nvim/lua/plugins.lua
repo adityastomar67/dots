@@ -66,7 +66,7 @@ return {
     },
     {
         "nvim-tree/nvim-tree.lua",
-        lazy = true
+        lazy = true,
         config = function()
             -- recommended settings from nvim-tree documentation
             vim.g.loaded_netrw = 1

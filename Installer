@@ -61,6 +61,11 @@ _mainScript_() {
     }
 	sleep 2 
 
+	# Clean Neovim cache files
+	[ -d "$HOME/.local/share/nvim" ] && rm -rf "$HOME/.local/share/nvim"
+	[ -d "$HOME/.local/state/nvim" ] && rm -rf "$HOME/.local/state/nvim"
+	[ -d "$HOME/.cache/nvim" ]       && rm -rf "$HOME/.cache/nvim"
+
 	setup_rice
 	install_eww
 	enable_services
