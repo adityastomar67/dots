@@ -37,3 +37,5 @@ opt.splitbelow = true
 opt.iskeyword:append("-")
 
 opt.cmdheight = 0
+
+opt.laststatus = 0
