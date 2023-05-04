@@ -1,7 +1,17 @@
-require("gh0st.plugins-setup")
-require("gh0st.core.options")
-require("gh0st.core.keymaps")
-require("gh0st.core.colorscheme")
-require("gh0st.plugins.nvim-tree")
-require("gh0st.plugins.lualine")
-require("gh0st.plugins.colorizer")
+require("options")
+require("keymaps")
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({{import = "plugins"}})

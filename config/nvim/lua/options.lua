@@ -2,7 +2,6 @@ local opt = vim.opt -- for conciseness
 
 -- Numeracion de las lineas
 opt.relativenumber = true
-opt.number = true
 
 -- tabs & indentation
 opt.tabstop = 4
