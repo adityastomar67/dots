@@ -164,7 +164,7 @@ _EOF_
 
 # Launch the bar
 launch_bars() {
-		polybar -q emi-bar -c ${rice_dir}/config.ini &
+		polybar -q doom-bar -c ${rice_dir}/config.ini &
 }
 
 
