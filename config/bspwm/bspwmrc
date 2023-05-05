@@ -94,3 +94,6 @@ xsetroot -cursor_name left_ptr
 
 # Load ST Theme
 xrdb merge "$HOME/.config/bspwm/xresources" && kill -USR1 $(pidof st)
+
+# Disable screen blanking
+xset -dpms s off &
