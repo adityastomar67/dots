@@ -88,3 +88,14 @@ class change_wall(Command):
 
     def tab(self, _):
         return self._tab_directory_content()
+    
+class empty_trash(Command):
+    """:empty
+
+    Empties the trash 
+    """
+
+    def execute(self):
+        HOME = os.environ['HOME']
+        self.fm.run(f'trash-empty')
+
