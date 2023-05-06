@@ -18,7 +18,7 @@ set_bspwm_config() {
 		bspc config border_width 2
 		bspc config focused_border_color "#928374"
 		bspc config normal_border_color "#282828"
-		bspc config window_gap 20
+		bspc config window_gap 6
 		bspc config borderless_monocle true
 		bspc config gapless_monocle true
 		bspc config single_monocle false
