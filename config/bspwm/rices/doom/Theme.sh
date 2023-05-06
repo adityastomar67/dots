@@ -125,7 +125,7 @@ _EOF_
 set_picom_config() {
 		sed -i "$HOME"/.config/bspwm/picom.conf \
 			-e "s/shadow-color = .*/shadow-color = \"#000000\"/g" \
-			-e "s/corner-radius = .*/corner-radius = 6/g" \
+			-e "s/corner-radius = .*/corner-radius = 0/g" \
 			-e "s/\".*:class_g = 'Alacritty'\"/\"100:class_g = 'Alacritty'\"/g" \
 			-e "s/\".*:class_g = 'FloaTerm'\"/\"100:class_g = 'FloaTerm'\"/g" \
 			-e "s/\".*:class_g = 'Updating'\"/\"100:class_g = 'Updating'\"/g" \
@@ -138,26 +138,27 @@ set_picom_config() {
 set_dunst_config() {
 		sed -i "$HOME"/.config/bspwm/dunstrc \
 		-e "s/transparency = .*/transparency = 0/g" \
-		-e "s/frame_color = .*/frame_color = \"#1a1b26\"/g" \
-		-e "s/separator_color = .*/separator_color = \"#ebdbb2\"/g" \
+		-e "s/corner_radius = .*/corner_radius = 0/g" \
+		-e "s/frame_color = .*/frame_color = \"#1D2021\"/g" \
+		-e "s/separator_color = .*/separator_color = \"#32302f\"/g" \
 		-e "s/font = .*/font = JetBrainsMono Nerd Font Medium 9/g" \
-		-e "s/foreground='.*'/foreground='#f9f9f9'/g"
+		-e "s/foreground='.*'/foreground='#b8bb26'/g"
 		
 		sed -i '/urgency_low/Q' "$HOME"/.config/bspwm/dunstrc
 		command cat >> "$HOME"/.config/bspwm/dunstrc <<- _EOF_
 				[urgency_low]
 				timeout = 3
-				background = "#1a1b26"
+				background = "#1D2021"
 				foreground = "#ebdbb2"
 
 				[urgency_normal]
 				timeout = 6
-				background = "#1a1b26"
+				background = "#1D2021"
 				foreground = "#ebdbb2"
 
 				[urgency_critical]
 				timeout = 0
-				background = "#1a1b26"
+				background = "#1D2021"
 				foreground = "#ebdbb2"
 _EOF_
 }

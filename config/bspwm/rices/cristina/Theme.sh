@@ -133,6 +133,7 @@ set_picom_config() {
 set_dunst_config() {
 		sed -i "$HOME"/.config/bspwm/dunstrc \
 		-e "s/transparency = .*/transparency = 0/g" \
+		-e "s/corner_radius = .*/corner_radius = 4/g" \
 		-e "s/frame_color = .*/frame_color = \"#1f1d29\"/g" \
 		-e "s/separator_color = .*/separator_color = \"#ea6f91\"/g" \
 		-e "s/font = .*/font = JetBrainsMono Nerd Font Medium 9/g" \
