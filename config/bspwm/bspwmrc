@@ -77,8 +77,6 @@ done
 picom --config "$HOME"/.config/bspwm/picom.conf &
 #picom --legacy-backends --config "$HOME"/.config/bspwm/picom.conf &
 
-[ -f "$rice_dir/picom.conf" ] && picom --config $rice_dir/picom.conf &
-
 # Launch dunst notification daemon
 dunst -config "$HOME"/.config/bspwm/dunstrc &
 

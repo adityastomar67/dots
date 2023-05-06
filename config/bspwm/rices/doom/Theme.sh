@@ -14,7 +14,7 @@ set_bspwm_config() {
 		bspc config left_padding 2
 		bspc config right_padding 2
 		bspc config window_gap 6
-		bspc monitor -d TERM WEB CODE MISC EDIT CHAT DISCORD MUSIC
+		bspc monitor -d TERM CODE WEB MISC EDIT CHAT DISCORD MUSIC
 		bspc config border_width 2
 		bspc config focused_border_color "#928374"
 		bspc config normal_border_color "#282828"
@@ -132,6 +132,44 @@ set_picom_config() {
 			-e "s/\".*:class_g = 'MusicPlayer'\"/\"100:class_g = 'MusicPlayer'\"/g" \
 			-e "s/\".*:class_g = 'Sysfetch'\"/\"100:class_g = 'Sysfetch'\"/g" \
 			-e "s/\".*:class_g = 'scratch'\"/\"90:class_g = 'scratch'\"/g"
+
+		sed -i '/EXTRA-RICE-CONF/Q' "$HOME"/.config/bspwm/picom.conf
+		command cat >> "$HOME"/.config/bspwm/picom.conf <<- _EOF_
+				#--EXTRA-RICE-CONF--#
+				
+				shadow = true;
+				no-dnd-shadow = true;
+				no-dock-shadow = true;
+				clear-shadow = true;
+				shadow-exclude = [
+					"class_g ='polybar'",
+					"class_g = 'tray'",
+					"class_g = 'Polybar'"
+				]
+
+				fade-delta = 0.25;
+				fade-in-step = 0.02;
+				fade-out-step = 0.02;
+
+				refresh-rate = 0;
+				dbe = false;
+				paint-on-overlay = true;
+				
+				focus-exclude = [ 
+					"class_g = 'Cairo-clock'" ,
+					"class_g = 'CoverGloobus'",
+					"class_g = 'Tilda'",
+					"class_g = 'firefox'",
+					"class_g = 'Firefox-esr'"
+				];
+				detect-client-leader = true;
+				invert-color-include = [ ];
+				glx-copy-from-front = false;
+				wintypes:
+				{
+				tooltip = { fade = true; shadow = true; opacity = 0.75; focus = true; };
+				};
+_EOF_
 }
 
 # Set dunst notification daemon config

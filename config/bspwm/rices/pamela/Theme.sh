@@ -127,6 +127,11 @@ set_picom_config() {
 			-e "s/\".*:class_g = 'MusicPlayer'\"/\"100:class_g = 'MusicPlayer'\"/g" \
 			-e "s/\".*:class_g = 'Sysfetch'\"/\"100:class_g = 'Sysfetch'\"/g" \
 			-e "s/\".*:class_g = 'scratch'\"/\"90:class_g = 'scratch'\"/g"
+
+		sed -i '/EXTRA-RICE-CONF/Q' "$HOME"/.config/bspwm/picom.conf
+		command cat >> "$HOME"/.config/bspwm/picom.conf <<- _EOF_
+				#--EXTRA-RICE-CONF--#
+_EOF_
 }
 
 # Set dunst notification daemon config
