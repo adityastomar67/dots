@@ -13,3 +13,7 @@
     background: var(--z0mbi3-bg) !important;
   }
 }
+@-moz-document url-prefix("about:sessionrestore"){
+  body {background: var(--z0mbi3-bg) !important;}
+  div.container.restore-chosen {background: var(--z0mbi3-bg) !important;}
+}
