@@ -9,7 +9,7 @@
 function hide() {
 	
 case "${RICETHEME}" in
-    emilia|jan|aline|silvia|pamela|doom)
+    emilia|jan|aline|silvia|pamela|doom|ayu)
         polybar-msg cmd hide | bspc config top_padding 2
         ;;
     isabel|cristina)
@@ -42,6 +42,9 @@ case "${RICETHEME}" in
 		;;
 	doom)
 		polybar-msg cmd show | bspc config top_padding 59
+		;;
+	ayu)
+		polybar-msg cmd show | bspc config top_padding 45
 		;;
 	jan)
 		polybar-msg cmd show | bspc config top_padding 64

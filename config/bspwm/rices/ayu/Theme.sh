@@ -7,7 +7,7 @@
 
 # Set bspwm configuration for Emilia
 set_bspwm_config() {
-		bspc config top_padding 59
+		bspc config top_padding 45
 		bspc config bottom_padding 2
 		bspc config active_border_color "#D9D7CE"
 		bspc config presel_feedback_color "#73D0FF"
