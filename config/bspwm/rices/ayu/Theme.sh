@@ -203,7 +203,7 @@ _EOF_
 
 # Launch the bar
 launch_bars() {
-		polybar -q doom-bar -c ${rice_dir}/config.ini &
+		polybar -q ayu-bar -c ${rice_dir}/config.ini &
 }
 
 
