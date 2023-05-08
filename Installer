@@ -71,6 +71,18 @@ _mainScript_() {
 	enable_services
 	firefox_css
 
+	if [ -f "$HOME/dotfiles/setup" ]; then
+		source "$HOME/dotfiles/setup"
+
+		logo "Extra Configs"
+		read -q "res?Would you like to install VsCode? [y/N] "
+		echo ""
+		[[ $res == "y" ]] && {
+			setup_code
+		}
+		sleep 2
+	fi
+
 	## Intalling tdrop for scratchpads
 	if is_installed tdrop; then
 		printf "\n%s%sInstalling tdrop, this must be fast!.%s\n" "${BLD}" "${CBL}" "${CNC}"
@@ -416,11 +428,11 @@ firefox_css() {
 		done
 
 		for archive in $(command ls ~/dotfiles/misc/firefox/); do
-			cp -R "$HOME/dotfiles/misc/firefox/$archive" ~/.mozilla/firefox/*.default-release/
+			ln -s "$HOME/dotfiles/misc/firefox/$archive" ~/.mozilla/firefox/*.default-release/$archive
 			if [ $? -eq 0 ]; then
-				printf "%s%s✓ $archive copied!!%s\n" "${BLD}" "${CGR}" "${CNC}"
+				printf "%s%s✓ $archive linked!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 			else
-				printf "%s✗ $archive is not copied!!%s\n" "${CRE}" "${CNC}"				
+				printf "%s✗ $archive is not linked!!%s\n" "${CRE}" "${CNC}"				
 			fi
 			sleep 1
 		done

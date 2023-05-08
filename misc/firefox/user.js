@@ -111,3 +111,6 @@ user_pref("geo.provider.use_geoclue", false); // [FF102+] [LINUX]
 
 // Integrated calculator at urlbar
 user_pref("browser.urlbar.suggest.calculator", true);
+
+// enforcing dark mode
+user_pref("layout.css.prefers-color-scheme.content-override", 0);
