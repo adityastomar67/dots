@@ -7,8 +7,8 @@
 
 ##--> Vars <--##
 CRE=$(tput setaf 1)
-CYE=$(tput setaf 3)
 CGR=$(tput setaf 2)
+CYE=$(tput setaf 3)
 CBL=$(tput setaf 4)
 BLD=$(tput bold)
 CNC=$(tput sgr0)
@@ -69,19 +69,6 @@ _mainScript_() {
 	setup_rice
 	install_eww
 	enable_services
-	firefox_css
-
-	if [ -f "$HOME/dotfiles/setup" ]; then
-		source "$HOME/dotfiles/setup"
-
-		logo "Extra Configs"
-		read -q "res?Would you like to install VsCode? [y/N] "
-		echo ""
-		[[ $res == "y" ]] && {
-			setup_code
-		}
-		sleep 2
-	fi
 
 	## Intalling tdrop for scratchpads
 	if is_installed tdrop; then
@@ -212,6 +199,68 @@ install_eww() {
 	fi
 	sleep 5
 	printf "%s%sDone%s\n" "${BLD}" "${CGR}" "${CNC}"
+}
+
+##--> Setup vscode and link the config files <--##
+setup_code() {
+	if ! is_installed code; then
+		paru -S visual-studio-code-bin
+	else
+		echo "Code is already installed!!"
+	fi
+
+	## EXTENSIONs
+    # code --force --install-extension ms-vscode.sublime-keybindings@4.0.10
+    # code --force --install-extension octref.vetur@0.34.1
+    # code --force --install-extension s-nlf-fh.glassit
+    # code --force --install-extension ms-vscode.cpptools
+    # code --force --install-extension esbenp.prettier-vscode
+    # code --force --install-extension ritwickdey.liveserver
+    # code --force --install-extension ms-python.python
+    # code --force --install-extension ms-python.vscode-pylance
+    # code --force --install-extension moalamri.inline-fold
+    # code --force --install-extension foxundermoon.shell-format
+    # code --force --install-extension teabyii.ayu@0.20.2
+    # code --force --install-extension matklad.rust-analyzer@0.2.727
+    # code --force --install-extension GitHub.github-vscode-theme
+    # code --force --install-extension vscodevim.vim
+    code --force --install-extension formulahendry.code-runner
+    code --force --install-extension Github.copilot
+    code --force --install-extension coenraads.bracket-pair-colorizer
+    code --force --install-extension viktorqvarfordt.vscode-pitch-black-theme
+    code --force --install-extension PKief.material-icon-theme
+    code --force --install-extension EliverLara.andromeda
+    code --force --insatll-extension Chouzz.vscode-better-align
+    code --force --insatll-extension iocave.customize-ui
+
+	if [ -d "$HOME"/.config/Code/User ]; then
+		cd "$HOME"/.config/Code/User || exit
+		for file in $(command ls ~/dotfiles/misc/vscode/); do
+			if [ -L "$file" ]; then
+				command rm -rf "$file"
+				printf "%s✗ $file is a symlink and removed%s\n" "${CRE}" "${CNC}"
+			elif [ -f "$file" ]; then
+				command mv -f "$file" "$backup_folder/${file}_$date"
+				printf "%s✓ $file file backed up successfully at $backup_folder/bin/${file}_$date%s\n" "${CGR}" "${CNC}"
+			else
+				printf "%s✗ $file not found!%s\n" "${CRE}" "${CNC}"
+			fi
+			sleep 1
+		done
+	else
+		printf "%s✗ $HOME/.config/Code/User folder not found!%s\nYou can copy it manually!\n" "${CRE}" "${CNC}"
+		sleep 1
+	fi
+
+	for conf in $(command ls ~/dotfiles/misc/vscode/); do
+		ln -s ~/dotfiles/misc/vscode/"$conf" ~/.config/Code/User/"$conf"
+		if [ $? -eq 0 ]; then
+			printf "%s%s→ %s file linked succesfully!%s\n" "${BLD}" "${CGR}" "${conf}" "${CNC}"
+		else
+			printf "%s%s✗ %s failed to been linked, you must do it manually%s\n" "${BLD}" "${CRE}" "${conf}" "${CNC}"
+		fi
+		sleep 1
+	done
 }
 
 ##--> Setup the config file and backup old ones <--##
@@ -398,7 +447,17 @@ setup_rice() {
 	printf "\n%s→ Installing Dmenu%s\n" "${CYE}" "${CNC}"
 	sudo make clean install >/dev/null 2>&1
 
-	printf "\n\n%s%s[✔] D O N E %s\n" "${BLD}" "${CGR}" "${CNC}"
+	firefox_css
+
+	logo "Extra Configs"
+	read -q "res?Would you like to install VsCode? [y/N] "
+	echo ""
+	[[ $res == "y" ]] && {
+		setup_code
+	}
+	sleep 2
+
+	printf "\n\n%s%s[✔] D O N E.\nRicing Complete. %s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
 }
 
