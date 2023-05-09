@@ -1,6 +1,6 @@
 mysql() {
     clear
-    printf "\t%s[[ %sSetting up MySQL%s ]]\n%s" "${tput setaf 3}" "${tput sgr0}" "${tput setaf 3}" "${tput sgr0}"
+    printf "\t%s[[ %sSetting up MySQL%s ]]\n%s" "$(tput setaf 3)" "$(tput sgr0)" "$(tput setaf 3)" "$(tput sgr0)"
 
     if [ ! $(command -v mariadb) ]; then
         sudo pacman -S mariadb
@@ -12,7 +12,7 @@ mysql() {
     sudo systemctl start mariadb.service
     sudo mysql_secure_installation
 
-    echo <<- _EOF_
+    cat <<- _EOF_
             MariaDB [(none)]:- CREATE USER 'username'@'localhost' IDENTIFIED BY 'some_pass';
                 On 'username' --- "write your username"
                 On 'some_pass' --- "write your password"
@@ -23,12 +23,12 @@ _EOF_
     flush privileges;
     quit
 
-	printf "\n\n%s%s[✔] D O N E %s\n" "${tput bold}" "${tput setaf 2}" "${tput sgr0}"
+	printf "\n\n%s%s[✔] D O N E %s\n" "$(tput bold)" "$(tput setaf 2)" "$(tput sgr0)"
 }
 
 ssh() {
     clear
-    printf "\t%s[[ %sSetting up SSH%s ]]\n\n%s" "${tput setaf 3}" "${tput sgr0}" "${tput setaf 3}" "${tput sgr0}"
+    printf "\t%s[[ %sSetting up SSH%s ]]\n\n%s" "$(tput setaf 3)" "$(tput sgr0)" "$(tput setaf 3)" "$(tput sgr0)"
     
     echo -n "Enter your email: "
     read -r EMAIL
@@ -73,6 +73,7 @@ ssh() {
 }
 
 lightdm() {
+    cd $HOME
     # If you prefer the last stable release, download from the releases page instead: https://github.com/NoiSek/Aether/releases/latest
     git clone git@github.com:NoiSek/Aether.git
     sudo cp --recursive Aether /usr/share/lightdm-webkit/themes/Aether
@@ -82,4 +83,6 @@ lightdm() {
 
     # Set default lightdm greeter to lightdm-webkit2-greeter
     sudo sed -i 's/^\(#?greeter\)-session\s*=\s*\(.*\)/greeter-session = lightdm-webkit2-greeter #\1/ #\2g' /etc/lightdm/lightdm.conf
+
+    rm -rf $HOME/Aether
 }
