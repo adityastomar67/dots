@@ -89,7 +89,7 @@ _mainScript_() {
 	sleep 2
 
 	# Cleanup
-	for file in $HOME/{.tmux,.rustup,.xsession-*} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
+	for file in $HOME/{.tmux,.rustup,.xsession-*,Installer} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
         if [ -e "$file" ]; then
             rm -rf "$file"    
         fi
@@ -285,7 +285,7 @@ setup_rice() {
 	fi
 
 	# Backing up the .config files
-	cd $HOME/.config
+	[ -d "$HOME"/.config ] && cd $HOME/.config
 	for file in $(command ls ~/dotfiles/config/); do
 		if [ -L "$file" ]; then
 			command rm -rf "$file"
@@ -361,7 +361,7 @@ setup_rice() {
 
 	##--> Copy the Files <--##
 	logo "Copying Rice..."
-	printf "→ Linking files to there respective directories..\n"
+	printf "→ Linking files to there respective directories..\n\n"
 
 	# Creating all the important directories
 	[ ! -d ~/.config ] && mkdir -p ~/.config
@@ -442,15 +442,27 @@ setup_rice() {
 	[ -d "$HOME"/.local/bin/st ] && cd "$HOME"/.local/bin/st || exit
 	printf "%s→ Installing ST Terminal%s\n" "${CYE}" "${CNC}"
 	sudo make clean install >/dev/null 2>&1
+	if [ $? -eq 0 ]; then
+			printf "%s%s✓ ST installed succesfully!%s\n" "${BLD}" "${CGR}" "${CNC}"
+		else
+			printf "%s%s✗ Cannot install ST, you have to compile it manually%s\n" "${BLD}" "${CRE}" "${CNC}"
+		fi
+	sleep 1
 
 	[ -d "$HOME"/.local/bin/dmenu ] && cd "$HOME"/.local/bin/dmenu || exit
 	printf "\n%s→ Installing Dmenu%s\n" "${CYE}" "${CNC}"
 	sudo make clean install >/dev/null 2>&1
+	if [ $? -eq 0 ]; then
+			printf "%s%s✓ DMenu installed succesfully!%s\n" "${BLD}" "${CGR}" "${CNC}"
+		else
+			printf "%s%s✗ Cannot install DMenu, you have to compile it manually%s\n" "${BLD}" "${CRE}" "${CNC}"
+		fi
+	sleep 1
 
 	firefox_css
 
 	logo "Extra Configs"
-	read -q "res?Would you like to install VsCode? [y/N] "
+	read -rp "Would you like to install VsCode? [y/N] " res
 	echo ""
 	[[ $res == "y" ]] && {
 		setup_code
@@ -466,10 +478,7 @@ firefox_css() {
 	logo "Installing Firefox CSS..."
 	if is_installed firefox; then
 		if [ ! -d "$HOME/.mozilla/firefox" ]; then
-			firefox &
-			sleep 5
-			pkill -f firefox
-			sleep 2
+			sudo su ${USR} -s /bin/zsh -lc "timeout 1s firefox --headless"
 		fi
 
 		for archive in $(command ls ~/dotfiles/misc/firefox/); do
