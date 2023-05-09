@@ -49,7 +49,7 @@ _mainScript_() {
 
 	install_pkg
 	logo "Preparing Folders"
-	read -q "res?Would you like to create XDG_DIRS? [y/N] "
+	read -rp "Would you like to create XDG_DIRS? [y/N] " res
     echo ""
     [[ $res == "y" ]] && {
 		if [ ! -e "$HOME"/.config/user-dirs.dirs ]; then
@@ -285,7 +285,7 @@ setup_rice() {
 	fi
 
 	# Backing up the .config files
-	[ -d "$HOME"/.config ] && cd "$HOME"/.config || exit
+	cd $HOME/.config
 	for file in $(command ls ~/dotfiles/config/); do
 		if [ -L "$file" ]; then
 			command rm -rf "$file"
@@ -327,7 +327,7 @@ setup_rice() {
 
 	# Backing up all the asciiarts
 	if [ -d "$HOME"/.local/share/asciiart ]; then
-		cd "$HOME"/.local/share/asciiart || exit
+		cd "$HOME"/.local/share/asciiart
 		for file in $(command ls ~/dotfiles/misc/asciiart/); do
 			if [ -L "$file" ]; then
 				command rm -rf "$file"
