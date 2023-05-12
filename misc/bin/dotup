@@ -157,7 +157,8 @@ else
     printf "$(tput bold)Sourcing zsh...$(tput sgr0)"
     sleep 2
 
-    chmod +x .config/bspwm/scripts/*
+    chmod +x $HOME/.config/bspwm/scripts/*
+    chmod +x $HOME/.local/share/asciiart/*
 
     ##--> Cleanup <--##
     cleanup
