@@ -9,6 +9,7 @@ NVIM_DIR="$HOME/.config/nvim"
 ZSH_DIR="$HOME/.config/zsh"
 
 removeOrStash() {
+    clear
     local text="${1:?}"
     printf "${text}"
     select opt in "Remove" "Persist"; do
@@ -37,7 +38,7 @@ removeOrStash() {
 
 cleanup() {
     cd $HOME
-    for file in $HOME/{.tmux,.rustup,.xsession-e*} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
+    for file in $HOME/{.tmux,.rustup,.xsession-e*,Installer,.vscode*,.bash_*} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
         if [ -e $file ]; then
             rm -rf $file    
         fi
@@ -155,6 +156,8 @@ else
     clear
     printf "$(tput bold)Sourcing zsh...$(tput sgr0)"
     sleep 2
+
+    chmod +x .config/bspwm/scripts/*
 
     ##--> Cleanup <--##
     cleanup

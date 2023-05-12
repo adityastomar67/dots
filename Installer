@@ -49,16 +49,13 @@ _mainScript_() {
 
 	install_pkg
 	logo "Preparing Folders"
-	read -rp "Would you like to create XDG_DIRS? [y/N] " res
-    echo ""
-    [[ $res == "y" ]] && {
-		if [ ! -e "$HOME"/.config/user-dirs.dirs ]; then
-			xdg-user-dirs-update
-			echo "Creating xdg-user-dirs"
-		else
-			echo "user-dirs.dirs already exists"
-		fi	
-    }
+	if [ ! -e "$HOME"/.config/user-dirs.dirs ]; then
+		xdg-user-dirs-update
+		echo "Creating xdg-user-dirs"
+	else
+		echo "user-dirs.dirs already exists"
+	fi	
+
 	sleep 2 
 
 	# Clean Neovim cache files
@@ -89,7 +86,7 @@ _mainScript_() {
 	sleep 2
 
 	# Cleanup
-	for file in $HOME/{.tmux,.rustup,.xsession-*,Installer} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
+	for file in $HOME/{.tmux,.rustup,.xsession-*,Installer,.vscode*,.bash_*} $HOME/dotfiles/{Installer,LICENSE.txt,CHANGELOG,README.md}; do
         if [ -e "$file" ]; then
             rm -rf "$file"    
         fi
@@ -204,7 +201,7 @@ install_eww() {
 ##--> Setup vscode and link the config files <--##
 setup_code() {
 	if ! is_installed code; then
-		paru -S visual-studio-code-bin
+		paru -S visual-studio-code-bin --skipreview --noconfirm
 	else
 		echo "Code is already installed!!"
 	fi
