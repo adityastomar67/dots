@@ -65,7 +65,7 @@ nvimUpdate() {
                 done
 
                 if [ $option = "Yes" ]; then
-                    removeOrStash "\n\nChoose whether you want to reset the Neovim options or persist them over the update?..\n"
+                    removeOrStash "Choose whether you want to reset the Neovim options or persist them over the update?..\n"
                     printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated Neovim.$(tput sgr0)\n"
                 fi
             fi
@@ -100,7 +100,7 @@ zshUpdate() {
                 done
 
                 if [ $option = "Yes" ]; then
-                    removeOrStash "\n\nChoose whether you want to reset the ZSH configs or persist them over the update?..\n"
+                    removeOrStash "Choose whether you want to reset the ZSH configs or persist them over the update?..\n"
                     printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated ZSH configs.$(tput sgr0)\n"
                 fi
             fi
