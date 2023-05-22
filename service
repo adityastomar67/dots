@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 mysql() {
     clear
     printf "\t%s[[ %sSetting up MySQL%s ]]\n%s" "$(tput setaf 3)" "$(tput sgr0)" "$(tput setaf 3)" "$(tput sgr0)"
@@ -26,10 +28,10 @@ _EOF_
 	printf "\n\n%s%s[✔] D O N E %s\n" "$(tput bold)" "$(tput setaf 2)" "$(tput sgr0)"
 }
 
-ssh() {
+gitssh() {
     clear
     printf "\t%s[[ %sSetting up SSH%s ]]\n\n%s" "$(tput setaf 3)" "$(tput sgr0)" "$(tput setaf 3)" "$(tput sgr0)"
-    
+
     echo -n "Enter your email: "
     read -r EMAIL
 
@@ -86,3 +88,52 @@ lightdm() {
 
     rm -rf $HOME/Aether
 }
+
+firefoxx() {
+    if $(pacman -Qi "firefox" &>/dev/null); then
+		if [ ! -d "$HOME/.mozilla/firefox" ]; then
+			sudo su ${USER} -s /bin/zsh -lc "timeout 2s firefox --headless"
+		fi
+
+		for archive in $(command ls ~/dotfiles/misc/firefox/); do
+			if [ -e "$HOME/.mozilla/firefox/*.default-release/$archive" ]; then
+				mv "$HOME/.mozilla/firefox/*.default-release/$archive" "$backup_folder/$archive_$date"
+				if [ $? -eq 0 ]; then
+					printf "%s✓ $archive backed up successfully at $backup_folder/config/${archive}_$date%s\n" "$(tput setaf 2)" "$(tput sgr0)"
+				else
+					printf "%s%s✗ %s failed to be backed up, you must copy it manually%s\n" "$(tput bold)" "$(tput setaf 1)" "${archive}" "$(tput sgr0)"
+				fi
+			else
+				printf "%s✗ $archive does not exist in $HOME/.mozilla/firefox/%s\n" "$(tput setaf 1)" "$(tput sgr0)"
+			fi
+			sleep 1
+		done
+
+		for archive in $(command ls ~/dotfiles/misc/firefox/); do
+			ln -s "$HOME/dotfiles/misc/firefox/$archive" ~/.mozilla/firefox/*.default-release/$archive
+			if [ $? -eq 0 ]; then
+				printf "%s%s✓ $archive linked!!%s\n" "$(tput bold)" "$(tput setaf 2)" "$(tput sgr0)"
+			else
+				printf "%s✗ $archive is not linked!!%s\n" "$(tput setaf 1)" "$(tput sgr0)"				
+			fi
+			sleep 1
+		done
+	else
+		printf "%s✗ Firefox is not instaleed on the system%s\n" "$(tput setaf 1)" "$(tput sgr0)"
+		sleep 2
+	fi
+}
+
+if [ $# -gt 0 ]; then
+    case "$1" in
+    -f | --firefox)
+        firefoxx
+        ;;
+    -s | --ssh)
+        gitssh
+        ;;
+    ?)
+        exit 1
+        ;;
+    esac
+fi

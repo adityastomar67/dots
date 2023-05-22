@@ -460,8 +460,6 @@ setup_rice() {
 		fi
 	sleep 1
 
-	firefox_css
-
 	logo "Extra Configs"
 	read -rp "Would you like to install VsCode? [y/N] " res
 	echo ""
@@ -472,43 +470,6 @@ setup_rice() {
 
 	printf "\n\n%s%s[✔] D O N E.\nRicing Complete. %s\n" "${BLD}" "${CGR}" "${CNC}"
 	sleep 2
-}
-
-##--> Setup the css for firefox <--##
-firefox_css() {
-	logo "Installing Firefox CSS..."
-	if is_installed firefox; then
-		if [ ! -d "$HOME/.mozilla/firefox" ]; then
-			sudo su ${USER} -s /bin/zsh -lc "timeout 2s firefox --headless"
-		fi
-
-		for archive in $(command ls ~/dotfiles/misc/firefox/); do
-			if [ -e "$HOME/.mozilla/firefox/*.default-release/$archive" ]; then
-				mv "$HOME/.mozilla/firefox/*.default-release/$archive" "$backup_folder/$archive_$date"
-				if [ $? -eq 0 ]; then
-					printf "%s✓ $archive backed up successfully at $backup_folder/config/${archive}_$date%s\n" "${CGR}" "${CNC}"
-				else
-					printf "%s%s✗ %s failed to be backed up, you must copy it manually%s\n" "${BLD}" "${CRE}" "${archive}" "${CNC}"
-				fi
-			else
-				printf "%s✗ $archive does not exist in $HOME/.mozilla/firefox/%s\n" "${CRE}" "${CNC}"
-			fi
-			sleep 1
-		done
-
-		for archive in $(command ls ~/dotfiles/misc/firefox/); do
-			ln -s "$HOME/dotfiles/misc/firefox/$archive" ~/.mozilla/firefox/*.default-release/$archive
-			if [ $? -eq 0 ]; then
-				printf "%s%s✓ $archive linked!!%s\n" "${BLD}" "${CGR}" "${CNC}"
-			else
-				printf "%s✗ $archive is not linked!!%s\n" "${CRE}" "${CNC}"				
-			fi
-			sleep 1
-		done
-	else
-		printf "%s✗ Firefox is not instaleed on the system%s\n" "${CRE}" "${CNC}"
-		sleep 2
-	fi
 }
 
 ##--> Enable necessary services <--##
