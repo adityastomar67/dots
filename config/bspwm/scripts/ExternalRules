@@ -11,6 +11,10 @@ consequences=$4
 
 main () {
 case "$class" in
+	Alacritty)
+	    eval "$consequences"
+	    [ "$state" ] || echo "desktop=^1 follow=on"
+	    ;;
 	FloaTerm)
 		eval "$consequences"
 		[ "$state" ] || echo "state=floating center=on"
