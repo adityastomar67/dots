@@ -2,7 +2,7 @@
 
 function set_theme {
     spicetify_theme=$1
-    
+
     #
     # configuring spotify theme (spicetify)
     #
@@ -15,10 +15,11 @@ function set_theme {
 current_theme=`cat $HOME/.config/bspwm/.rice`
 
 shopt -s nocasematch
-case "$current_theme" in 
-    "gruvbox" ) set_theme "Gruvbox-Gold" ;; 
-    "solarized-dark" ) set_theme "SolarizedDark" ;; 
-    "pink-nord" ) set_theme "Nord" ;; 
-    #"nord" ) set_theme "Nord" ;; 
+case "$current_theme" in
+    "gruvbox" ) set_theme "Gruvbox-Gold" ;;
+    "solarized-dark" ) set_theme "SolarizedDark" ;;
+    "pink-nord" ) set_theme "Nord" ;;
+    "leigh" ) set_theme "Ziro" ;;
+    #"nord" ) set_theme "Nord" ;;
     *) echo "[ERROR]: no config with name \"$current_theme\" found" && dunstify -u low -i ~/.config/bspwm/assets/white-brush.png 'Spotify Theme' '[ERROR]: Selected theme does not exist' && exit 1 ;;
 esac
