@@ -6,7 +6,7 @@
 # Set the path to your dotfiles directory
 DOTFILES_DIR="$HOME/dotfiles"
 NVIM_DIR="$HOME/.config/nvim"
-ZSH_DIR="$HOME/.config/zsh"
+ZSH_DIR="$HOME/.config/zsh-conf"
 
 removeOrStash() {
     clear
