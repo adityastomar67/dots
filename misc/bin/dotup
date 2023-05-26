@@ -89,7 +89,7 @@ zshUpdate() {
             if [ $# -gt 0 ]; then
                 printf "$(tput bold)Updating ZSH Configs...$(tput sgr0)"
                 sleep 2
-                removeOrStash "\n\nChoose whether you want to reset the ZSH configs or persist them over the update?..\n"
+                removeOrStash "Choose whether you want to reset the ZSH configs or persist them over the update?..\n"
                 printf "\n$(tput setaf 2)$(tput bold)✓ Successfully Updated ZSH configs.$(tput sgr0)\n"
             else
                 echo "Do you want to update ZSH configs also?"
