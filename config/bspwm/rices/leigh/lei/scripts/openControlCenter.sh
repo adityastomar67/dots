@@ -11,27 +11,27 @@ fix_stacking_bug() {
 }
 
 run() {
-	${EWW_BIN} open control-center
+	eww -c ${rice_dir}/lei open control-center
 	sleep 0.2
-	fix_stacking_bug; ${EWW_BIN} update ccenter=true; xdo raise -N eww-bar
+	fix_stacking_bug; eww -c ${rice_dir}/lei update ccenter=true; xdo raise -N eww-bar
 
-	sleep 0.8 && [[ ! -z "$ACTIVE_PLAYERS" ]] && ${EWW_BIN} update mp=true
+	sleep 0.8 && [[ ! -z "$ACTIVE_PLAYERS" ]] && eww -c ${rice_dir}/lei update mp=true
 	touch "$LOCK_FILE"
 }
 
 # Run eww daemon if not running
 if [[ ! `pidof eww` ]]; then
-	${EWW_BIN} daemon
+	eww -c ${rice_dir}/lei daemon
 	sleep 1
 else
 	if [[ ! -f "$LOCK_FILE" ]]; then
 		run
 	else
 		rm "$LOCK_FILE"
-		[[ ! -z "$ACTIVE_PLAYERS" ]] && ${EWW_BIN} update mp=false && sleep 0.4
-		${EWW_BIN} update ccenter=false
+		[[ ! -z "$ACTIVE_PLAYERS" ]] && eww -c ${rice_dir}/lei update mp=false && sleep 0.4
+		eww -c ${rice_dir}/lei update ccenter=false
 		sleep 0.6
-		${EWW_BIN} close control-center
+		eww -c ${rice_dir}/lei close control-center
 		xdo lower -N eww-bar
 	fi
 fi

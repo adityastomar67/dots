@@ -8,13 +8,13 @@
 # Set bspwm configuration for z0mbi3
 set_bspwm_config() {
 		bspc config border_width 0
-		bspc config top_padding 3
-		bspc config bottom_padding 2
+		bspc config top_padding 2
+		bspc config bottom_padding 60
 		bspc config normal_border_color "#3d414f"
 		bspc config active_border_color "#3d414f"
 		bspc config focused_border_color "#3d414f"
 		bspc config presel_feedback_color "#90ceaa"
-		bspc config left_padding 79
+		bspc config left_padding 2
 		bspc config right_padding 2
 		bspc config window_gap 6
 }

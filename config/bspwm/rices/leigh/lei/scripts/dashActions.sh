@@ -10,7 +10,7 @@ FOCUSED_DESKTOP=$(bspc query -D -d focused --names)
 
 pre_run() {
 	if [[ -f "$HOME/.cache/eww-control-center.lock" ]]; then
-		sh "$HOME/.config/eww/scripts/openControlCenter.sh"
+		sh "${rice_dir}/lei/scripts/openControlCenter.sh"
 	fi
 }
 
