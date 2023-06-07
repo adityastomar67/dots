@@ -109,10 +109,10 @@
 ;; search
 (defwindow search
            :monitor 0
-           :geometry (geometry :x "30px"
+           :geometry (geometry :x "10px"
                                :y "15px"
-                               :width "100px"
-                               :height "45px"
+                               :width "90px"
+                               :height "42px"
                                :anchor "top left")
            :stacking "fg"
            :reserve (struts :distance "5px" :side "top")
@@ -125,10 +125,10 @@
 ;; apps
 (defwindow apps
            :monitor 0
-           :geometry (geometry :x "150px"
+           :geometry (geometry :x "110px"
                                :y "15px"
-                               :width "300px"
-                               :height "45px"
+                               :width "280px"
+                               :height "42px"
                                :anchor "top left")
            :stacking "fg"
            :reserve (struts :distance "5px" :side "top")                                                                 
@@ -139,10 +139,10 @@
 ;; weather
 (defwindow weather
            :monitor 0
-           :geometry (geometry :x "950px"
+           :geometry (geometry :x "780px"
                                :y "15px"
                                :width "180px"
-                               :height "45px"
+                               :height "42px"
                                :anchor "top left")
            :stacking "fg"
            :reserve (struts :distance "5px" :side "top")
@@ -153,10 +153,10 @@
 ;; music
 (defwindow music
            :monitor 0
-           :geometry (geometry :x "470px"
+           :geometry (geometry :x "400px"
                                :y "15px"
-                               :width "460px"
-                               :height "45px"
+                               :width "350px"
+                               :height "42px"
                                :anchor "top left")
            :stacking "fg"
            :reserve (struts :distance "5px" :side "top")
@@ -167,10 +167,10 @@
 ;; system
 (defwindow system
            :monitor 0
-           :geometry (geometry :x "1150px"
+           :geometry (geometry :x "970px"
                                :y "15px"
-                               :width "420px"
-                               :height "45px"
+                               :width "385px"
+                               :height "42px"
                                :anchor "top left")
            :stacking "fg"
            :reserve (struts :distance "5px" :side "top")
