@@ -23,7 +23,7 @@ set_bspwm_config() {
 set_term_config() {
 		sed -i "$HOME"/.config/alacritty/fonts.yml \
 		-e "s/family: .*/family: JetBrainsMono Nerd Font/g" \
-		-e "s/size: .*/size: 1/g"
+		-e "s/size: .*/size: 10/g"
 		
 		command cat > "$HOME"/.config/alacritty/colors.yml <<- _EOF_
 				# Colors (Pencil light) Aline Rice
@@ -34,26 +34,26 @@ set_term_config() {
 
 				  normal:
 				    black:   '#212121'
-				    red:     '#c3771'
-				    green:   '#1a778'
+				    red:     '#c30771'
+				    green:   '#10a778'
 				    yellow:  '#a89c14'
-				    blue:    '#8ec4'
+				    blue:    '#008ec4'
 				    magenta: '#523c79'
-				    cyan:    '#2a5ba'
+				    cyan:    '#20a5ba'
 				    white:   '#51576d'
 
 				  bright:
 				    black:   '#212121'
-				    red:     '#fb7a'
+				    red:     '#fb007a'
 				    green:   '#5fd7af'
-				    yellow:  '#f3e43'
-				    blue:    '#2bbfc'
+				    yellow:  '#f3e430'
+				    blue:    '#20bbfc'
 				    magenta: '#6855de'
 				    cyan:    '#4fb8cc'
 				    white:   '#51576d'
 
 				  cursor:
-				    cursor: '#2bbfc'
+				    cursor: '#20bbfc'
 				    text:	'#e5eafe'
 _EOF_
 }
