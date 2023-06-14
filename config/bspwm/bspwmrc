@@ -45,9 +45,9 @@ bspc config gapless_monocle               false
 bspc config focus_follows_pointer         true
 bspc config pointer_follows_focus         false
 bspc config pointer_motion_interval       5
-bspc config pointer_modifier              mod4 
-bspc config pointer_action1               move 
-bspc config pointer_action2               resize_side 
+bspc config pointer_modifier              mod4
+bspc config pointer_action1               move
+bspc config pointer_action2               resize_side
 bspc config pointer_action3               resize_corner
 
 #bspc wm --adopt-orphans
@@ -69,10 +69,17 @@ for process in "${processes[@]}"; do
   fi
 done
 
+# Terminate conky instances
+killall conky
+
+# Terminate already running bar instances
+killall -q polybar
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done # Wait until the processes have been shut down
+
 # Load colors, dunst, bars and/or eww widgets
 . ${rice_dir}/Theme.sh
 
-# Launch picom // If you have old hardware or encounter problems 
+# Launch picom // If you have old hardware or encounter problems
 # uncomment the picom "--legacy-backends" line and comment the current one.
 picom --config "$HOME"/.config/bspwm/picom.conf &
 #picom --legacy-backends --config "$HOME"/.config/bspwm/picom.conf &
@@ -81,7 +88,7 @@ picom --config "$HOME"/.config/bspwm/picom.conf &
 dunst -config "$HOME"/.config/bspwm/dunstrc &
 
 # Set random wallpaper for actual rice
-feh -z --no-fehbg --bg-fill ${rice_dir}/walls
+RandomWall
 
 # Reload sxhkd daemon
 sxhkd -c "$HOME"/.config/bspwm/sxhkdrc &
