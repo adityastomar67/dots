@@ -49,7 +49,7 @@ font-4 = "MesloLGS NF:style=Regular:size=15;4"
 
 modules-left = date layout
 modules-center = bspwm
-modules-right = recorder-status pulseaudio bluetooth wlan
+modules-right = recorder-status pulseaudio wlan
 
 ;tray-position = right
 ;tray-padding = 4
@@ -95,7 +95,7 @@ type = custom/ipc
 hook-0 = echo "%{T3}%{T-}"
 hook-1 = echo "%{T3}%{T-}"
 initial = 1
-click-left = /home/dilip/.config/polybar/scripts/poly-dunst.sh &
+click-left = ~/.config/bspwm/rices/felor/polybar/scripts/poly-dunst.sh &
 format-padding = 2
 format-background = ${felor.backlight}
 
@@ -122,7 +122,7 @@ type = custom/ipc
 hook-0 = echo ""
 hook-1 = echo ""
 initial = 1
-click-left = /home/dilip/.config/polybar/scripts/poly-picom.sh &
+click-left = ~/.config/bspwm/rices/felor/polybar/scripts/poly-picom.sh &
 format-padding = 2
 format-background = ${felor.background}
 
@@ -131,7 +131,7 @@ format-background = ${felor.background}
 ; RECORDER-STATUS {{{
 [module/recorder-status]
 type = custom/script
-exec = bash /home/dilip/.config/polybar/scripts/rofi-recorder-status.sh
+exec = bash ~/.config/bspwm/rices/felor/polybar/scripts/rofi-recorder-status.sh
 interval = 5
 label = %output:0:15:...%
 format-padding = 2
@@ -189,7 +189,7 @@ label-empty-padding = 2
 
 [module/layout]
 type = custom/script
-exec = bash /home/dilip/.config/polybar/scripts/bsp-layout &
+exec = bash ~/.config/bspwm/rices/felor/polybar/scripts/bsp-layout &
 tail = true
 interval = 0
 label = %output:0:3:...%
@@ -423,7 +423,7 @@ label-padding = 2
 
 [module/wlan]
 type = internal/network
-interface = wlp0s29f7u8
+interface = wlo1
 interval = 1.0
 
 format-connected = %{A1:rofi-wifi-menu:}<ramp-signal> <label-connected>%{A}
@@ -485,7 +485,7 @@ label-padding = 2
 ; KDECONNECT {{{
 [module/kdeconnect]  
 type = custom/script  
-exec = "/home/dilip/.config/polybar/scripts/polybar-kdeconnect.sh -d"  
+exec = "~/.config/bspwm/rices/felor/polybar/scripts/polybar-kdeconnect.sh -d"  
 tail = true
 ; }}}
 

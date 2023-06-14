@@ -12,7 +12,7 @@ set_bspwm_config() {
 		bspc config window_gap 10
 		bspc config borderless_monocle false
 		bspc config gapless_monocle false
-		bspc config top_padding 2
+		bspc config top_padding 57
 		bspc config bottom_padding 2
 		bspc config left_padding 2
 		bspc config right_padding 2
@@ -151,7 +151,6 @@ set_picom_config() {
 				"_GTK_FRAME_EXTENTS@:c"
 				];
 
-				corner-radius = 15 
 				frame-opacity = 1.0
 				inactive-opacity-override = false;
 
@@ -226,7 +225,7 @@ _EOF_
 
 # Launch the bar
 launch_bars() {
-		polybar -q bspwm-bar light -c ${rice_dir}/config.ini &
+		polybar -q bspwm-bar -c ${rice_dir}/config.ini &
 }
 
 
