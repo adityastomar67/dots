@@ -3,11 +3,6 @@
 #  ╠╩╗╚═╗╠═╝║║║║║║  - https://github.com/gh0stzk/dotfiles
 #  ╚═╝╚═╝╩  ╚╩╝╩ ╩  - z0mbi3.zk@protonmail.com
 
-
-#  ┬┌┬┐┌─┐┌─┐┬─┐┌┬┐┌─┐┌┐┌┌┬┐  ┬  ┬┌─┐┬─┐┬┌─┐┌┐ ┬  ┌─┐┌─┐
-#  ││││├─┘│ │├┬┘ │ ├─┤│││ │   └┐┌┘├─┤├┬┘│├─┤├┴┐│  ├┤ └─┐
-#  ┴┴ ┴┴  └─┘┴└─ ┴ ┴ ┴┘└┘ ┴    └┘ ┴ ┴┴└─┴┴ ┴└─┘┴─┘└─┘└─┘
-
 read -r RICETHEME < "$HOME"/.config/bspwm/.rice
 export RICETHEME
 PATH="$HOME/.config/bspwm/scripts:$PATH"
@@ -15,10 +10,6 @@ rice_dir="$HOME/.config/bspwm/rices/$RICETHEME"
 
 ## Fix java applications
 export _JAVA_AWT_WM_NONREPARENTING=1
-
-#  ┬ ┬┌─┐┬─┐┬┌─┌─┐┌─┐┌─┐┌─┐┌─┐┌─┐
-#  ││││ │├┬┘├┴┐└─┐├─┘├─┤│  ├┤ └─┐
-#  └┴┘└─┘┴└─┴ ┴└─┘┴  ┴ ┴└─┘└─┘└─┘
 
 workspaces() {
 	name=1
@@ -28,20 +19,15 @@ workspaces() {
 		(( name++ ))
 	done
 }
-
 workspaces
 
-#  ┌┐ ┌─┐┌─┐┬ ┬┌┬┐  ┌─┐┌─┐┌┐┌┌─┐┬┌─┐
-#  ├┴┐└─┐├─┘││││││  │  │ ││││├┤ ││ ┬
-#  └─┘└─┘┴  └┴┘┴ ┴  └─┘└─┘┘└┘└  ┴└─┘
-
+# Core cofigs for BSPWM
 bspc config external_rules_command $HOME/.config/bspwm/scripts/ExternalRules
 
 bspc config split_ratio                   0.51
 bspc config single_monocle                true
 bspc config borderless_monocle            false
 bspc config gapless_monocle               false
-
 bspc config focus_follows_pointer         true
 bspc config pointer_follows_focus         false
 bspc config pointer_motion_interval       5
@@ -69,8 +55,8 @@ for process in "${processes[@]}"; do
   fi
 done
 
-# Terminate conky instances
-killall conky
+# Terminate conky and applet instances
+killall conky nm-applet blueman-applet kdeconnect-indicator
 
 # Terminate already running bar instances
 killall -q polybar
@@ -79,10 +65,9 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done # Wait until the pro
 # Load colors, dunst, bars and/or eww widgets
 . ${rice_dir}/Theme.sh
 
-# Launch picom // If you have old hardware or encounter problems
-# uncomment the picom "--legacy-backends" line and comment the current one.
+# Launch picom configs
 picom --config "$HOME"/.config/bspwm/picom.conf &
-#picom --legacy-backends --config "$HOME"/.config/bspwm/picom.conf &
+# picom --legacy-backends --config "$HOME"/.config/bspwm/picom.conf &  # If you have old hardware or encounter problems uncoment this
 
 # Launch dunst notification daemon
 dunst -config "$HOME"/.config/bspwm/dunstrc &
