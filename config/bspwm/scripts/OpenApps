@@ -16,7 +16,7 @@ case "$1" in
 		 -theme $HOME/.config/bspwm/rices/${RICETHEME}/launcher.rasi;;
 
   --rice)
-	RiceSelector;;
+	  RiceSelector;;
 
   --terminal)
     $TERM;;
@@ -33,7 +33,7 @@ case "$1" in
 					-e Updates --update-system;;
 
   --checkupdates)
-	alacritty --hold --class Updating,Alacritty \
+	  alacritty --hold --class Updating,Alacritty \
 					-o window.dimensions.lines=22 \
 					   window.dimensions.columns=47 \
 					-e Updates --print-updates;;
@@ -61,23 +61,23 @@ case "$1" in
 
   #Apps
   --filemanager)
-	thunar;;
+	  thunar;;
 
   --browser)
-	firefox;;
+	  firefox;;
 
   --editor)
-	geany;;
+	  geany;;
 
   --telegram)
-	telegram;;
+	  telegram;;
 
   --whats)
-	whatsapp-nativefier --disable-gpu;;
+	  whatsapp-nativefier --disable-gpu;;
 
   --soundcontrol)
     pavucontrol;;
 
   *)
-    echo "Opción no válida";;
+    echo "Not Valid!!";;
 esac
