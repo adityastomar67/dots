@@ -44,7 +44,7 @@ case "${RICETHEME}" in
 		polybar-msg cmd show | bspc config top_padding 59
 		;;
 	felor)
-		polybar-msg cmd show | bspc config top_padding 57
+		polybar-msg cmd show | bspc config top_padding 35
 		;;
 	doom)
 		polybar-msg cmd show | bspc config top_padding 59

@@ -12,7 +12,7 @@ set_bspwm_config() {
 		bspc config window_gap 10
 		bspc config borderless_monocle false
 		bspc config gapless_monocle false
-		bspc config top_padding 57
+		bspc config top_padding 27
 		bspc config bottom_padding 2
 		bspc config left_padding 2
 		bspc config right_padding 2
