@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
-#  ╔╗ ╔═╗╔═╗╦ ╦╔╦╗  - z0mbi3
-#  ╠╩╗╚═╗╠═╝║║║║║║  - https://github.com/gh0stzk/dotfiles
-#  ╚═╝╚═╝╩  ╚╩╝╩ ╩  - z0mbi3.zk@protonmail.com
 
 read -r RICETHEME < "$HOME"/.config/bspwm/.rice
 export RICETHEME
 PATH="$HOME/.config/bspwm/scripts:$PATH"
 rice_dir="$HOME/.config/bspwm/rices/$RICETHEME"
 
-## Fix java applications
+# Fix java applications
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 workspaces() {

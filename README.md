@@ -1,7 +1,7 @@
 # BSPWM | Polybar themes collection with Theme Selector
 
 ## 🌿 Information
-12 different themes for BSPWM and Polybar. With a theme selector to change on the fly. 
+17 different themes for BSPWM and Polybar. With a theme selector to change on the fly. 
 
 https://user-images.githubusercontent.com/67278339/211363959-9182ecb7-e56e-4598-afed-f352c5d2979e.mp4
 
