@@ -451,7 +451,7 @@ setup_rice() {
 	sleep 1
 
 	[ -d "$HOME"/.local/bin/dmenu ] && cd "$HOME"/.local/bin/dmenu || exit
-	printf "\n%s→ Installing Dmenu%s\n" "${CYE}" "${CNC}"
+	printf "%s→ Installing Dmenu%s\n" "${CYE}" "${CNC}"
 	sudo make clean install >/dev/null 2>&1
 	if [ $? -eq 0 ]; then
 			printf "%s%s✓ DMenu installed succesfully!%s\n" "${BLD}" "${CGR}" "${CNC}"
