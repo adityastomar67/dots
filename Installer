@@ -191,7 +191,7 @@ install_eww() {
 	if ! is_installed eww; then 
 		printf "\n%s%sInstalling Eww, this could take 10 mins or more.%s\n" "${BLD}" "${CBL}" "${CNC}"
 		cd || exit
-		paru -S eww --skipreview --noconfirm
+		paru -S eww-x11-git --skipreview --noconfirm
 		rm -rf {paru-bin,.cargo,.rustup}
 		rm -rf "$HOME"/.cache/paru/clone/eww
 	else
