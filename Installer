@@ -49,13 +49,22 @@ _mainScript_() {
 
 	install_pkg
 	logo "Preparing Folders"
-	if [ ! -e "$HOME"/.config/user-dirs.dirs ]; then
-		xdg-user-dirs-update
-		echo "Creating xdg-user-dirs"
-	else
-		echo "user-dirs.dirs already exists"
-	fi	
-
+	while true; do
+		read -rp "Do you want to create User Dirs? [y/N]: " yn
+		case $yn in
+			[Yy]*)
+				if [ ! -e "$HOME"/.config/user-dirs.dirs ]; then
+					echo "Creating xdg-user-dirs"
+					xdg-user-dirs-update
+				else
+					echo "user-dirs.dirs already exists"
+				fi
+				break	
+			;;
+			[Nn]*) break ;;
+			*) printf "✗ Error: just write 'y' or 'n'\n\n" ;;
+		esac
+	done
 	sleep 2 
 
 	# Clean Neovim cache files
