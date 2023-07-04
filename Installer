@@ -219,28 +219,33 @@ setup_code() {
 	fi
 
 	## EXTENSIONs
-    # code --force --install-extension ms-vscode.sublime-keybindings@4.0.10
-    # code --force --install-extension octref.vetur@0.34.1
-    # code --force --install-extension s-nlf-fh.glassit
-    # code --force --install-extension ms-vscode.cpptools
-    # code --force --install-extension esbenp.prettier-vscode
-    # code --force --install-extension ritwickdey.liveserver
-    # code --force --install-extension ms-python.python
-    # code --force --install-extension ms-python.vscode-pylance
-    # code --force --install-extension moalamri.inline-fold
-    # code --force --install-extension foxundermoon.shell-format
-    # code --force --install-extension teabyii.ayu@0.20.2
-    # code --force --install-extension matklad.rust-analyzer@0.2.727
-    # code --force --install-extension GitHub.github-vscode-theme
-    # code --force --install-extension vscodevim.vim
-    code --force --install-extension formulahendry.code-runner
-    code --force --install-extension Github.copilot
-    code --force --install-extension coenraads.bracket-pair-colorizer
-    code --force --install-extension viktorqvarfordt.vscode-pitch-black-theme
-    code --force --install-extension PKief.material-icon-theme
-    code --force --install-extension EliverLara.andromeda
-    code --force --insatll-extension Chouzz.vscode-better-align
-    code --force --insatll-extension iocave.customize-ui
+	code --force \
+		--user-data-dir="$HOME/.config/Code/User" \
+		--extensions-dir="$HOME/.config/Code/User/extensions" \
+		--install-extension formulahendry.code-runner \
+		--install-extension Github.copilot \
+		--install-extension coenraads.bracket-pair-colorizer \
+		--install-extension PKief.material-icon-theme \
+		--install-extension antfu.icons-carbon \
+		--install-extension zhuangtongfa.Material-theme
+    	# --install-extension octref.vetur@0.34.1 \
+    	# --install-extension s-nlf-fh.glassit \
+    	# --install-extension ms-vscode.cpptools \
+    	# --install-extension esbenp.prettier-vscode \
+    	# --install-extension ritwickdey.liveserver \
+    	# --install-extension ms-python.python \
+    	# --install-extension ms-python.vscode-pylance \
+    	# --install-extension moalamri.inline-fold \
+    	# --install-extension foxundermoon.shell-format \
+    	# --install-extension teabyii.ayu@0.20.2 \
+    	# --install-extension matklad.rust-analyzer@0.2.727 \
+    	# --install-extension GitHub.github-vscode-theme \
+    	# --install-extension vscodevim.vim \
+    	# --install-extension viktorqvarfordt.vscode-pitch-black-theme \
+    	# --install-extension EliverLara.andromeda \
+    	# --install-extension ms-vscode.sublime-keybindings@4.0.10 \
+    	# --install-extension Chouzz.vscode-better-align \
+    	# --install-extension iocave.customize-ui \
 
 	if [ -d "$HOME"/.config/Code/User ]; then
 		cd "$HOME"/.config/Code/User || exit
