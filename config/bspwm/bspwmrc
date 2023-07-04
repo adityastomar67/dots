@@ -44,20 +44,13 @@ bspc rule -a scratch sticky=on state=floating focus=on
 . SetSysVars
 
 # Terminate already running polybar, eww, picom, sxhkd and dunst instances
-processes=("picom" "polybar" "eww" "sxhkd" "dunst")
+processes=("picom" "polybar" "eww" "sxhkd" "dunst" "conky" "nm-applet" "blueman-applet" "kdeconnect-indicator")
 
 for process in "${processes[@]}"; do
   if pidof -q "$process"; then
     pkill -x "$process" > /dev/null; sleep 0.1
   fi
 done
-
-# Terminate conky and applet instances
-killall conky nm-applet blueman-applet kdeconnect-indicator
-
-# Terminate already running bar instances
-killall -q polybar
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done # Wait until the processes have been shut down
 
 # Load colors, dunst, bars and/or eww widgets
 . ${rice_dir}/Theme.sh
