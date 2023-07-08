@@ -98,14 +98,14 @@ function unhide() {
 
 case $1 in
 	-h | --hide | hide)
-		if [[ -f "$LOCK_FILE" ]]; then
-			rm "$LOCK_FILE"
+		if [[ ! -f "$LOCK_FILE" ]]; then
+			touch "$LOCK_FILE"
 		fi
 		hide
 		exit;;
 	-u | --unhide | unhide)
-		if [[ ! -f "$LOCK_FILE" ]]; then
-			touch "$LOCK_FILE"
+		if [[ -f "$LOCK_FILE" ]]; then
+			rm "$LOCK_FILE"
 		fi
 		unhide
 		exit;;

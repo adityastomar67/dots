@@ -163,7 +163,7 @@ _EOF_
 # Launch the bar
 launch_bars() {
 		polybar -q emi-bar -c ${rice_dir}/config.ini &
-		if [[ ! -f "$LOCK_FILE" ]]; then
+		if [[ -f "$LOCK_FILE" ]]; then
 			sleep 0.2 && HideBar -h &
 		fi
 }
