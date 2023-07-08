@@ -168,6 +168,9 @@ launch_bars() {
 		eww -c ${rice_dir}/bar open bar &
 		polybar -q karla-bar -c ${rice_dir}/config.ini &
 		polybar -q karla-bar2 -c ${rice_dir}/config.ini &
+		if [[ ! -f "$LOCK_FILE" ]]; then
+			sleep 0.4 && HideBar -h &
+		fi
 }
 
 ### ---------- Apply Configurations ---------- ###

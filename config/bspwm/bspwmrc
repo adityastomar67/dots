@@ -4,6 +4,7 @@ read -r RICETHEME < "$HOME"/.config/bspwm/.rice
 export RICETHEME
 PATH="$HOME/.config/bspwm/scripts:$PATH"
 rice_dir="$HOME/.config/bspwm/rices/$RICETHEME"
+export LOCK_FILE="$HOME/.cache/bar.lock"
 
 # Fix java applications
 export _JAVA_AWT_WM_NONREPARENTING=1
@@ -19,8 +20,7 @@ workspaces() {
 workspaces
 
 # Core cofigs for BSPWM
-bspc config external_rules_command $HOME/.config/bspwm/scripts/ExternalRules
-
+bspc config external_rules_command        $HOME/.config/bspwm/scripts/ExternalRules
 bspc config split_ratio                   0.51
 bspc config single_monocle                true
 bspc config borderless_monocle            false

@@ -169,6 +169,9 @@ launch_bars() {
 		eww -c ${rice_dir}/bar open bar &
 		eww -c ${rice_dir}/dashboard daemon &
 		polybar -q tray -c ${rice_dir}/bar/polybar_tray.ini &
+		if [[ ! -f "$LOCK_FILE" ]]; then
+			sleep 0.4 && HideBar -h &
+		fi
 }
 
 

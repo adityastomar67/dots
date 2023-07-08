@@ -164,6 +164,9 @@ _EOF_
 launch_bars() {
 		polybar -q cyn-bar -c ${rice_dir}/config.ini &
 		polybar -q cyn-bar2 -c ${rice_dir}/config.ini &
+		if [[ ! -f "$LOCK_FILE" ]]; then
+			sleep 0.2 && HideBar -h &
+		fi
 }
 
 

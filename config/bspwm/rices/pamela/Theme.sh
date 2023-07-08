@@ -169,6 +169,9 @@ launch_bars() {
 		polybar -q pam4 -c ${rice_dir}/config.ini &
 		polybar -q pam5 -c ${rice_dir}/config.ini &
 		polybar -q pam6 -c ${rice_dir}/config.ini &
+		if [[ ! -f "$LOCK_FILE" ]]; then
+			sleep 0.4 && HideBar -h &
+		fi
 }
 
 

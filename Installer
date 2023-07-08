@@ -20,7 +20,7 @@ dependencies=(conky base-devel rustup pacman-contrib bspwm polybar sxhkd \
 			  alacritty brightnessctl dunst rofi lsd \
 			  jq polkit-gnome git playerctl mpd fzf \
 			  ncmpcpp geany ranger mpc picom xdotool tmux \
-			  feh ueberzug maim pamixer libwebp xdg-user-dirs \
+			  feh ueberzug maim pamixer libwebp xdg-user-dirs xorg-xauth \
 			  webp-pixbuf-loader xorg-xprop xorg-xkill physlock papirus-icon-theme \
 			  ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-terminus-nerd ttf-inconsolata ttf-joypixels \
 			  zsh xorg-xsetroot xorg-xwininfo)
@@ -315,6 +315,18 @@ rice_firefox() {
 	fi
 }
 
+#TODO: Need to work on this
+##--> Setup display manager<--##
+install_ly_DM() {
+	cd "$HOME" || exit
+	git clone --recurse-submodules https://github.com/fairyglade/ly
+	cd ly
+	make
+	make install installsystemd
+	cd $HOME
+	rm -rf ly
+}
+
 ##--> Setup the config file and backup old ones <--##
 setup_rice() {
 	##--> Cloning <--##
@@ -526,11 +538,16 @@ setup_rice() {
 ##--> Enable necessary services <--##
 enable_services() {
 	logo "Enabling services..."
-	if is_installed lightdm; then
+	if is_installed ly; then
+		sudo systemctl enable ly.service -f >/dev/null 2>&1
+		printf '%s✓ Ly TUI-DM services enabled on your system!%s\n\n' "${CGR}" "${CNC}"
+		sleep 2
+	elif is_installed lightdm; then
 		sudo systemctl enable lightdm -f >/dev/null 2>&1
 		printf '%s✓ LightDM services enabled on your system!%s\n\n' "${CGR}" "${CNC}"
 		sleep 2
 	fi
+	
 	if is_installed mpd; then
 		systemctl --user enable mpd.service >/dev/null 2>&1
 		systemctl --user start mpd.service >/dev/null 2>&1
