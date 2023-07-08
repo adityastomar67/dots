@@ -164,8 +164,8 @@ _EOF_
 launch_bars() {
 		# eww -c ${rice_dir}/widgets daemon &
 		polybar -q cristina-bar -c ${rice_dir}/config.ini &
-		if [[ ! -f "$LOCK_FILE" ]]; then
-			sleep 0.2 && HideBar -h &
+		if [[ -f "$LOCK_FILE" ]]; then
+			sleep 1 && HideBar -h &
 		fi
 }
 
