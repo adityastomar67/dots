@@ -163,9 +163,6 @@ _EOF_
 # Launch the bar
 launch_bars() {
 		eww -c ${rice_dir}/arin open-many search apps weather music system &
-		if [[ -f "$LOCK_FILE" ]]; then
-			sleep 1 && HideBar -h &
-		fi
 }
 
 

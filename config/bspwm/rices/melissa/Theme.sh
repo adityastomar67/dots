@@ -164,9 +164,6 @@ _EOF_
 launch_bars() {
 		polybar -q mel-bar -c ${rice_dir}/config.ini &
 		polybar -q mel2-bar -c ${rice_dir}/config.ini &
-		if [[ -f "$LOCK_FILE" ]]; then
-			sleep 1 && HideBar -h &
-		fi
 }
 
 

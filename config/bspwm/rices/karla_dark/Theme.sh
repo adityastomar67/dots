@@ -159,9 +159,6 @@ launch_bars() {
 		polybar -q karla-dark-bar -c ${rice_dir}/config.ini &
 		polybar -q karla-dark-bar2 -c ${rice_dir}/config.ini &
 		polybar -q karla-dark-bar3 -c ${rice_dir}/config.ini &
-		if [[ -f "$LOCK_FILE" ]]; then
-			sleep 1 && HideBar -h &
-		fi
 }
 
 ### ---------- Apply Configurations ---------- ###
