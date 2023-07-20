@@ -33,7 +33,7 @@ set_term_config() {
 				    foreground: '#E8E3E3'
 
 				  normal:
-				    black:   '#151515'
+				    black:   '#424242'
 				    red:     '#B66467'
 				    green:   '#8C977D'
 				    yellow:  '#D9BC8C'
@@ -83,7 +83,7 @@ set_xresources_config() {
 				*.background:     #151515
 
 				! black
-				*.color0:         #151515
+				*.color0:         #424242
 				*.color8:         #424242
 
 				! red
@@ -159,7 +159,7 @@ _EOF_
 
 # Launch the bar
 launch_bars() {
-		polybar -q emi-bar -c ${rice_dir}/config.ini &
+		polybar -q emii-bar -c ${rice_dir}/config.ini &
 }
 
 
