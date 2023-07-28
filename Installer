@@ -18,7 +18,7 @@ date=$(date +%Y%m%d-%H%M%S)
 ##--> Dependecies for smoother experience <--##
 dependencies=(conky base-devel rustup pacman-contrib bspwm polybar sxhkd
 	alacritty brightnessctl dunst rofi lsd
-	jq polkit-gnome git playerctl mpd fzf
+	jq polkit-gnome git playerctl pipewire pipewire-pulse mpd fzf
 	ncmpcpp geany ranger mpc picom xdotool tmux
 	feh ueberzug maim pamixer libwebp xdg-user-dirs xorg-xauth
 	webp-pixbuf-loader xorg-xprop xorg-xkill physlock papirus-icon-theme
@@ -537,6 +537,10 @@ setup_rice() {
 
 ##--> Enable necessary services <--##
 enable_services() {
+
+	# systemctl --user --now enable pipewire pipewire-pulse
+	# sudo systemctl enable bluetooth
+	# sudo systemctl start bluetooth
 	logo "Enabling services..."
 	if is_installed ly; then
 		sudo systemctl enable ly.service -f >/dev/null 2>&1

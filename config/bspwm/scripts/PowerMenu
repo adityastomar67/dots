@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Options for the power menu
+options="Lock\nLogout\nReboot\nShutdown"
+
+# Get the user's choice via rofi
+selected_option=$(echo -e "$options" | rofi -dmenu -p "Power Menu:" -theme $HOME/.config/bspwm/rices/${RICETHEME}/launcher.rasi)
+
+case "$selected_option" in
+    "Lock")
+        # Lock the screen
+        physlock -d
+        ;;
+    "Logout")
+        # Logout the current user
+        bspc quit
+        ;;
+    "Reboot")
+        # Reboot the system
+        systemctl reboot
+        ;;
+    "Shutdown")
+        # Shutdown the system
+        systemctl poweroff
+        ;;
+    *)
+        # Invalid option chosen or rofi was closed
+        exit 1
+        ;;
+esac
+
+exit 0
