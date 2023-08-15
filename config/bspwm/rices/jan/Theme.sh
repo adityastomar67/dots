@@ -25,37 +25,8 @@ set_term_config() {
 		-e "s/family: .*/family: JetBrainsMono Nerd Font/g" \
 		-e "s/size: .*/size: 10/g"
 		
-		command cat > "$HOME"/.config/alacritty/colors.yml <<- _EOF_
-				# Colors (CyberPunk) Jan Rice
-				colors:
-				  primary:
-				    background: '#070219'
-				    foreground: '#c0caf5'
-
-				  normal:
-				    black:   '#626483'
-				    red:     '#fb007a'
-				    green:   '#a6e22e'
-				    yellow:  '#f3e430'
-				    blue:    '#58AFC2'
-				    magenta: '#583794'
-				    cyan:    '#926BCA'
-				    white:   '#d9d9d9'
-
-				  bright:
-				    black:   '#626483'
-				    red:     '#fb007a'
-				    green:   '#a6e22e'
-				    yellow:  '#f3e430'
-				    blue:    '#58AFC2'
-				    magenta: '#472575'
-				    cyan:    '#926BCA'
-				    white:   '#f1f1f1'
-   
-				  cursor:
-				    cursor: '#fb007a'
-				    text:	'#070219'
-_EOF_
+		sed -i "$HOME"/.config/alacritty/rice-colors.yml \
+		-e "s/colors: .*/colors: *jan_cyberpunk/"
 }
 
 # Reload xresources colors

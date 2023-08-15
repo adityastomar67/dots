@@ -25,37 +25,8 @@ set_term_config() {
 		-e "s/family: .*/family: JetBrainsMono Nerd Font/g" \
 		-e "s/size: .*/size: 10/g"
 		
-		command cat > "$HOME"/.config/alacritty/colors.yml <<- _EOF_
-				# Colors (i dont know) Andrea Rice
-				colors:
-				  primary:
-				    background: '#F5EEE6'
-				    foreground: '#6d6a78'
-
-				  normal:
-				    black:   '#80859d'
-				    red:     '#c04364'
-				    green:   '#abd77a'
-				    yellow:  '#ffcc57'
-				    blue:    '#67d4f1'
-				    magenta: '#7a7498'
-				    cyan:    '#9bf4d5'
-				    white:   '#b0b0b0'
-
-				  bright:
-				    black:   '#80859d'
-				    red:     '#c03f61'
-				    green:   '#a1d16c'
-				    yellow:  '#f2be47'
-				    blue:    '#50bfdc'
-				    magenta: '#605692'
-				    cyan:    '#83edc8'
-				    white:   '#b0b0b0'
-    
-				  cursor:
-				    cursor: '#7a7498'
-				    text:	'#F5EEE6'
-_EOF_
+		sed -i "$HOME"/.config/alacritty/rice-colors.yml \
+		-e "s/colors: .*/colors: *andrea_color_scheme/"
 }
 
 # Reload xresources colors

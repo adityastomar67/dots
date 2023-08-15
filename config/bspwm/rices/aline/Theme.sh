@@ -25,37 +25,8 @@ set_term_config() {
 		-e "s/family: .*/family: JetBrainsMono Nerd Font/g" \
 		-e "s/size: .*/size: 10/g"
 		
-		command cat > "$HOME"/.config/alacritty/colors.yml <<- _EOF_
-				# Colors (Pencil light) Aline Rice
-				colors:
-				  primary:
-				    background: '#e5eafe'
-				    foreground: '#51576d'
-
-				  normal:
-				    black:   '#212121'
-				    red:     '#c30771'
-				    green:   '#10a778'
-				    yellow:  '#a89c14'
-				    blue:    '#008ec4'
-				    magenta: '#523c79'
-				    cyan:    '#20a5ba'
-				    white:   '#51576d'
-
-				  bright:
-				    black:   '#212121'
-				    red:     '#fb007a'
-				    green:   '#5fd7af'
-				    yellow:  '#f3e430'
-				    blue:    '#20bbfc'
-				    magenta: '#6855de'
-				    cyan:    '#4fb8cc'
-				    white:   '#51576d'
-
-				  cursor:
-				    cursor: '#20bbfc'
-				    text:	'#e5eafe'
-_EOF_
+		sed -i "$HOME"/.config/alacritty/rice-colors.yml \
+		-e "s/colors: .*/colors: *aline_pencil_light/"
 }
 
 # Reload xresources colors
