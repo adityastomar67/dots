@@ -200,10 +200,11 @@ install_eww() {
 
 	if ! is_installed eww; then
 		printf "\n%s%sInstalling Eww, this could take 10 mins or more.%s\n" "${BLD}" "${CBL}" "${CNC}"
-		cd || exit
+		curl -sS https://github.com/elkowar.gpg | gpg --import -i -
+		curl -sS https://github.com/web-flow.gpg | gpg --import -i -
 		paru -S eww-x11 --skipreview --noconfirm
 		rm -rf {paru-bin,.cargo,.rustup}
-		rm -rf "$HOME"/.cache/paru/clone/eww
+		rm -rf $HOME/.cache/paru/clone/eww
 	else
 		printf "\n%s%sEww is already installed%s\n" "${BLD}" "${CGR}" "${CNC}"
 	fi
