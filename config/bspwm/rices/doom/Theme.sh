@@ -30,37 +30,8 @@ set_term_config() {
 		-e "s/family: .*/family: JetBrainsMono Nerd Font/g" \
 		-e "s/size: .*/size: 10/g"
 		
-		command cat > "$HOME"/.config/alacritty/colors.yml <<- _EOF_
-				# Colors (Tokyo Night) Emilia Rice
-				colors:
-				  primary:
-				    background: '#1D2021'
-				    foreground: '#fbf1c7'
-
-				  normal:
-				    black:   '#1D2021'
-				    red:     '#fb4833'
-				    green:   '#b8ba25'
-				    yellow:  '#fabc2e'
-				    blue:    '#83a597'
-				    magenta: '#d3859a'
-				    cyan:    '#FE8019'
-				    white:   '#a89983'
-
-				  bright:
-				    black:   '#1D2021'
-				    red:     '#fb4833'
-				    green:   '#b8ba25'
-				    yellow:  '#fabc2e'
-				    blue:    '#83a597'
-				    magenta: '#d3859a'
-				    cyan:    '#FE8019'
-				    white:   '#ebdbb2'
-
-				  cursor:
-				    cursor: '#d3859a'
-				    text:	'#1a1b26'
-_EOF_
+		sed -i "$HOME"/.config/alacritty/rice-colors.yml \
+		-e "s/colors: .*/colors: *doom_grub_scheme/"
 }
 
 # Reload xresources colors

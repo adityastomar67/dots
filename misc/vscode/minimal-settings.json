@@ -1,5 +1,5 @@
 {
-    "editor.fontFamily": "'Operator Mono Lig','Droid Sans Mono', 'monospace', monospace",
+    "editor.fontFamily": "'Cascursive','Operator Mono Lig','Droid Sans Mono', 'monospace', monospace",
     "editor.fontLigatures": true,
     "editor.fontSize": 16,
     "window.menuBarVisibility" : "hidden", 

@@ -29,37 +29,8 @@ set_term_config() {
 		-e "s/family: .*/family: JetBrainsMono Nerd Font/g" \
 		-e "s/size: .*/size: 9.5/g"
 		
-		command cat > "$HOME"/.config/alacritty/colors.yml <<- _EOF_
-				# Colors (Decay, decayce variant) z0mbi3 Rice
-				colors:
-				  primary:
-				    background: '0x0B0F10'
-				    foreground: '0xc5c8c9'
-
-				  normal:
-				    black:   '0x131718'
-				    red:     '0xdf5b61'
-				    green:   '0x87c7a1'
-				    yellow:  '0xde8f78'
-				    blue:    '0x6791c9'
-				    magenta: '0xbc83e3'
-				    cyan:    '0x70b9cc'
-				    white:   '0xc4c4c4'
-
-				  bright:
-				    black:   '0x151a1c'
-				    red:     '0xee6a70'
-				    green:   '0x96d6b0'
-				    yellow:  '0xffb29b'
-				    blue:    '0x7ba5dd'
-				    magenta: '0xcb92f2'
-				    cyan:    '0x7fc8db'
-				    white:   '0xcccccc'
-    
-				  cursor:
-				    cursor: '#a5b6cf'
-				    text:	'#0d0f18'
-_EOF_
+		sed -i "$HOME"/.config/alacritty/rice-colors.yml \
+		-e "s/colors: .*/colors: *leigh_lei_colors/"
 }
 
 # Reload xresources colors

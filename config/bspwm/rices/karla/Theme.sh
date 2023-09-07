@@ -25,37 +25,8 @@ set_term_config() {
 		-e "s/family: .*/family: JetBrainsMono Nerd Font/g" \
 		-e "s/size: .*/size: 10/g"
 		
-		command cat > "$HOME"/.config/alacritty/colors.yml <<- _EOF_
-				# Colors () Karla Rice
-				colors:
-				  primary:
-				    background: '#e1eaff'
-				    foreground: '#2d2e33'
-
-				  normal:
-				    black:   '#020816'
-				    red:     '#ff004a'
-				    green:   '#1bce5f'
-				    yellow:  '#ffcb00'
-				    blue:    '#0864f1'
-				    magenta: '#b93fe0'
-				    cyan:    '#17bcef'
-				    white:   '#9da6ba'
-
-				  bright:
-				    black:   '#7d829e'
-				    red:     '#e74f62'
-				    green:   '#57e28a'
-				    yellow:  '#fcde68'
-				    blue:    '#3d7fea'
-				    magenta: '#da80f4'
-				    cyan:    '#74cbe7'
-				    white:   '#7d829e'
-    
-				  cursor:
-				     cursor: '#0864f1'
-				     text:	'#e1eaff'
-_EOF_
+		sed -i "$HOME"/.config/alacritty/rice-colors.yml \
+		-e "s/colors: .*/colors: *karla_sunflower_day/"
 }
 
 # Reload xresources colors
