@@ -4,26 +4,26 @@
       "color": "red",
       "links": [
         { "name": "Spotify", "url": "https://open.spotify.com/" },
-        { "name": "YoutubeMusic", "url": "https://music.youtube.com/", "newTab": false },
-        { "name": "Netflix", "url": "https://netflix.com" },
-        { "name": "Youtube", "url": "https://youtube.com" }
+        { "name": "Youtube", "url": "https://youtube.com" },
+        { "name": "Netflix", "url": "https://netflix.com" }
       ]
     },
     { "name": "work",
       "color": "#26A69A",
       "links": [
+        { "name": "Gmail", "url": "http://gmail.com/"},
         { "name": "Github", "url": "https://github.com" },
-        { "name": "Heroku", "url": "http://heroku.com/" },
-        { "name": "localhost", "url": "http://localhost:8000/" },
-        { "name": "ChatGPT", "url": "https://chat.openai.com/"}
+        { "name": "Whatsapp", "url": "http://web.whatsapp.com/" },
+        { "name": "ChatGPT", "url": "https://chat.openai.com/"},
+        { "name": "Bard", "url": "https://bard.google.com/"}
       ]
     },
     { "name": "social",
       "color": "#D3D04F",
       "links": [
-        { "name": "Reddit", "url": "https://reddit.com" },
         { "name": "LinkedIn", "url": "https://www.linkedin.com/feed/" },
-        { "name": "r/unixporn", "url": "https://www.reddit.com/r/unixporn/" },
+        { "name": "Internshala", "url": "https://internshala.com/student/dashboard/" },
+        { "name": "Reddit", "url": "https://reddit.com" },
         { "name": "r/mk", "url": "https://www.reddit.com/r/MechanicalKeyboards/" }
       ]
     },
@@ -31,10 +31,8 @@
       "name": "Others",
       "color": "#8EAC50",
       "links": [
-        {"name": "Material Colors", "url": "http://materialuicolors.co/"},
-        {"name": "Gmail", "url": "http://gmail.com/"},
-        {"name": "neo4j Local", "url": "http://localhost:7474/"},
-        {"name": "rarbg", "url": "http://rarbg.to"}
+        {"name": "Leetcode", "url": "https://leetcode.com/problemset/all/"},
+        {"name": "Coding Ninjas", "url": "https://www.codingninjas.com/studio/home"}
       ]
     }
   ],
@@ -52,7 +50,7 @@
     "location": "Gwalior India",
     "unit": "cel"
   },
-  "settingsIcon": false,
+  "settingsIcon": true,
   "style": {
     "backgroundColor": "#212121",
     "messageColor": "#fff",
