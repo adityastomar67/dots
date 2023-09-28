@@ -1,44 +1,93 @@
 {
   "squares": [
-    { "name": "media",
+    {
+      "name": "media",
       "color": "red",
       "links": [
-        { "name": "Spotify", "url": "https://open.spotify.com/" },
-        { "name": "Youtube", "url": "https://youtube.com" },
-        { "name": "Netflix", "url": "https://netflix.com" }
+        {
+          "name": "Spotify",
+          "url": "https://open.spotify.com/"
+        },
+        {
+          "name": "Youtube",
+          "url": "https://youtube.com"
+        },
+        {
+          "name": "Netflix",
+          "url": "https://netflix.com"
+        }
       ]
     },
-    { "name": "work",
+    {
+      "name": "work",
       "color": "#26A69A",
       "links": [
-        { "name": "Gmail", "url": "http://gmail.com/"},
-        { "name": "Github", "url": "https://github.com" },
-        { "name": "Whatsapp", "url": "http://web.whatsapp.com/" },
-        { "name": "ChatGPT", "url": "https://chat.openai.com/"},
-        { "name": "Bard", "url": "https://bard.google.com/"}
+        {
+          "name": "Gmail",
+          "url": "http://gmail.com/"
+        },
+        {
+          "name": "Github",
+          "url": "https://github.com"
+        },
+        {
+          "name": "Whatsapp",
+          "url": "http://web.whatsapp.com/"
+        },
+        {
+          "name": "ChatGPT",
+          "url": "https://chat.openai.com/"
+        },
+        {
+          "name": "Bard",
+          "url": "https://bard.google.com/"
+        }
       ]
     },
-    { "name": "social",
+    {
+      "name": "social",
       "color": "#D3D04F",
       "links": [
-        { "name": "LinkedIn", "url": "https://www.linkedin.com/feed/" },
-        { "name": "Internshala", "url": "https://internshala.com/student/dashboard/" },
-        { "name": "Reddit", "url": "https://reddit.com" },
-        { "name": "r/mk", "url": "https://www.reddit.com/r/MechanicalKeyboards/" }
+        {
+          "name": "LinkedIn",
+          "url": "https://www.linkedin.com/feed/"
+        },
+        {
+          "name": "Internshala",
+          "url": "https://internshala.com/student/dashboard/"
+        },
+        {
+          "name": "Reddit",
+          "url": "https://reddit.com"
+        },
+        {
+          "name": "r/mk",
+          "url": "https://www.reddit.com/r/MechanicalKeyboards/"
+        }
       ]
     },
     {
       "name": "Others",
       "color": "#8EAC50",
       "links": [
-        {"name": "Leetcode", "url": "https://leetcode.com/problemset/all/"},
-        {"name": "Coding Ninjas", "url": "https://www.codingninjas.com/studio/home"}
+        {
+          "name": "Leetcode",
+          "url": "https://leetcode.com/problemset/all/"
+        },
+        {
+          "name": "Coding Ninjas",
+          "url": "https://www.codingninjas.com/studio/home"
+        },
+        {
+          "name": "MonkeyType",
+          "url": "https://monkeytype.com/"
+        }
       ]
     }
   ],
   "linkInNewTab": false,
   "title": "Home",
-  "searchEngine":"Google",
+  "searchEngine": "Google",
   "user": "adityastomar67",
   "disableMessage": false,
   "disableDate": false,
@@ -75,7 +124,7 @@
     "p": "https://startpage.com",
     "s": "https://stackoverflow.com",
     "w": {
-      "URL":"https://wikipedia.org/wiki",
+      "URL": "https://wikipedia.org/wiki",
       "Search": "/Special:Search?search="
     }
   }
